@@ -33,3 +33,4 @@ src/styles
 # font awesome fonts
 src/fonts/fontawesome*
 src/fonts/FontAwesome*
+src/app-config.js
