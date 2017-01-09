@@ -5,7 +5,7 @@ import urls from './urls';
 
 class ReportApi {
 
-    static getAllProfiles() {
+    static getAllReports() {
         return new Promise((resolve, reject) => {
             fetch(urls.search.all).then(function(response) {
                 return response.json();
