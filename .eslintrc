@@ -68,5 +68,6 @@
     "react/wrap-multilines": 1
   },
   "globals": {
+      "APP_CONFIG"
   }
 }

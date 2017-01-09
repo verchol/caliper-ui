@@ -1,13 +1,11 @@
 import 'whatwg-fetch';
 
-import urls from './urls';
-
 
 class ReportApi {
 
     static getAllReports() {
         return new Promise((resolve, reject) => {
-            fetch(urls.search.all).then(function(response) {
+            fetch(APP_CONFIG.urls.allReports).then(function(response) {
                 return response.json();
             }).then(function(reports) {
                 resolve(Object.assign([], reports));
