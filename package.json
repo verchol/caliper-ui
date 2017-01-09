@@ -8,7 +8,7 @@
   "scripts": {
     "start-message": "babel-node tools/startMessage.js",
     "prestart": "npm-run-all --parallel start-message remove-dist",
-    "start": "npm-run-all --parallel test:watch open:src lint:watch",
+    "start": "npm-run-all --parallel test:watch open:src lint:watch less:watch",
     "open:src": "babel-node tools/srcServer.js",
     "open:dist": "babel-node tools/distServer.js",
     "open:cover": "npm run test:cover && open coverage/index.html",
@@ -24,6 +24,7 @@
     "test:cover": "babel-node node_modules/isparta/bin/isparta cover --root src --report html node_modules/mocha/bin/_mocha -- --require ./tools/testSetup.js \"src/**/*.spec.js\" --reporter progress",
     "test:cover:travis": "babel-node node_modules/isparta/bin/isparta cover --root src --report lcovonly _mocha -- --require ./tools/testSetup.js \"src/**/*.spec.js\" && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
     "test:watch": "npm run test -- --watch",
+    "less:watch": "nodemon -e less -w src/less -x \"npm run less\"",
     "less": "lessc --source-map --include-path=node_modules src/less/main.less src/styles/bundle.css",
     "postless": "npm-run-all --parallel runpostcss copyfonts copymarkers copyawesomemarkers",
     "runpostcss": "postcss -c postcss.config.json",
