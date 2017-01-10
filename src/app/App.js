@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 
-import Navbar from './components/navbar';
+import Sidebar from './components/sidebar';
 
 
 const App = (props) => {
     return (
         <div className="application">
-            <Navbar />
+            <Sidebar />
             <section className="content">
                 {props.children}
             </section>
