@@ -10,44 +10,44 @@ const HomePage = () => {
                 developed for NGA Research.
             </p>
 
-            <div className="flex-grid">
-                <div className="col">
+            <div className="grid-test-1">
+                <div className="something">
                     Just some
                 </div>
-                <div className="col">
+                <div className="anything">
                     text to show
                 </div>
-                <div className="col">
+                <div className="stuff">
                     what a standard
                 </div>
-                <div className="col">
+                <div className="more-stuff">
                     grid looks like.
                 </div>
             </div>
 
-            <div className="flex-grid-thirds">
-                <div className="col">
+            <div className="grid-test-2">
+                <div className="this">
                     Here's a grid
                 </div>
-                <div className="col">
+                <div className="that">
                     that's separated
                 </div>
-                <div className="col">
+                <div className="whatever">
                     into thirds with gutters.
                 </div>
             </div>
 
-            <div className="flex-grid-quarters">
-                <div className="col">
+            <div className="grid-test-3">
+                <div className="who">
                     Here's a
                 </div>
-                <div className="col">
+                <div className="what">
                     grid that's
                 </div>
-                <div className="col">
+                <div className="where">
                     separated into
                 </div>
-                <div className="col">
+                <div className="when">
                     quarters with gutters.
                 </div>
             </div>
