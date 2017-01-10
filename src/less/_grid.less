@@ -1,0 +1,48 @@
+.flex-grid {
+    display: flex;
+
+    .col {
+        flex: 1;
+    }
+}
+.flex-grid-thirds {
+    display: flex;
+    justify-content: space-between;
+
+    .col {
+        width: 32%;
+    }
+}
+.flex-grid-quarters {
+    display: flex;
+    justify-content: space-between;
+
+    .col {
+        width: 24%;
+    }
+}
+
+@media (max-width: 640px) {
+    .flex-grid,
+    .flex-grid-thirds,
+    .flex-grid-quarters {
+        display: block;
+        .col {
+            width: 100%;
+            margin: 0 0 10px 0;
+        }
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+.flex-grid,
+.flex-grid-thirds,
+.flex-grid-quarters {
+    margin: 0 0 20px 0;
+}
+.col {
+    padding: 20px;
+    border: 1px solid white;
+}
