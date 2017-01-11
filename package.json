@@ -54,6 +54,7 @@
     "drmonty-leaflet-awesome-markers": "2.0.2",
     "fixed-data-table": "^0.6.3",
     "font-awesome": "^4.7.0",
+    "griddle-react": "^0.7.1",
     "leaflet": "^1.0.1",
     "moment": "^2.17.1",
     "node-static": "^0.7.9",
