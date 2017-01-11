@@ -9,7 +9,7 @@ momentLocalizer(Moment);
 
 
 const AisDateTimePicker = (props) => {
-  return AisDateTimePickerTemplate(props);
+    return AisDateTimePickerTemplate(props);
 };
 
 AisDateTimePicker.propTypes = {
