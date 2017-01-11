@@ -2,7 +2,7 @@ import React from 'react';
 import DateTimePicker from 'react-widgets/lib/DateTimePicker';
 
 
-const DateTimePickerTemplate = (props) => {
+const AisDateTimePickerTemplate = (props) => {
     return (
         <fieldset>
             <div className="ais-dtpicker">
@@ -10,14 +10,14 @@ const DateTimePickerTemplate = (props) => {
                     <label>{props.label}</label>
                 </div>
                 <div className="ais-dtpicker__date">
-                    <DateTimePicker time={false} format={'MM-DD-YYYY'} />
+                    <DateTimePicker time={false} format={'MM-DD-YYYY'} defaultValue={props.default} />
                 </div>
                 <div className="ais-dtpicker__time">
-                    <DateTimePicker calendar={false} timeFormat={'HH:mm [Z]'} format={'HH:mm [Z]'} />
+                    <DateTimePicker calendar={false} timeFormat={'HH:mm [Z]'} format={'HH:mm [Z]'} defaultValue={props.default} />
                 </div>
             </div>
         </fieldset>
     );
 };
 
-export default DateTimePickerTemplate;
+export default AisDateTimePickerTemplate;

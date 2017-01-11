@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import DateTimePickerTemplate from './DateTimePickerTemplate';
+import AisDateTimePickerTemplate from './AisDateTimePickerTemplate';
 
 import Moment from 'moment';
 import momentLocalizer from 'react-widgets/lib/localizers/moment';
@@ -8,12 +8,13 @@ import momentLocalizer from 'react-widgets/lib/localizers/moment';
 momentLocalizer(Moment);
 
 
-const DateTimePicker = (props) => {
-  return DateTimePickerTemplate(props);
+const AisDateTimePicker = (props) => {
+  return AisDateTimePickerTemplate(props);
 };
 
-DateTimePicker.propTypes = {
+AisDateTimePicker.propTypes = {
     label: PropTypes.string,
+    default: PropTypes.instanceOf(Date)
 };
 
-export default DateTimePicker;
+export default AisDateTimePicker;

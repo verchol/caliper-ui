@@ -1,14 +1,14 @@
 import React from 'react';
-import DateTimePicker from '../form/DateTimePicker';
+import AisDateTimePicker from '../form/AisDateTimePicker';
 
 
-const CaliperFormTemplate = () => {
+const CaliperFormTemplate = (props) => {
     return (
         <div className="caliper-form">
 
-            <DateTimePicker label="Start Time"/>
+            <AisDateTimePicker label="Start Time" default={props.defaultStartTime} />
 
-            <DateTimePicker label="End Time" />
+            <AisDateTimePicker label="End Time" default={props.defaultEndTime} />
 
         </div>
     );
