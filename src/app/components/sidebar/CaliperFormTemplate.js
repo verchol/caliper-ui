@@ -1,6 +1,7 @@
 import React from 'react';
 
 import AisDateTimePicker from '../form/AisDateTimePicker';
+import AisTextInput from '../form/AisTextInput';
 
 
 const CaliperFormTemplate = (props) => {
@@ -23,6 +24,19 @@ const CaliperFormTemplate = (props) => {
                 </fieldset>
             </section>
 
+            <section>
+                <h2>Filters</h2>
+                <fieldset>
+                    <AisTextInput name="reqid" showLabel={false} label="Requirement ID" />
+                    <AisTextInput name="reqid" showLabel={false} label="Product ID" />
+                    <AisTextInput name="reqid" showLabel={false} label="Task Name" />
+                </fieldset>
+            </section>
+
+            <section>
+                <h2>Error Criteria</h2>
+
+            </section>
 
         </div>
     );
