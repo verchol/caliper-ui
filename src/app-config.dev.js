@@ -1,5 +1,5 @@
 APP_CONFIG = {
     urls: {
-        'allReports': '/mocks/allReports.json'
+        'allReports': 'http://localhost:3000/reports'
     }
 };
