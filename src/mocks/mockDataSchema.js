@@ -18,12 +18,12 @@ const schema = {
                         'faker': 'system.fileName'
                     },
                     'date': {
-                        'type': 'date',
-                        'faker': 'date.recent',
+                        'type': 'string',
+                        'faker': 'date.recent'
                     },
                     'email': {
                         'type': 'string',
-                        'faker': 'internet.email',
+                        'faker': 'internet.email'
                     },
                     'address': {
                         'type': 'string',

@@ -35,3 +35,6 @@ src/fonts/fontawesome*
 src/fonts/FontAwesome*
 src/fonts/rw*
 src/app-config.js
+
+# mock data
+src/mocks/db.json
