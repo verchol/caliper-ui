@@ -1,7 +1,6 @@
 .grid-justify() {
     display: flex;
     justify-content: space-between;
-    margin: 0 0 20px 0;
 
     @media (max-width: 640px) {
         display: block;
@@ -17,8 +16,6 @@
 }
 .col(@columnWidth) {
     width: @columnWidth;
-    padding: 20px;
-    border: 1px solid white;
 
     @media (max-width: 640px) {
         width: 100%;
@@ -27,8 +24,6 @@
 }
 .col() {
     flex: 1;
-    padding: 20px;
-    border: 1px solid white;
 
     @media (max-width: 640px) {
         width: 100%;

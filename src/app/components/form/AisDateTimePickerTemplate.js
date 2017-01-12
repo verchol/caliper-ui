@@ -9,11 +9,13 @@ const AisDateTimePickerTemplate = (props) => {
                 <div className="ais-dtpicker__label">
                     <label>{props.label}</label>
                 </div>
-                <div className="ais-dtpicker__date">
-                    <DateTimePicker time={false} format={'MM-DD-YYYY'} defaultValue={props.default} />
-                </div>
-                <div className="ais-dtpicker__time">
-                    <DateTimePicker calendar={false} timeFormat={'HH:mm [Z]'} format={'HH:mm [Z]'} defaultValue={props.default} />
+                <div className="ais-dtpicker__inputs">
+                    <div className="ais-dtpicker__date">
+                        <DateTimePicker time={false} format={'MM-DD-YYYY'} defaultValue={props.default} />
+                    </div>
+                    <div className="ais-dtpicker__time">
+                        <DateTimePicker calendar={false} timeFormat={'HH:mm [Z]'} format={'HH:mm [Z]'} defaultValue={props.default} />
+                    </div>
                 </div>
             </div>
         </fieldset>

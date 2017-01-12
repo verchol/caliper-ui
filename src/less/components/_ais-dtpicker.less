@@ -1,7 +1,5 @@
 
 .ais-dtpicker {
-    display: flex;
-    flex-wrap: wrap;
 
     label {
         font-weight: bold;
@@ -12,13 +10,16 @@
         width: 100%;
     }
 
-    .ais-dtpicker__date {
-        margin-right: 0.5em;
-        flex: 1;
-    }
+    .ais-dtpicker__inputs {
+        .grid-justify();
 
-    .ais-dtpicker__time {
-        flex: 1;
+        .ais-dtpicker__date {
+            .col(49%);
+        }
+
+        .ais-dtpicker__time {
+            .col(49%);
+        }
     }
 
     .rw-widget {
