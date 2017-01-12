@@ -26,3 +26,45 @@
         }
     }
 }
+
+// hat tip to: http://blog.karenmenezes.com/2014/nov/1/another-pure-css-checkbox-article/
+.aisform__checkbox {
+
+    input {
+        opacity: 0;
+        position: absolute;
+    }
+
+    input, label {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 5px;
+        cursor: pointer;
+    }
+
+    label {
+        position: relative;
+    }
+
+    input + label:before {
+        content: '';
+        background: @aisform__bg;
+        border-radius: 4px;
+        display: inline-block;
+        vertical-align: middle;
+        width: 18px;
+        height: 18px;
+        padding: 2px;
+        margin-right: 10px;
+        text-align: center;
+        transition: all 0.5s ease;
+    }
+
+    input:checked + label:before {
+        background: @clr-blue;
+    }
+
+    input:focus + label {
+        outline: 0;
+    }
+}
