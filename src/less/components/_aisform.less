@@ -47,6 +47,7 @@
     }
 
     label {
+        color: @aisform__bg;
         position: relative;
     }
 
@@ -64,8 +65,20 @@
         transition: all 0.5s ease;
     }
 
+    input:hover + label:before {
+        background-color: @clr-white;
+    }
+
+    input:hover + label {
+        color: @clr-white;
+    }
+
     input:checked + label:before {
         background-color: @clr-green;
+    }
+
+    input:checked + label {
+        color: @clr-white;
     }
 
     input:focus + label {
