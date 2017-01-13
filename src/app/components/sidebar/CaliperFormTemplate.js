@@ -1,6 +1,7 @@
 import React from 'react';
 
 import AisCheckbox from '../form/AisCheckbox';
+import AisComparator from '../form/AisComparator';
 import AisDateTimePicker from '../form/AisDateTimePicker';
 import AisTextInput from '../form/AisTextInput';
 
@@ -31,6 +32,10 @@ const CaliperFormTemplate = (props) => {
                     <AisTextInput name="reqid" showLabel={false} label="Requirement ID" />
                     <AisTextInput name="reqid" showLabel={false} label="Product ID" />
                     <AisTextInput name="reqid" showLabel={false} label="Task Name" />
+                </fieldset>
+                <fieldset>
+                    <AisComparator name="numFrames" label="Frame Count" />
+                    <AisComparator name="numBiscuits" label="Biscuit Count" />
                 </fieldset>
             </section>
 
