@@ -47,6 +47,7 @@
     }
 
     label {
+        color: @aisform__bg;
         position: relative;
     }
 
@@ -64,11 +65,32 @@
         transition: all 0.5s ease;
     }
 
+    input:hover + label:before {
+        background-color: @clr-white;
+    }
+
+    input:hover + label {
+        color: @clr-white;
+    }
+
     input:checked + label:before {
         background-color: @clr-green;
+    }
+
+    input:checked + label {
+        color: @clr-white;
     }
 
     input:focus + label {
         outline: 0;
     }
+}
+
+.aisform__comparator {
+    margin: 1.0em 0;
+}
+
+.aisform__comparator-operators {
+    font-size: 12px;
+    padding-left: 2.0em;
 }
