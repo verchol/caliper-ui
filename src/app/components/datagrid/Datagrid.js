@@ -50,11 +50,11 @@ class Datagrid extends React.Component {
 
 
 Datagrid.propTypes = {
-    reports: PropTypes.array
+    results: PropTypes.object
 };
 
 function mapStateToProps(state) { //optional arg is ownProps
-    return {reports: state.reports};
+    return {results: state.results};
 }
 
 export default connect(mapStateToProps)(Datagrid);

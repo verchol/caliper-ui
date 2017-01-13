@@ -1,19 +1,27 @@
 import React from 'react';
 import Griddle from 'griddle-react';
+import Spinner from '../Spinner';
 
 const DatagridTemplate = (props, setPage, changeSort, setFilter, setPageSize) => {
+    if (props.results.reports) {
+        return (
+            <Griddle results={props.results.reports}
+                     showFilter={false}
+                     showSettings={false}
+                     useExternal={true}
+                     useGriddleStyles={false}
+                     externalMaxPage={props.results.headers.pages}
+                     externalCurrentPage={props.results.headers.page}
+                     externalSetPage={setPage}
+                     externalChangeSort={changeSort}
+                     externalSetFilter={setFilter}
+                     externalSetPageSize={setPageSize}/>
+        );
+    }
     return (
-        <Griddle results={props.reports}
-                 showFilter={true}
-                 showSettings={true}
-                 useExternal={true}
-                 useGriddleStyles={false}
-                 externalMaxPage={1}
-                 externalCurrentPage={0}
-                 externalSetPage={setPage}
-                 externalChangeSort={changeSort}
-                 externalSetFilter={setFilter}
-                 externalSetPageSize={setPageSize}/>
+        <div className="spinner-container">
+            <Spinner/>
+        </div>
     );
 };
 

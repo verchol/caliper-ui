@@ -2,17 +2,17 @@
 import * as types from './reportActionTypes';
 import api from '../../api/reportApi';
 
-export function reportLoadReportsSuccess(reports) {
+export function reportLoadReportsSuccess(results) {
     return {
         type: types.REPORT__LOAD_REPORTS_SUCCESS,
-        reports
+        results
     };
 }
 
 export function fetchAllReports() {
     return function(dispatch) {
-        return api.getAllReports().then(reports => {
-            dispatch(reportLoadReportsSuccess(reports));
+        return api.getAllReports().then(results => {
+            dispatch(reportLoadReportsSuccess(results));
         }).catch(error => {
             throw(error);
         });

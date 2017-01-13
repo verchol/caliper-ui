@@ -7,8 +7,8 @@ class ReportApi {
         return new Promise((resolve, reject) => {
             fetch(APP_CONFIG.urls.allReports).then(function(response) {
                 return response.json();
-            }).then(function(reports) {
-                resolve(Object.assign([], reports));
+            }).then(function(results) {
+                resolve(Object.assign({}, results));
             }).catch(function(error) {
                 reject(error);
             });
