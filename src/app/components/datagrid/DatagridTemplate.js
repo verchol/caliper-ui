@@ -7,6 +7,7 @@ const DatagridTemplate = (props, setPage, changeSort, setFilter, setPageSize) =>
                  showFilter={true}
                  showSettings={true}
                  useExternal={true}
+                 useGriddleStyles={false}
                  externalMaxPage={1}
                  externalCurrentPage={0}
                  externalSetPage={setPage}

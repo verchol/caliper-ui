@@ -1,3 +1,92 @@
-.griddle-container {
-    margin: 20px 0;
+.griddle-container{
+
+}
+
+.griddle {
+    .top-section{
+        .grid-justify(space-between);
+    }
+
+    .griddle-filter{
+        .col(25%);
+        text-align:left;
+        color:#222;
+        min-height:1px;
+        input {
+            .textinput();
+        }
+    }
+
+    .griddle-settings-toggle{
+        .col(25%);
+        text-align:right;
+
+        button {
+            .btn();
+        }
+    }
+
+    .griddle-settings{
+        background-color:#FFF;
+        border:1px solid #DDD;
+        color:#222;
+        padding:10px;
+        margin-bottom:10px;
+
+        .griddle-columns{
+            clear:both;
+            display:table;
+            width:100%;
+            border-bottom:1px solid #EDEDED;
+            margin-bottom:10px;
+        }
+
+        .griddle-column-selection{
+            float:left;
+            width:20%;
+        }
+    }
+
+    table{
+        width:100%;
+        table-layout:fixed;
+        font-size: 0.75rem;
+    }
+
+    th{
+        background-color:#EDEDEF;
+        border:0px;
+        border-bottom:1px solid #DDD;
+        color:#222;
+        padding:5px;
+    }
+
+    td{
+        padding:5px;
+        background-color: lighten(@clr-background-alt, 5%);
+        border-top-color:#DDD;
+        color:#ddd;
+    }
+
+    .footer-container{
+        padding:0px;
+        background-color:#EDEDED;
+        border:0px;
+        color:#222;
+    }
+
+    .griddle-previous, .griddle-page, .griddle-next{
+        float:left;
+        width:33%;
+        min-height:1px;
+        margin-top:5px;
+    }
+
+    .griddle-page{
+        text-align:center;
+    }
+
+    .griddle-next{
+        text-align:right;
+    }
 }

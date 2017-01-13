@@ -1,21 +1,17 @@
 .application-ctr {
-    display: flex;
     height: 100%;
     width: 100%;
 }
 
 .application {
-    display: flex;
-    flex: 1;
-    width: 100%;
+    .grid-justify(space-between);
 
     .content {
         background-color: @clr-background-alt;
-        flex: 1;
-        height: 100%;
+        .col(80%);
     }
 
     .sidebar {
-        width: 297px;
+        .col(20%);
     }
 }
