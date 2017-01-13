@@ -8,12 +8,17 @@ const schema = {
             'items': {
                 'type': 'object',
                 'properties': {
-                    'id': {
+                    'requirementId': {
                         'type': 'number',
                         'unique': true,
                         'minimum': 1
                     },
-                    'name': {
+                    'productId': {
+                        'type': 'number',
+                        'unique': true,
+                        'minimum': 1
+                    },
+                    'taskName': {
                         'type': 'string',
                         'faker': 'system.fileName'
                     },
@@ -66,7 +71,7 @@ const schema = {
                         'faker': 'finance.accountName'
                     }
                 },
-                required: ['id', 'name', 'date', 'email', 'address', 'city', 'state', 'zipCode', 'latitude', 'longitude', 'company', 'product', 'phone', 'account']
+                required: ['requirementId', 'productId', 'taskName', 'date', 'email', 'address', 'city', 'state', 'zipCode', 'latitude', 'longitude', 'company', 'product', 'phone', 'account']
             }
         }
     },
