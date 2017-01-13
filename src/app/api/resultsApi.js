@@ -1,11 +1,11 @@
 import 'whatwg-fetch';
 
 
-class ReportApi {
+class ResultsApi {
 
-    static getAllReports() {
+    static getAllResults() {
         return new Promise((resolve, reject) => {
-            fetch(APP_CONFIG.urls.allReports).then(function(response) {
+            fetch(APP_CONFIG.urls.allResults).then(function(response) {
                 return response.json();
             }).then(function(results) {
                 resolve(Object.assign({}, results));
@@ -16,4 +16,4 @@ class ReportApi {
     }
 
 }
-export default ReportApi;
+export default ResultsApi;

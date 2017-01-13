@@ -1,5 +1,5 @@
 APP_CONFIG = {
     urls: {
-        'allReports': 'http://localhost:3000/search'
+        'allResults': 'http://localhost:3000/search'
     }
 };

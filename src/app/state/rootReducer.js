@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-import results from './reducers/reportReducer';
+import results from './reducers/resultsReducer';
 import selection from './reducers/selectionReducer';
 
 
