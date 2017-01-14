@@ -1,60 +1,67 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import DatagridTemplate from './DatagridTemplate';
+import { fetchPagedResults } from '../../state/actions/resultsActions';
 
 class Datagrid extends React.Component {
     constructor (props, context) {
         super(props, context);
     }
 
-    //what page is currently viewed
-    setPage (index) {
-        console.log('setPage');
-    }
-    // //this will handle how the data is sorted
-    // sortData (sort, sortAscending, data) {
-    //     //sorting should generally happen wherever the data is coming from
-    //     sortedData = _.sortBy(data, function(item){
-    //         return item[sort];
-    //     });
-    //
-    //     if(sortAscending === false){
-    //         sortedData.reverse();
-    //     }
-    //     return {
-    //         "currentPage": 0,
-    //         "externalSortColumn": sort,
-    //         "externalSortAscending": sortAscending,
-    //         "pretendServerData": sortedData,
-    //         "results": sortedData.slice(0,this.state.externalResultsPerPage)
-    //     };
-    // }
-    //this changes whether data is sorted in ascending or descending order
-    changeSort (sort, sortAscending) {
-        console.log('changeSort');
-        // this.setState(this.sortData(sort, sortAscending, this.state.pretendServerData));
-    }
-    //this method handles the filtering of the data
-    setFilter (filter) {
-        console.log('setFilter');
-    }
-    //this method handles determining the page size
-    setPageSize (size) {
-        console.log('setPageSize');
-    }
-
     render () {
-        return DatagridTemplate(this.props, this.setPage, this.changeSort, this.setFilter, this.setPageSize);
+        return DatagridTemplate(this.props, this.changeSort, this.setFilter, this.setPageSize);
     }
 }
-
 
 Datagrid.propTypes = {
-    results: PropTypes.object
+    results: PropTypes.object,
+    setPage: PropTypes.func,
+    sortData: PropTypes.func,
+    changeSort: PropTypes.func,
+    setFilter: PropTypes.func,
+    setPageSize: PropTypes.func
 };
 
-function mapStateToProps(state) { //optional arg is ownProps
-    return {results: state.results};
-}
+const mapStateToProps = (state) => { //optional arg is ownProps
+    return {
+        results: state.results
+    };
+};
 
-export default connect(mapStateToProps)(Datagrid);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setPage: (index) => {
+            dispatch(fetchPagedResults(index + 1));
+        },
+        sortData: (sort, sortAscending, data) => {
+            console.log(sort + ', ' + sortAscending + ', ' + data);
+            //     //sorting should generally happen wherever the data is coming from
+            //     sortedData = _.sortBy(data, function(item){
+            //         return item[sort];
+            //     });
+            //
+            //     if(sortAscending === false){
+            //         sortedData.reverse();
+            //     }
+            //     return {
+            //         "currentPage": 0,
+            //         "externalSortColumn": sort,
+            //         "externalSortAscending": sortAscending,
+            //         "pretendServerData": sortedData,
+            //         "results": sortedData.slice(0,this.state.externalResultsPerPage)
+            //     };
+            // }
+        },
+        changeSort: (sort, sortAscending) => {
+            console.log(sort + ', ' + sortAscending);
+        },
+        setFilter: (filter) => {
+            console.log(filter);
+        },
+        setPageSize: (size) => {
+            console.log(size);
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Datagrid);

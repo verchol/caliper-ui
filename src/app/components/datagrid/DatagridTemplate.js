@@ -2,7 +2,7 @@ import React from 'react';
 import Griddle from 'griddle-react';
 import Spinner from '../Spinner';
 
-const DatagridTemplate = (props, setPage, changeSort, setFilter, setPageSize) => {
+const DatagridTemplate = (props, changeSort, setFilter, setPageSize) => {
     if (props.results.headers && props.results.reports) {
         return (
             <Griddle results={props.results.reports}
@@ -12,10 +12,10 @@ const DatagridTemplate = (props, setPage, changeSort, setFilter, setPageSize) =>
                      useGriddleStyles={false}
                      externalMaxPage={props.results.headers.pages}
                      externalCurrentPage={props.results.headers.page}
-                     externalSetPage={setPage}
-                     externalChangeSort={changeSort}
-                     externalSetFilter={setFilter}
-                     externalSetPageSize={setPageSize}/>
+                     externalSetPage={props.setPage}
+                     externalChangeSort={props.changeSort}
+                     externalSetFilter={props.setFilter}
+                     externalSetPageSize={props.setPageSize}/>
         );
     }
     return (
