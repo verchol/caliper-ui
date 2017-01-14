@@ -11,7 +11,7 @@
     "start": "npm-run-all --parallel test:watch open:src lint:watch less:watch start-mockapi",
     "generate-mock-data": "node src/mocks/generateMockData",
     "prestart-mockapi": "npm run generate-mock-data",
-    "start-mockapi": "json-server --watch src/mocks/db.json",
+    "start-mockapi": "node src/mocks/server.js",
     "open:src": "babel-node tools/srcServer.js",
     "open:dist": "babel-node tools/distServer.js",
     "open:cover": "npm run test:cover && open coverage/index.html",

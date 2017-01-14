@@ -18,3 +18,13 @@ export function fetchAllResults() {
         });
     };
 }
+
+export function fetchPagedResults (page) {
+    return function (dispatch) {
+        return api.getPagedResults(page).then(results => {
+            dispatch(reportLoadResultsSuccess(results));
+        }).catch(error => {
+            throw(error);
+        });
+    };
+}

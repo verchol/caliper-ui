@@ -3,7 +3,7 @@ import Griddle from 'griddle-react';
 import Spinner from '../Spinner';
 
 const DatagridTemplate = (props, setPage, changeSort, setFilter, setPageSize) => {
-    if (props.results.reports) {
+    if (props.results.headers && props.results.reports) {
         return (
             <Griddle results={props.results.reports}
                      showFilter={false}
