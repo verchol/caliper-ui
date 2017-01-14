@@ -5,9 +5,9 @@ let server = jsonServer.create();
 let router = jsonServer.router(path.join(__dirname, 'db.json'));
 let middlewares = jsonServer.defaults();
 
-router.render = function (req, res) {
+router.render = (req, res) => {
     // parse url params to determine page and limit
-    let params = req.url.split('?')[1].split('&').map(function (s) { return s.split('='); });
+    let params = req.url.split('?')[1].split('&').map((s) => { return s.split('='); });
     // convert params output - [['_page', '1'],['_limit','25']] - to an object
     params = params.reduce((prev,curr) => {
         prev[curr[0]] = parseInt(curr[1]);
@@ -27,6 +27,6 @@ router.render = function (req, res) {
 
 server.use(middlewares);
 server.use(router);
-server.listen(3000, function () {
+server.listen(3000, () => {
     console.log('JSON Server is running');
 });
