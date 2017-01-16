@@ -2,7 +2,7 @@ import React from 'react';
 import Griddle from 'griddle-react';
 import Spinner from '../Spinner';
 
-const DatagridTemplate = (props, changeSort, setFilter, setPageSize) => {
+const DatagridTemplate = (props) => {
     if (props.results.headers && props.results.reports) {
         return (
             <Griddle results={props.results.reports}

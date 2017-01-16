@@ -3,21 +3,12 @@ import 'whatwg-fetch';
 
 class ResultsApi {
 
-    static getAllResults() {
+    static getAllResults(params) {
+        params = params || {};
+        let url = new URL(APP_CONFIG.urls.allResults);
+        Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
         return new Promise((resolve, reject) => {
-            fetch(APP_CONFIG.urls.allResults).then(function(response) {
-                return response.json();
-            }).then(function(results) {
-                resolve(Object.assign({}, results));
-            }).catch(function(error) {
-                reject(error);
-            });
-        });
-    }
-
-    static getPagedResults (page) {
-        return new Promise((resolve, reject) => {
-            fetch(APP_CONFIG.urls.pagedResults + page).then(function(response) {
+            fetch(url).then(function(response) {
                 return response.json();
             }).then(function(results) {
                 resolve(Object.assign({}, results));

@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import DatagridTemplate from './DatagridTemplate';
-import { fetchPagedResults } from '../../state/actions/resultsActions';
+import { fetchAllResults } from '../../state/actions/resultsActions';
 
 class Datagrid extends React.Component {
     constructor (props, context) {
@@ -9,7 +9,7 @@ class Datagrid extends React.Component {
     }
 
     render () {
-        return DatagridTemplate(this.props, this.changeSort, this.setFilter, this.setPageSize);
+        return DatagridTemplate(this.props);
     }
 }
 
@@ -31,7 +31,10 @@ const mapStateToProps = (state) => { //optional arg is ownProps
 const mapDispatchToProps = (dispatch) => {
     return {
         setPage: (index) => {
-            dispatch(fetchPagedResults(index + 1));
+            let urlParams = {};
+            urlParams[APP_CONFIG.urlParams.page] = index + 1;
+            urlParams[APP_CONFIG.urlParams.count] = 20;
+            dispatch(fetchAllResults(urlParams));
         },
         sortData: (sort, sortAscending, data) => {
             console.log(sort + ', ' + sortAscending + ', ' + data);
@@ -63,5 +66,15 @@ const mapDispatchToProps = (dispatch) => {
         }
     };
 };
+
+// const mergeProps = (stateProps, dispatchProps, ownProps) => {
+//     return Object.assign({}, ownProps, {
+//         results: stateProps.results,
+//         setPage: (index) => dispatchProps.setPage(index, stateProps.params),
+//         changeSort: (sort, sortAscending) => dispatchProps.changeSort(sort, sortAscending, stateProps.params),
+//         setFilter: (filter) => dispatchProps.setFilter(filter, stateProps.params),
+//         setPageSize: (size) => dispatchProps.setPageSize(size, stateProps.params)
+//     });
+// };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Datagrid);

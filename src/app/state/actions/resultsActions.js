@@ -9,19 +9,10 @@ export function reportLoadResultsSuccess(results) {
     };
 }
 
-export function fetchAllResults() {
+export function fetchAllResults(params) {
+    params = params || {};
     return function(dispatch) {
-        return api.getAllResults().then(results => {
-            dispatch(reportLoadResultsSuccess(results));
-        }).catch(error => {
-            throw(error);
-        });
-    };
-}
-
-export function fetchPagedResults (page) {
-    return function (dispatch) {
-        return api.getPagedResults(page).then(results => {
+        return api.getAllResults(params).then(results => {
             dispatch(reportLoadResultsSuccess(results));
         }).catch(error => {
             throw(error);
