@@ -8,16 +8,15 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import routes from './routes';
 import configureStore from './state/store/configureStore';
 import { fetchAllResults } from './state/actions/resultsActions';
+import { updateParams } from './state/actions/paramsActions';
 
 // Import application assets so webpack can process them
 //require('../favicon.ico');
 //import '../sass/main.scss';
 
 const store = configureStore();
-const urlParams = {};
-urlParams[APP_CONFIG.urlParams.page] = 1;
-urlParams[APP_CONFIG.urlParams.count] = 20;
-store.dispatch(fetchAllResults(urlParams));
+store.dispatch(updateParams({_page: 1, _limit: 20}));
+store.dispatch(fetchAllResults({_page: 1, _limit: 20}));
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);

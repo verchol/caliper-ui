@@ -1,7 +1,8 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import DatagridTemplate from './DatagridTemplate';
-import { fetchAllResults } from '../../state/actions/resultsActions';
+import * as resultsActions from '../../state/actions/resultsActions';
+import * as paramsActions from '../../state/actions/paramsActions';
 
 class Datagrid extends React.Component {
     constructor (props, context) {
@@ -15,6 +16,7 @@ class Datagrid extends React.Component {
 
 Datagrid.propTypes = {
     results: PropTypes.object,
+    params: PropTypes.object,
     setPage: PropTypes.func,
     sortData: PropTypes.func,
     changeSort: PropTypes.func,
@@ -24,17 +26,17 @@ Datagrid.propTypes = {
 
 const mapStateToProps = (state) => { //optional arg is ownProps
     return {
-        results: state.results
+        results: state.results,
+        params: state.params
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         setPage: (index) => {
-            let urlParams = {};
-            urlParams[APP_CONFIG.urlParams.page] = index + 1;
-            urlParams[APP_CONFIG.urlParams.count] = 20;
-            dispatch(fetchAllResults(urlParams));
+            dispatch(paramsActions.updateParams({ _page: index + 1}));
+            //TODO need to call this with updated params somehow
+            dispatch(resultsActions.fetchAllResults());
         },
         sortData: (sort, sortAscending, data) => {
             console.log(sort + ', ' + sortAscending + ', ' + data);
@@ -70,6 +72,7 @@ const mapDispatchToProps = (dispatch) => {
 // const mergeProps = (stateProps, dispatchProps, ownProps) => {
 //     return Object.assign({}, ownProps, {
 //         results: stateProps.results,
+//         params: stateProps.params,
 //         setPage: (index) => dispatchProps.setPage(index, stateProps.params),
 //         changeSort: (sort, sortAscending) => dispatchProps.changeSort(sort, sortAscending, stateProps.params),
 //         setFilter: (filter) => dispatchProps.setFilter(filter, stateProps.params),
