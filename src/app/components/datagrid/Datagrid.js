@@ -34,11 +34,14 @@ const mapStateToProps = (state) => { //optional arg is ownProps
 const mapDispatchToProps = (dispatch) => {
     return {
         setPage: (index, params) => {
-            dispatch(paramsActions.updateParams({ _page: index + 1}));
-            //TODO get updated params from above dispatch call somehow instead
-            let updatedParams = Object.assign({}, params, {
-                _page: index + 1
-            });
+            // use config value for key
+            let updatedParams = {};
+            updatedParams[APP_CONFIG.params.page] = index + 1;
+            // update params state
+            dispatch(paramsActions.updateParams(updatedParams));
+            // update grid
+            // TODO get updated params from above dispatch call somehow instead
+            updatedParams = Object.assign({}, params, updatedParams);
             dispatch(resultsActions.fetchAllResults(updatedParams));
         },
         sortData: (sort, sortAscending, data) => {

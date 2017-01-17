@@ -9,9 +9,9 @@ const FilterSectionTemplate = (props) => {
         <section>
             <h2>Filters</h2>
             <fieldset>
-                <AisTextInput name="reqid" showLabel={false} label="Requirement ID" />
-                <AisTextInput name="reqid" showLabel={false} label="Product ID" />
-                <AisTextInput name="reqid" showLabel={false} label="Task Name" />
+                <AisTextInput name="reqid" showLabel={false} label="Requirement ID" onChange={props.filter.bind(this, 'requirementId')} />
+                <AisTextInput name="reqid" showLabel={false} label="Product ID" onChange={props.filter.bind(this, 'productId')} />
+                <AisTextInput name="reqid" showLabel={false} label="Task Name" onChange={props.filter.bind(this, 'taskName')} />
             </fieldset>
             <fieldset>
                 <AisComparator name="numFrames" label="Frame Count" />
