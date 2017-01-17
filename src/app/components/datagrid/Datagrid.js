@@ -33,10 +33,13 @@ const mapStateToProps = (state) => { //optional arg is ownProps
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setPage: (index) => {
+        setPage: (index, params) => {
             dispatch(paramsActions.updateParams({ _page: index + 1}));
-            //TODO need to call this with updated params somehow
-            dispatch(resultsActions.fetchAllResults());
+            //TODO get updated params from above dispatch call somehow instead
+            let updatedParams = Object.assign({}, params, {
+                _page: index + 1
+            });
+            dispatch(resultsActions.fetchAllResults(updatedParams));
         },
         sortData: (sort, sortAscending, data) => {
             console.log(sort + ', ' + sortAscending + ', ' + data);
@@ -69,15 +72,15 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-// const mergeProps = (stateProps, dispatchProps, ownProps) => {
-//     return Object.assign({}, ownProps, {
-//         results: stateProps.results,
-//         params: stateProps.params,
-//         setPage: (index) => dispatchProps.setPage(index, stateProps.params),
-//         changeSort: (sort, sortAscending) => dispatchProps.changeSort(sort, sortAscending, stateProps.params),
-//         setFilter: (filter) => dispatchProps.setFilter(filter, stateProps.params),
-//         setPageSize: (size) => dispatchProps.setPageSize(size, stateProps.params)
-//     });
-// };
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+    return Object.assign({}, ownProps, {
+        results: stateProps.results,
+        params: stateProps.params,
+        setPage: (index) => dispatchProps.setPage(index, stateProps.params),
+        changeSort: (sort, sortAscending) => dispatchProps.changeSort(sort, sortAscending, stateProps.params),
+        setFilter: (filter) => dispatchProps.setFilter(filter, stateProps.params),
+        setPageSize: (size) => dispatchProps.setPageSize(size, stateProps.params)
+    });
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Datagrid);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Datagrid);
