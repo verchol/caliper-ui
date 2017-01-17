@@ -1,6 +1,10 @@
 import React from 'react';
 import moment from 'moment';
+
+import { DATE_FORMAT, TIME_FORMAT } from '../form/AisDateTimePicker';
 import DateRangeSectionTemplate from './DateRangeSectionTemplate';
+
+const DATE_TIME_FORMAT = `${DATE_FORMAT} ${TIME_FORMAT}`;
 
 
 class DateRangeSection extends React.Component {
@@ -8,13 +12,13 @@ class DateRangeSection extends React.Component {
     constructor(props) {
         super(props);
 
-        this.defaultStartTime = moment().startOf('day').toDate();
-        this.defaultEndTime = moment().endOf('day').toDate();
+        this.defaultStartTime = moment().startOf('day');
+        this.defaultEndTime = moment().endOf('day');
 
         this.state = {
             error: null,
-            startDateTime: null,
-            endDateTime: null
+            startDateTime: this.defaultStartTime.format(DATE_TIME_FORMAT),
+            endDateTime: this.defaultEndTime.format(DATE_TIME_FORMAT)
         };
 
         this.handleStartChange = this.handleStartChange.bind(this);
@@ -32,11 +36,12 @@ class DateRangeSection extends React.Component {
     render() {
         return DateRangeSectionTemplate({
             error: this.state.error,
-            defaultStartTime: this.defaultStartTime,
-            defaultEndTime: this.defaultEndTime,
+            defaultStartTime: this.defaultStartTime.toDate(),
+            defaultEndTime: this.defaultEndTime.toDate(),
             onStartChange: this.handleStartChange,
             onEndChange: this.handleEndChange
         });
     }
 }
+
 export default DateRangeSection;
