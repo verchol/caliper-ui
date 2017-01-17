@@ -1,5 +1,6 @@
 import React from 'react';
 import DateTimePicker from 'react-widgets/lib/DateTimePicker';
+import AisDateTimePicker, {DATE_FORMAT, TIME_FORMAT} from './AisDateTimePicker';
 
 
 const AisDateTimePickerTemplate = (context) => {
@@ -14,15 +15,15 @@ const AisDateTimePickerTemplate = (context) => {
                     <div className="ais-dtpicker__date">
                         <DateTimePicker
                             time={false}
-                            format={'MM-DD-YYYY'}
+                            format={DATE_FORMAT}
                             onChange={context.onDateChange}
                             defaultValue={context.defaultValue} />
                     </div>
                     <div className="ais-dtpicker__time">
                         <DateTimePicker
                             calendar={false}
-                            timeFormat={'HH:mm[Z]'}
-                            format={'HH:mm[Z]'}
+                            timeFormat={TIME_FORMAT}
+                            format={TIME_FORMAT}
                             onChange={context.onTimeChange}
                             defaultValue={context.defaultValue} />
                     </div>

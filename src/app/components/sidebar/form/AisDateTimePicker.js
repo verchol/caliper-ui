@@ -7,19 +7,23 @@ import momentLocalizer from 'react-widgets/lib/localizers/moment';
 // Required by react-widgets: https://jquense.github.io/react-widgets/docs/#/datetime-picker
 momentLocalizer(moment);
 
+export const DATE_FORMAT = 'MM-DD-YYYY';
+export const TIME_FORMAT = 'HH:mm[Z]';
+
 class AisDateTimePicker extends React.Component {
 
     constructor(props) {
         super(props);
 
-        let date = moment(props.defaultValue).format('MM-DD-YYYY');
-        let time = moment(props.defaultValue).format('HH:mm[Z]');
+        let dateStr = moment(props.defaultValue).format(DATE_FORMAT);
+        let timeStr = moment(props.defaultValue).format(TIME_FORMAT);
 
         this.state = {
             error: null,
-            date: date,
-            time: time
+            date: dateStr,
+            time: timeStr
         };
+        console.log('AisDateTimePicker State: ' + JSON.stringify(this.state));
 
         this.handleDateChange = this.handleDateChange.bind(this);
         this.handleTimeChange = this.handleTimeChange.bind(this);
@@ -39,6 +43,7 @@ class AisDateTimePicker extends React.Component {
             this.setState({
                 date: dateValue
             }, function() {
+                console.log('AisDateTimePicker State: ' + JSON.stringify(this.state));
                 if (this.state.date && this.state.time) {
                     this.props.onChange(this.state.date, this.state.time);
                 }
@@ -60,6 +65,7 @@ class AisDateTimePicker extends React.Component {
             this.setState({
                 time: timeValue
             }, function() {
+                console.log('AisDateTimePicker State: ' + JSON.stringify(this.state));
                 if (this.state.date && this.state.time) {
                     this.props.onChange(this.state.date, this.state.time);
                 }
