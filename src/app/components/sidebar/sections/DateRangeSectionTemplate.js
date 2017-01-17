@@ -8,9 +8,16 @@ const DateRangeSectionTemplate = (props) => {
         <section>
             <h2>Date Range</h2>
 
-            <AisDateTimePicker label="Start Time" default={props.defaultStartTime} />
+            <AisDateTimePicker
+                label="Start Time"
+                defaultValue={props.defaultStartTime}
+                onChange={props.onStartChange} />
 
-            <AisDateTimePicker label="End Time" default={props.defaultEndTime} />
+            <AisDateTimePicker
+                label="End Time"
+                defaultValue={props.defaultEndTime}
+                onChange={props.onEndChange}
+                />
 
             <fieldset>
                 <div className="caliper-form__btnrow">
