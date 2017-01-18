@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import moment from 'moment';
 
 import { DATE_FORMAT, TIME_FORMAT } from '../form/AisDateTimePicker';
@@ -27,10 +27,38 @@ class AisDateRangePicker extends React.Component {
 
     handleStartChange(newDate, newTime) {
         console.log(`Updating start to ${newDate} ${newTime}`);
+        let newDateTime = `${newDate} ${newTime}`;
+        this.handleDateChange(newDateTime, this.state.endDateTime);
     }
 
-    handleEndChange(newValue) {
-        console.log('Updating end to: ' + newValue);
+    handleEndChange(newDate, newTime) {
+        console.log(`Updating end to ${newDate} ${newTime}`);
+        let newDateTime = `${newDate} ${newTime}`;
+        this.handleDateChange(this.state.startDateTime, newDateTime);
+    }
+
+    handleDateChange(startStr, endStr) {
+        this.setState({
+            error: null
+        });
+
+        let start = moment(startStr, DATE_TIME_FORMAT);
+        let end = moment(endStr, DATE_TIME_FORMAT);
+
+        if (start.isAfter(end)) {
+            this.setState({
+                error: 'Start Date should be before End Date'
+            });
+        }
+        else {
+            this.setState({
+                startDateTime: start.format(DATE_TIME_FORMAT),
+                endDateTime: end.format(DATE_TIME_FORMAT)
+            }, function() {
+                this.props.onChange(this.state.startDateTime, this.state.endDateTime);
+                console.log(`New Date Range ${this.state.startDateTime} - ${this.state.endDateTime}`);
+            });
+        }
     }
 
     render() {
@@ -43,5 +71,9 @@ class AisDateRangePicker extends React.Component {
         });
     }
 }
+
+AisDateRangePicker.propTypes = {
+    onChange: PropTypes.func
+};
 
 export default AisDateRangePicker;

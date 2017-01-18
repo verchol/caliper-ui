@@ -6,6 +6,7 @@ import AisDateTimePicker from '../form/AisDateTimePicker';
 const AisDateRangePickerTemplate = (props) => {
     return (
         <div>
+            { props.error && <div className="aisform__error">{props.error}</div> }
             <AisDateTimePicker
                 label="Start Time"
                 defaultValue={props.defaultStartTime}
