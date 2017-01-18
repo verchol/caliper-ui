@@ -3,11 +3,9 @@ import React, {PropTypes} from 'react';
 import AisDateTimePicker from '../form/AisDateTimePicker';
 
 
-const DateRangeSectionTemplate = (props) => {
+const AisDateRangePickerTemplate = (props) => {
     return (
-        <section>
-            <h2>Date Range</h2>
-
+        <div>
             <AisDateTimePicker
                 label="Start Time"
                 defaultValue={props.defaultStartTime}
@@ -26,11 +24,11 @@ const DateRangeSectionTemplate = (props) => {
                     <button className="aisbtn aisbtn__small">Last Month</button>
                 </div>
             </fieldset>
-        </section>
+        </div>
     );
 };
 
-DateRangeSectionTemplate.propTypes = {
+AisDateRangePickerTemplate.propTypes = {
     defaultStartTime: PropTypes.instanceOf(Date),
     defaultEndTime: PropTypes.instanceOf(Date),
     error: PropTypes.string,
@@ -38,4 +36,4 @@ DateRangeSectionTemplate.propTypes = {
     onEndChange: PropTypes.func
 };
 
-export default DateRangeSectionTemplate;
+export default AisDateRangePickerTemplate;
