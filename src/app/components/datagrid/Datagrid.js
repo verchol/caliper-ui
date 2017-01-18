@@ -44,27 +44,19 @@ const mapDispatchToProps = (dispatch) => {
             updatedParams = Object.assign({}, params, updatedParams);
             dispatch(resultsActions.fetchAllResults(updatedParams));
         },
-        sortData: (sort, sortAscending, data) => {
-            console.log(sort + ', ' + sortAscending + ', ' + data);
-            //     //sorting should generally happen wherever the data is coming from
-            //     sortedData = _.sortBy(data, function(item){
-            //         return item[sort];
-            //     });
-            //
-            //     if(sortAscending === false){
-            //         sortedData.reverse();
-            //     }
-            //     return {
-            //         "currentPage": 0,
-            //         "externalSortColumn": sort,
-            //         "externalSortAscending": sortAscending,
-            //         "pretendServerData": sortedData,
-            //         "results": sortedData.slice(0,this.state.externalResultsPerPage)
-            //     };
-            // }
-        },
-        changeSort: (sort, sortAscending) => {
-            console.log(sort + ', ' + sortAscending);
+        changeSort: (sort, sortAscending, params) => {
+            dispatch(resultsActions.fetchAllResultsPending());
+            // use config value for key
+            let updatedParams = {};
+            updatedParams[APP_CONFIG.params.sort] = sort;
+            updatedParams[APP_CONFIG.params.order] = sortAscending ? 'ASC' : 'DESC';
+            updatedParams[APP_CONFIG.params.page] = 1;
+            // update params state
+            dispatch(paramsActions.updateParams(updatedParams));
+            // update grid
+            // TODO get updated params from above dispatch call somehow instead
+            updatedParams = Object.assign({}, params, updatedParams);
+            dispatch(resultsActions.fetchAllResults(updatedParams));
         },
         setFilter: (filter) => {
             console.log(filter);

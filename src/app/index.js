@@ -15,8 +15,13 @@ import { updateParams } from './state/actions/paramsActions';
 //import '../sass/main.scss';
 
 const store = configureStore();
-store.dispatch(updateParams({_page: 1, _limit: 20}));
-store.dispatch(fetchAllResults({_page: 1, _limit: 20}));
+const initialParams = {};
+initialParams[APP_CONFIG.params.page] = 1;
+initialParams[APP_CONFIG.params.count] = 20;
+initialParams[APP_CONFIG.params.sort] = 'requirementId';
+initialParams[APP_CONFIG.params.order] = 'ASC';
+store.dispatch(updateParams(initialParams));
+store.dispatch(fetchAllResults(initialParams));
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
