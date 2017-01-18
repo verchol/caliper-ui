@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 import AisDateTimePicker from '../form/AisDateTimePicker';
 
@@ -28,6 +28,14 @@ const DateRangeSectionTemplate = (props) => {
             </fieldset>
         </section>
     );
+};
+
+DateRangeSectionTemplate.propTypes = {
+    defaultStartTime: PropTypes.instanceOf(Date),
+    defaultEndTime: PropTypes.instanceOf(Date),
+    error: PropTypes.string,
+    onStartChange: PropTypes.func,
+    onEndChange: PropTypes.func
 };
 
 export default DateRangeSectionTemplate;

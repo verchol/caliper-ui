@@ -18,11 +18,10 @@ const AisTextInput = ({name, label, showLabel, error, onChange}) => {
 
 AisTextInput.propTypes = {
     name: PropTypes.string,
-//    label: PropTypes.string,
-    onChange: PropTypes.func,
-    placeholder: PropTypes.string,
-//    value: PropTypes.string,
-//    error: PropTypes.string
+    label: PropTypes.string,
+    showLabel: PropTypes.bool,
+    error: PropTypes.string,
+    onChange: PropTypes.func
 };
 
 export default AisTextInput;

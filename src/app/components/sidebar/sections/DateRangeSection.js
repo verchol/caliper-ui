@@ -25,11 +25,11 @@ class DateRangeSection extends React.Component {
         this.handleEndChange = this.handleEndChange.bind(this);
     }
 
-    handleStartChange = function(newDate, newTime) {
+    handleStartChange(newDate, newTime) {
         console.log(`Updating start to ${newDate} ${newTime}`);
     }
 
-    handleEndChange = function(newValue) {
+    handleEndChange(newValue) {
         console.log('Updating end to: ' + newValue);
     }
 

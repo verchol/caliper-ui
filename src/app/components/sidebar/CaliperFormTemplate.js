@@ -5,7 +5,7 @@ import ErrorCriteriaSection from './sections/ErrorCriteriaSection';
 import FilterSection from './sections/FilterSection';
 
 
-const CaliperFormTemplate = (props) => {
+const CaliperFormTemplate = () => {
     return (
         <div className="caliper-form">
             <DateRangeSection />

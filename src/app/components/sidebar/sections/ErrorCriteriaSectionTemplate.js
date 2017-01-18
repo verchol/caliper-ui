@@ -3,7 +3,7 @@ import React from 'react';
 import AisCheckbox from '../form/AisCheckbox';
 
 
-const ErrorCriteriaSectionTemplate = (props) => {
+const ErrorCriteriaSectionTemplate = () => {
     return (
         <section>
             <h2>Error Criteria</h2>

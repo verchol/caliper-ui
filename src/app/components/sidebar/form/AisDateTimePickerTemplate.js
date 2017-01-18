@@ -1,6 +1,6 @@
 import React from 'react';
 import DateTimePicker from 'react-widgets/lib/DateTimePicker';
-import AisDateTimePicker, {DATE_FORMAT, TIME_FORMAT} from './AisDateTimePicker';
+import {DATE_FORMAT, TIME_FORMAT} from './AisDateTimePicker';
 
 
 const AisDateTimePickerTemplate = (context) => {
