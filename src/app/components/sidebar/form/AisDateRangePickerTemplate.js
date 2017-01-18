@@ -9,20 +9,20 @@ const AisDateRangePickerTemplate = (props) => {
             { props.error && <div className="aisform__error">{props.error}</div> }
             <AisDateTimePicker
                 label="Start Time"
-                defaultValue={props.defaultStartTime}
+                defaultValue={props.start}
                 onChange={props.onStartChange} />
 
             <AisDateTimePicker
                 label="End Time"
-                defaultValue={props.defaultEndTime}
+                defaultValue={props.end}
                 onChange={props.onEndChange}
                 />
 
             <fieldset>
                 <div className="caliper-form__btnrow">
-                    <button className="aisbtn aisbtn__small">Last Two Days</button>
-                    <button className="aisbtn aisbtn__small">Last Week</button>
-                    <button className="aisbtn aisbtn__small">Last Month</button>
+                    <button className="aisbtn aisbtn__small" onClick={() => props.setRange(2, 'days')}>Last Two Days</button>
+                    <button className="aisbtn aisbtn__small" onClick={() => props.setRange(1, 'week')}>Last Week</button>
+                    <button className="aisbtn aisbtn__small" onClick={() => props.setRange(1, 'month')}>Last Month</button>
                 </div>
             </fieldset>
         </div>
@@ -30,11 +30,12 @@ const AisDateRangePickerTemplate = (props) => {
 };
 
 AisDateRangePickerTemplate.propTypes = {
-    defaultStartTime: PropTypes.instanceOf(Date),
-    defaultEndTime: PropTypes.instanceOf(Date),
+    start: PropTypes.instanceOf(Date),
+    end: PropTypes.instanceOf(Date),
     error: PropTypes.string,
     onStartChange: PropTypes.func,
-    onEndChange: PropTypes.func
+    onEndChange: PropTypes.func,
+    setRange: PropTypes.func
 };
 
 export default AisDateRangePickerTemplate;

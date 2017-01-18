@@ -23,7 +23,6 @@ class AisDateTimePicker extends React.Component {
             date: dateStr,
             time: timeStr
         };
-        console.log('AisDateTimePicker State: ' + JSON.stringify(this.state));
 
         this.handleDateChange = this.handleDateChange.bind(this);
         this.handleTimeChange = this.handleTimeChange.bind(this);
@@ -43,7 +42,6 @@ class AisDateTimePicker extends React.Component {
             this.setState({
                 date: dateValue
             }, function() {
-                console.log('AisDateTimePicker State: ' + JSON.stringify(this.state));
                 if (this.state.date && this.state.time) {
                     this.props.onChange(this.state.date, this.state.time);
                 }
@@ -65,7 +63,6 @@ class AisDateTimePicker extends React.Component {
             this.setState({
                 time: timeValue
             }, function() {
-                console.log('AisDateTimePicker State: ' + JSON.stringify(this.state));
                 if (this.state.date && this.state.time) {
                     this.props.onChange(this.state.date, this.state.time);
                 }

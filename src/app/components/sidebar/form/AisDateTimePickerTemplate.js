@@ -17,6 +17,7 @@ const AisDateTimePickerTemplate = (context) => {
                             time={false}
                             format={DATE_FORMAT}
                             onChange={context.onDateChange}
+                            value={context.defaultValue}
                             defaultValue={context.defaultValue} />
                     </div>
                     <div className="ais-dtpicker__time">
@@ -25,6 +26,7 @@ const AisDateTimePickerTemplate = (context) => {
                             timeFormat={TIME_FORMAT}
                             format={TIME_FORMAT}
                             onChange={context.onTimeChange}
+                            value={context.defaultValue}
                             defaultValue={context.defaultValue} />
                     </div>
                 </div>

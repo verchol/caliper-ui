@@ -12,27 +12,36 @@ class AisDateRangePicker extends React.Component {
     constructor(props) {
         super(props);
 
-        this.defaultStartTime = moment().startOf('day');
-        this.defaultEndTime = moment().endOf('day');
-
         this.state = {
             error: null,
-            startDateTime: this.defaultStartTime.format(DATE_TIME_FORMAT),
-            endDateTime: this.defaultEndTime.format(DATE_TIME_FORMAT)
+            startDateTime: moment().startOf('day').format(DATE_TIME_FORMAT),
+            endDateTime: moment().endOf('day').format(DATE_TIME_FORMAT)
         };
 
         this.handleStartChange = this.handleStartChange.bind(this);
         this.handleEndChange = this.handleEndChange.bind(this);
+        this.setRange = this.setRange.bind(this);
+    }
+
+    setRange(amount, units) {
+        let e = moment().endOf('day');
+        let s = moment(e, DATE_TIME_FORMAT);
+        s.subtract(amount, units).startOf('day');
+
+        this.setState({
+            startDateTime: s.format(DATE_TIME_FORMAT),
+            endDateTime: e.format(DATE_TIME_FORMAT)
+        }, function() {
+            this.props.onChange(this.state.startDateTime, this.state.endDateTime);
+        });
     }
 
     handleStartChange(newDate, newTime) {
-        console.log(`Updating start to ${newDate} ${newTime}`);
         let newDateTime = `${newDate} ${newTime}`;
         this.handleDateChange(newDateTime, this.state.endDateTime);
     }
 
     handleEndChange(newDate, newTime) {
-        console.log(`Updating end to ${newDate} ${newTime}`);
         let newDateTime = `${newDate} ${newTime}`;
         this.handleDateChange(this.state.startDateTime, newDateTime);
     }
@@ -56,18 +65,21 @@ class AisDateRangePicker extends React.Component {
                 endDateTime: end.format(DATE_TIME_FORMAT)
             }, function() {
                 this.props.onChange(this.state.startDateTime, this.state.endDateTime);
-                console.log(`New Date Range ${this.state.startDateTime} - ${this.state.endDateTime}`);
             });
         }
     }
 
     render() {
+        let s = moment(this.state.startDateTime, DATE_TIME_FORMAT).toDate();
+        let e = moment(this.state.endDateTime, DATE_TIME_FORMAT).toDate();
+
         return AisDateRangePickerTemplate({
             error: this.state.error,
-            defaultStartTime: this.defaultStartTime.toDate(),
-            defaultEndTime: this.defaultEndTime.toDate(),
+            start: s,
+            end: e,
             onStartChange: this.handleStartChange,
-            onEndChange: this.handleEndChange
+            onEndChange: this.handleEndChange,
+            setRange: this.setRange
         });
     }
 }
