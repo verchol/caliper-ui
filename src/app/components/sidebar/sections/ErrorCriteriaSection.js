@@ -11,8 +11,10 @@ class ErrorCriteriaSection extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange() {
-        console.log('handling Error Criteria checkbox change!');
+    handleChange(evt) {
+        let name = evt.target.name;
+        let value = evt.target.checked;
+        console.log(`Error Criteria setting ${name} to ${value}`);
     }
 
     render() {
