@@ -7,7 +7,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 
 import routes from './routes';
 import configureStore from './state/store/configureStore';
-import { fetchAllResults } from './state/actions/resultsActions';
+import * as resultsActions from './state/actions/resultsActions';
 import { updateParams } from './state/actions/paramsActions';
 
 // Import application assets so webpack can process them
@@ -20,8 +20,9 @@ initialParams[APP_CONFIG.params.page] = 1;
 initialParams[APP_CONFIG.params.count] = 20;
 initialParams[APP_CONFIG.params.sort] = 'requirementId';
 initialParams[APP_CONFIG.params.order] = 'ASC';
+store.dispatch(resultsActions.fetchAllResultsPending());
 store.dispatch(updateParams(initialParams));
-store.dispatch(fetchAllResults(initialParams));
+store.dispatch(resultsActions.fetchAllResults(initialParams));
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);

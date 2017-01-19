@@ -9,6 +9,8 @@ const DatagridTemplate = (props) => {
                  showSettings={false}
                  useExternal={true}
                  useGriddleStyles={false}
+                 externalIsLoading={props.results.pending || false}
+                 externalLoadingComponent={Spinner}
                  externalSortColumn={props.params[APP_CONFIG.params.sort]}
                  externalSortAscending={props.params[APP_CONFIG.params.order] === 'ASC'}
                  externalMaxPage={props.results.headers ? props.results.headers.pages : 1}
@@ -18,12 +20,6 @@ const DatagridTemplate = (props) => {
                  externalSetFilter={props.setFilter}
                  externalSetPageSize={props.setPageSize}/>
     );
-
-    // return (
-    //     <div className="spinner-container">
-    //         <Spinner/>
-    //     </div>
-    // );
 };
 
 export default DatagridTemplate;

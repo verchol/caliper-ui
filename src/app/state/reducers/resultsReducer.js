@@ -3,9 +3,9 @@ import * as types from '../actions/resultsActionTypes';
 export default function resultsReducer(state = {}, action) {
     switch (action.type) {
         case types.RESULTS__LOAD_RESULTS_PENDING:
-            return action.results;
+            return Object.assign({}, state, {pending: true});
         case types.RESULTS__LOAD_RESULTS_SUCCESS:
-            return action.results;
+            return Object.assign({}, action.results, {pending: false});
         default:
             return state;
     }

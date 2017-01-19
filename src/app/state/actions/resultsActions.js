@@ -2,10 +2,9 @@
 import * as types from './resultsActionTypes';
 import api from '../../api/resultsApi';
 
-function resultLoadResultsPending(results) {
+function resultLoadResultsPending() {
     return {
-        type: types.RESULTS__LOAD_RESULTS_PENDING,
-        results
+        type: types.RESULTS__LOAD_RESULTS_PENDING
     };
 }
 
@@ -18,7 +17,7 @@ function resultLoadResultsSuccess(results) {
 
 export function fetchAllResultsPending() {
     return function(dispatch) {
-        return dispatch(resultLoadResultsPending({records: []}));
+        return dispatch(resultLoadResultsPending());
     };
 }
 
