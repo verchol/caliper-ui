@@ -2,5 +2,6 @@
 export default {
     results: {},
     params: {},
-    selection: {}
+    selection: {},
+    report: {}
 };

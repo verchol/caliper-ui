@@ -7,8 +7,11 @@ const DatagridTemplate = (props) => {
         <Griddle results={props.results.reports || []}
                  showFilter={false}
                  showSettings={false}
-                 useExternal={true}
+                 onRowClick={props.onRowClick}
                  useGriddleStyles={false}
+                 rowMetadata={props.rowMetadata}
+                 key={props.report.requirementId}
+                 useExternal={true}
                  externalIsLoading={props.results.pending || false}
                  externalLoadingComponent={Spinner}
                  externalSortColumn={props.params[APP_CONFIG.params.sort]}

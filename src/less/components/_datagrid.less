@@ -1,15 +1,11 @@
-.griddle-container{
-
-}
-
 .griddle {
     text-align: center;
 
-    .top-section{
+    .top-section {
         .grid-justify(space-between);
     }
 
-    .griddle-filter{
+    .griddle-filter {
         .col(25%);
         text-align:left;
         color:#222;
@@ -19,7 +15,7 @@
         }
     }
 
-    .griddle-settings-toggle{
+    .griddle-settings-toggle {
         .col(25%);
         text-align:right;
 
@@ -28,14 +24,14 @@
         }
     }
 
-    .griddle-settings{
+    .griddle-settings {
         background-color:#FFF;
         border:1px solid #DDD;
         color:#222;
         padding:10px;
         margin-bottom:10px;
 
-        .griddle-columns{
+        .griddle-columns {
             clear:both;
             display:table;
             width:100%;
@@ -43,52 +39,79 @@
             margin-bottom:10px;
         }
 
-        .griddle-column-selection{
+        .griddle-column-selection {
             float:left;
             width:20%;
         }
     }
 
-    table{
+    table {
         width:100%;
         table-layout:fixed;
         font-size: 0.75rem;
+        border-collapse: collapse;
     }
 
-    th{
+    thead {
+        border-left: 2px solid @clr-background-alt;
+        border-right: 2px solid @clr-background-alt;
+    }
+
+    tr {
+        &.standard-row {
+            background-color: lighten(@clr-background-alt, 5%);
+            transition: all 0.35s ease;
+
+            &:hover {
+                cursor: pointer;
+                background-color: lighten(@clr-background-alt, 15%);
+            }
+        }
+
+        &.selected {
+            background-color: lighten(@clr-background-alt, 35%);
+            &:hover {
+                background-color: lighten(@clr-background-alt, 35%);
+            }
+        }
+    }
+
+    th {
         background-color:#EDEDEF;
-        border:0px;
-        border-bottom:1px solid #DDD;
+        border-left: 2px solid @clr-background-alt;
+        border-right: 2px solid @clr-background-alt;
         color:#222;
         padding:5px;
+        cursor: pointer;
     }
 
-    td{
+    td {
         padding:5px;
-        background-color: lighten(@clr-background-alt, 5%);
-        border-top-color:#DDD;
+        border: 2px solid @clr-background-alt;
         color:#ddd;
+        overflow-wrap: break-word;
     }
 
-    .footer-container{
-        padding:0px;
+    .footer-container {
+        padding:5px;
         background-color:#EDEDED;
-        border:0px;
+        border-left: 2px solid @clr-background-alt;
+        border-right: 2px solid @clr-background-alt;
         color:#222;
     }
 
-    .griddle-previous, .griddle-page, .griddle-next{
+    .griddle-previous, .griddle-page, .griddle-next {
         float:left;
         width:33%;
         min-height:1px;
         margin-top:5px;
     }
 
-    .griddle-page{
+    .griddle-page {
         text-align:center;
     }
 
-    .griddle-next{
+    .griddle-next {
         text-align:right;
     }
 }

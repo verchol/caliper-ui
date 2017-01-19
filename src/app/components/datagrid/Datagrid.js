@@ -1,8 +1,10 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
+import isEqual from 'lodash/isEqual';
 import DatagridTemplate from './DatagridTemplate';
 import * as resultsActions from '../../state/actions/resultsActions';
 import * as paramsActions from '../../state/actions/paramsActions';
+import * as reportActions from '../../state/actions/reportActions';
 
 class Datagrid extends React.Component {
     constructor (props, context) {
@@ -17,23 +19,28 @@ class Datagrid extends React.Component {
 Datagrid.propTypes = {
     results: PropTypes.object,
     params: PropTypes.object,
+    report: PropTypes.object,
     setPage: PropTypes.func,
     sortData: PropTypes.func,
     changeSort: PropTypes.func,
     setFilter: PropTypes.func,
-    setPageSize: PropTypes.func
+    setPageSize: PropTypes.func,
+    onRowClick: PropTypes.func,
+    rowMetadata: PropTypes.object
 };
 
 const mapStateToProps = (state) => { //optional arg is ownProps
     return {
         results: state.results,
-        params: state.params
+        params: state.params,
+        report: state.report
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         setPage: (index, params) => {
+            dispatch(resultsActions.fetchAllResultsPending());
             // use config value for key
             let updatedParams = {};
             updatedParams[APP_CONFIG.params.page] = index + 1;
@@ -63,6 +70,21 @@ const mapDispatchToProps = (dispatch) => {
         },
         setPageSize: (size) => {
             console.log(size);
+        },
+        onRowClick: (gridRow, event, report) => {
+            if (isEqual(report, gridRow.props.data)) {
+                // deselect report
+                dispatch(reportActions.selectReport({}));
+            } else {
+                // deselect old report if necessary
+                let oldRow = document.getElementsByClassName('selected');
+                if (oldRow.length > 0) {
+                    oldRow[0].classList.remove('selected');
+                }
+                event.target.parentElement.classList.add('selected');
+                // select new report
+                dispatch(reportActions.selectReport(gridRow.props.data));
+            }
         }
     };
 };
@@ -71,10 +93,17 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     return Object.assign({}, ownProps, {
         results: stateProps.results,
         params: stateProps.params,
+        report: stateProps.report,
         setPage: (index) => dispatchProps.setPage(index, stateProps.params),
         changeSort: (sort, sortAscending) => dispatchProps.changeSort(sort, sortAscending, stateProps.params),
         setFilter: (filter) => dispatchProps.setFilter(filter, stateProps.params),
-        setPageSize: (size) => dispatchProps.setPageSize(size, stateProps.params)
+        setPageSize: (size) => dispatchProps.setPageSize(size, stateProps.params),
+        onRowClick: (gridRow, event) => dispatchProps.onRowClick(gridRow, event, stateProps.report),
+        rowMetadata: {
+            bodyCssClassName: (rowData) => {
+                return rowData.requirementId === stateProps.report.requirementId ? 'standard-row selected' : 'standard-row';
+            }
+        }
     });
 };
 
