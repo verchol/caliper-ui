@@ -10,5 +10,39 @@ APP_CONFIG = {
         requirementId: 'requirementId_like',
         productId: 'productId_like',
         taskName: 'taskName_like'
+    },
+    form: {
+        txtfilters: [{
+            name: 'requirementId',
+            label: 'Requirement ID'
+        }, {
+            name: 'productId',
+            label: 'Product Id'
+        }, {
+            name: 'taskName',
+            label: 'Task Name'
+        }],
+        criteria: [{
+            name: 'isMonkey',
+            label: 'Is a Monkey'
+        }, {
+            name: 'isGorilla',
+            label: 'Is a Gorilla'
+        }, {
+            name: 'isLemur',
+            label: 'Is a Lemur'
+        }, {
+            name: 'isOrangutan',
+            label: 'Is an Orangutan'
+        }, {
+            name: 'isGibbon',
+            label: 'Is a Gibbon'
+        }, {
+            name: 'isHuman',
+            label: 'Is a Human'
+        }, {
+            name: 'isChimpanzee',
+            label: 'Is a Chimpanzee'
+        }]
     }
 };
