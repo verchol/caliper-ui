@@ -12,6 +12,16 @@ APP_CONFIG = {
         taskName: 'taskName_like'
     },
     form: {
+        txtfilters: [{
+            name: 'requirementId',
+            label: 'Requirement ID'
+        }, {
+            name: 'productId',
+            label: 'Product Id'
+        }, {
+            name: 'taskName',
+            label: 'Task Name'
+        }],
         criteria: [{
             name: 'isMonkey',
             label: 'Is a Monkey'
