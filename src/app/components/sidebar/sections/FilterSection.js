@@ -14,17 +14,22 @@ class FilterSection extends React.Component {
         super(props, context);
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleComparatorChange = this.handleComparatorChange.bind(this);
     }
 
     handleChange(evt) {
-        console.log(`FilterSection filter ${evt.target.name} has changed!`);
+        console.log(`FilterSection filter ${evt.target.value} has changed!`);
+    }
+
+    handleComparatorChange(comparator) {
+        console.log('Comparator changed to: ' + JSON.stringify(comparator));
     }
 
     render () {
         let txtfilters = APP_CONFIG.form.txtfilters;
         let comparators = APP_CONFIG.form.comparators;
         let changeHandler = this.handleChange;
-
+        let comparatorHandler = this.handleComparatorChange;
         return (
             <section>
                 <h2>Filters</h2>
@@ -37,7 +42,7 @@ class FilterSection extends React.Component {
                                     name={filter.name}
                                     label={filter.label}
                                     onChange={changeHandler} />
-                            )
+                            );
                         })
                     }
                 </fieldset>
@@ -50,8 +55,8 @@ class FilterSection extends React.Component {
                                     name={comparator.name}
                                     label={comparator.label}
                                     defaultValue={comparator.defaultValue}
-                                    onChange={changeHandler} />
-                            )
+                                    onChange={comparatorHandler} />
+                            );
                         })
                     }
                 </fieldset>

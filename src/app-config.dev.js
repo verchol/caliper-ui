@@ -25,7 +25,7 @@ APP_CONFIG = {
         comparators: [{
             name: 'eggCount',
             label: 'Eggs are',
-            defaultVal: 3
+            defaultValue: 3
         }, {
             name: 'baconCount',
             label: 'Bacon Count is',
