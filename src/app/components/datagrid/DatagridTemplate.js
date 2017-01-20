@@ -5,6 +5,7 @@ import Spinner from '../Spinner';
 const DatagridTemplate = (props) => {
     return (
         <Griddle results={props.results.reports || []}
+                 columns={APP_CONFIG.columns}
                  showFilter={false}
                  showSettings={false}
                  onRowClick={props.onRowClick}

@@ -26,6 +26,30 @@ const schema = {
                         'type': 'string',
                         'faker': 'date.recent'
                     },
+                    'frames': {
+                        'type': 'number',
+                        'faker': 'random.number'
+                    },
+                    'biscuits': {
+                        'type': 'number',
+                        'faker': 'random.number'
+                    },
+                    'error': {
+                        'type': 'string',
+                        'chance': {
+                            'pickone': [
+                                [
+                                    'Monkey',
+                                    'Gorilla',
+                                    'Lemur',
+                                    'Orangutan',
+                                    'Gibbon',
+                                    'Human',
+                                    'Chimpanzee'
+                                ]
+                            ]
+                        }
+                    },
                     'email': {
                         'type': 'string',
                         'faker': 'internet.email'
@@ -71,7 +95,7 @@ const schema = {
                         'faker': 'finance.accountName'
                     }
                 },
-                'required': ['requirementId', 'productId', 'taskName', 'date', 'email', 'address', 'city', 'state', 'zipCode', 'latitude', 'longitude', 'company', 'product', 'phone', 'account']
+                'required': ['requirementId', 'productId', 'taskName', 'date', 'frames', 'biscuits', 'error', 'email', 'address', 'city', 'state', 'zipCode', 'latitude', 'longitude', 'company', 'product', 'phone', 'account']
             }
         }
     },

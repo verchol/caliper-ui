@@ -44,5 +44,16 @@ APP_CONFIG = {
             name: 'isChimpanzee',
             label: 'Is a Chimpanzee'
         }]
-    }
+    },
+    columns: [
+        'requirementId',
+        'productId',
+        'taskName',
+        'date',
+        'frames',
+        'biscuits',
+        'error',
+        'latitude',
+        'longitude'
+    ]
 };
