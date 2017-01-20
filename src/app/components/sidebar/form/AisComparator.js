@@ -4,25 +4,50 @@ import AisTextInput from './AisTextInput';
 import DropdownList from 'react-widgets/lib/DropdownList';
 
 
-const AisComparator = ({name, label}) => {
+class AisComparator extends React.Component {
 
-    const comparators = ['equal to', 'less than', 'greater than'];
+    constructor(props) {
+        super(props);
 
-    return (
-        <div className="aisform__comparator">
-            <AisCheckbox name={name} label={label + ' is '} />
-            <div className="aisform__comparator-operators">
-                <DropdownList defaultValue={'equal to'} data={comparators} />
-                <AisTextInput name={'val'} label={'Value'} />
+        this.state = {
+            enabled: false
+        };
+
+        this.toggleEnabled = this.toggleEnabled.bind(this);
+    }
+
+    toggleEnabled(evt) {
+        let value = evt.target.checked;
+        this.setState({
+            enabled: value
+        });
+    }
+
+    render() {
+        const comparators = ['equal to', 'less than', 'greater than'];
+        let comparatorLabel = this.props.label;
+        if (!this.state.enabled) {
+            comparatorLabel += '...';
+        }
+
+        return (
+            <div className="aisform__comparator">
+                <AisCheckbox name={this.props.name} label={comparatorLabel} onChange={this.toggleEnabled} />
+                {
+                    <div className={this.state.enabled ? 'aisform__comparator-operators' : 'aisform__comparator-operators aisform__comparator-operators-closed'}>
+                        <DropdownList defaultValue={'equal to'} data={comparators} />
+                        <AisTextInput name={'val'} label={'Value'} />
+                    </div>
+                }
             </div>
-        </div>
-    );
-};
+        );
+    }
+}
 
 AisComparator.propTypes = {
     name: PropTypes.string,
-    label: PropTypes.string
-//    onChange: PropTypes.func
+    label: PropTypes.string,
+    onChange: PropTypes.func
 };
 
 export default AisComparator;

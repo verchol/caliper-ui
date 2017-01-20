@@ -57,8 +57,8 @@
         border-radius: 4px;
         display: inline-block;
         vertical-align: middle;
-        width: 18px;
-        height: 18px;
+        width: 14px;
+        height: 14px;
         padding: 2px;
         margin-right: 10px;
         text-align: center;
@@ -92,7 +92,16 @@
 
 .aisform__comparator-operators {
     font-size: 12px;
+    overflow-y: hidden;
+    max-height: 200px;
+    padding-bottom: 2.5em;
     padding-left: 2.0em;
+    transition: all 0.35s ease;
+}
+
+.aisform__comparator-operators-closed {
+    max-height: 0;
+    padding-bottom: 0;
 }
 
 .aisform__error {
