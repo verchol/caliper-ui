@@ -6,6 +6,7 @@ const DatagridTemplate = (props) => {
     return (
         <Griddle results={props.results.reports || []}
                  columns={APP_CONFIG.columns}
+                 columnMetadata={APP_CONFIG.columnMetadata}
                  showFilter={false}
                  showSettings={false}
                  onRowClick={props.onRowClick}

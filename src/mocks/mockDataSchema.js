@@ -34,21 +34,26 @@ const schema = {
                         'type': 'number',
                         'faker': 'random.number'
                     },
-                    'error': {
-                        'type': 'string',
-                        'chance': {
-                            'pickone': [
-                                [
-                                    'Monkey',
-                                    'Gorilla',
-                                    'Lemur',
-                                    'Orangutan',
-                                    'Gibbon',
-                                    'Human',
-                                    'Chimpanzee'
-                                ]
-                            ]
-                        }
+                    'isMonkey': {
+                        'type': 'boolean'
+                    },
+                    'isGorilla': {
+                        'type': 'boolean'
+                    },
+                    'isLemur': {
+                        'type': 'boolean'
+                    },
+                    'isOrangutan': {
+                        'type': 'boolean'
+                    },
+                    'isGibbon': {
+                        'type': 'boolean'
+                    },
+                    'isHuman': {
+                        'type': 'boolean'
+                    },
+                    'isChimpanzee': {
+                        'type': 'boolean'
                     },
                     'email': {
                         'type': 'string',
@@ -95,7 +100,7 @@ const schema = {
                         'faker': 'finance.accountName'
                     }
                 },
-                'required': ['requirementId', 'productId', 'taskName', 'date', 'frames', 'biscuits', 'error', 'email', 'address', 'city', 'state', 'zipCode', 'latitude', 'longitude', 'company', 'product', 'phone', 'account']
+                'required': ['requirementId', 'productId', 'taskName', 'date', 'frames', 'biscuits', 'isMonkey', 'isGorilla', 'isLemur', 'isOrangutan', 'isGibbon', 'isHuman', 'isChimpanzee', 'email', 'address', 'city', 'state', 'zipCode', 'latitude', 'longitude', 'company', 'product', 'phone', 'account']
             }
         }
     },
