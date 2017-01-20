@@ -39,18 +39,6 @@ const mapStateToProps = (state) => { //optional arg is ownProps
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setPage: (index, params) => {
-            dispatch(resultsActions.fetchAllResultsPending());
-            // use config value for key
-            let updatedParams = {};
-            updatedParams[APP_CONFIG.params.page] = index + 1;
-            // update params state
-            dispatch(paramsActions.updateParams(updatedParams));
-            // update grid
-            // TODO get updated params from above dispatch call somehow instead
-            updatedParams = Object.assign({}, params, updatedParams);
-            dispatch(resultsActions.fetchAllResults(updatedParams));
-        },
         changeSort: (sort, sortAscending, params) => {
             dispatch(resultsActions.fetchAllResultsPending());
             // use config value for key
@@ -94,7 +82,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         results: stateProps.results,
         params: stateProps.params,
         report: stateProps.report,
-        setPage: (index) => dispatchProps.setPage(index, stateProps.params),
+        setPage: (index) => {
+            // just a stub function to suppress a griddle warning
+        },
         changeSort: (sort, sortAscending) => dispatchProps.changeSort(sort, sortAscending, stateProps.params),
         setFilter: (filter) => dispatchProps.setFilter(filter, stateProps.params),
         setPageSize: (size) => dispatchProps.setPageSize(size, stateProps.params),

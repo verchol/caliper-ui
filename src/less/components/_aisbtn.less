@@ -16,6 +16,11 @@
         background: @clr-blue;
         color: @clr-white;
     }
+
+    &:disabled {
+        background: lighten(@clr-gray-dark, 25%);
+        cursor: not-allowed;
+    }
 }
 
 .aisbtn {

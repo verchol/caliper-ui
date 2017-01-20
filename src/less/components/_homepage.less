@@ -1,0 +1,31 @@
+.homepage {
+    h1 {
+        margin-top: .1em;
+    }
+
+    .homepage__datagrid {
+        margin: 10px 0;
+        height: 45vh;
+        overflow-y: auto;
+    }
+
+    .homepage__datagrid-pager {
+        height: 6vh;
+    }
+
+    .homepage__charts {
+        .grid-justify(space-between);
+
+        margin: 10px 0;
+        height: 45vh;
+        overflow-y: auto;
+
+        .line {
+            .col(50%);
+        }
+
+        .histogram {
+            .col(50%);
+        }
+    }
+}
