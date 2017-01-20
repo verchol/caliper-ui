@@ -22,6 +22,19 @@ APP_CONFIG = {
             name: 'taskName',
             label: 'Task Name'
         }],
+        comparators: [{
+            name: 'eggCount',
+            label: 'Eggs are',
+            defaultVal: 3
+        }, {
+            name: 'baconCount',
+            label: 'Bacon Count is',
+            defaultValue: 26
+        }, {
+            name: 'biscuitCount',
+            label: 'Biscuit Count is',
+            defaultValue: 1
+        }],
         criteria: [{
             name: 'isMonkey',
             label: 'Is a Monkey'

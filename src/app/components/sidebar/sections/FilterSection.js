@@ -22,13 +22,15 @@ class FilterSection extends React.Component {
 
     render () {
         let txtfilters = APP_CONFIG.form.txtfilters;
+        let comparators = APP_CONFIG.form.comparators;
         let changeHandler = this.handleChange;
+
         return (
             <section>
                 <h2>Filters</h2>
                 <fieldset>
                     {
-                        txtfilters.map(function(filter){
+                        txtfilters.map(function(filter) {
                             return (
                                 <AisTextInput key={filter.name}
                                     id={filter.name}
@@ -40,8 +42,18 @@ class FilterSection extends React.Component {
                     }
                 </fieldset>
                 <fieldset>
-                    <AisComparator name="numFrames" label="Frame Count" />
-                    <AisComparator name="numBiscuits" label="Biscuit Count" />
+                    {
+                        comparators.map(function(comparator) {
+                            return (
+                                <AisComparator key={comparator.name}
+                                    id={comparator.name}
+                                    name={comparator.name}
+                                    label={comparator.label}
+                                    defaultValue={comparator.defaultValue}
+                                    onChange={changeHandler} />
+                            )
+                        })
+                    }
                 </fieldset>
             </section>
         );
