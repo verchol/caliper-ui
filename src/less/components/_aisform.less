@@ -91,23 +91,17 @@
 }
 
 .aisform__comparator-operators {
-    .grid();
-
     font-size: 12px;
+    overflow-y: hidden;
+    max-height: 200px;
+    padding-bottom: 2.25em;
     padding-left: 2.0em;
-
-    .aisform__comparator-dropdown {
-        .col(80%);
-        margin: 0.25em 0;
-    }
-
-    .aisform__text {
-        .col(20%);
-        padding-left: 1.0em;
-    }
+    transition: all 0.35s ease;
 }
 
 .aisform__comparator-operators-closed {
+    max-height: 0;
+    padding-bottom: 0;
 }
 
 .aisform__error {

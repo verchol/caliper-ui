@@ -1,22 +1,29 @@
-.application-ctr {
-    height: 100%;
-    width: 100%;
-}
+@sidebar-width: 350px;
 
 .application {
-    .grid-justify(space-between);
-    height: 100%;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
 
     .content {
-        .col();
         background-color: @clr-background-alt;
+        bottom: 0;
         height: 100%;
+        left: @sidebar-width;
         overflow: hidden;
+        position: absolute;
+        top: 0;
     }
 
     .sidebar {
-        .col(350px);
-        height: 100%;
-        overflow-y: auto;
+        bottom: 0;
+        left: 0;
+        overflow-y: scroll;
+        position: absolute;
+        top: 0;
+        width: @sidebar-width;
     }
 }
