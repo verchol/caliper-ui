@@ -5,17 +5,18 @@
 
 .application {
     .grid-justify(space-between);
+    height: 100%;
 
     .content {
-        background-color: @clr-background-alt;
         .col(80%);
+        background-color: @clr-background-alt;
         height: 100%;
         overflow: hidden;
     }
 
     .sidebar {
         .col(20%);
-        height: 100vh;
+        height: 100%;
         overflow-y: auto;
     }
 }
