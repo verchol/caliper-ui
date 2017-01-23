@@ -67,7 +67,9 @@ class AisComparator extends React.Component {
                 <AisCheckbox name={this.props.name} label={comparatorLabel} onChange={this.updateEnabled} />
                 {
                     <div className={this.state.enabled ? 'aisform__comparator-operators' : 'aisform__comparator-operators aisform__comparator-operators-closed'}>
-                        <DropdownList defaultValue={this.state.comparator} data={comparators} onChange={this.updateComparator} />
+                        <div className='aisform__comparator-dropdown'>
+                            <DropdownList defaultValue={this.state.comparator} data={comparators} onChange={this.updateComparator} />
+                        </div>
                         <AisNumberInput name={'val'} defaultValue={this.state.value} onChange={this.updateValue} />
                     </div>
                 }
