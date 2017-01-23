@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 import AisCheckbox from '../form/AisCheckbox';
 
@@ -14,7 +14,9 @@ class ErrorCriteriaSection extends React.Component {
     handleChange(evt) {
         let name = evt.target.name;
         let value = evt.target.checked;
-        console.log(`Error Criteria setting ${name} to ${value}`);
+        this.props.onChange({
+            name: value
+        });
     }
 
     render() {
@@ -41,5 +43,9 @@ class ErrorCriteriaSection extends React.Component {
         );
     }
 }
+
+ErrorCriteriaSection.propTypes = {
+    onChange: PropTypes.func
+};
 
 export default ErrorCriteriaSection;

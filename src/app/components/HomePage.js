@@ -25,10 +25,8 @@ const HomePage = () => {
 
                 <div className="homepage__charts">
                     <div className="line">
-                        <LineChart profile={{signature: {}}}/>
                     </div>
                     <div className="histogram">
-                        <LineChart profile={{signature: {}}}/>
                     </div>
                 </div>
 

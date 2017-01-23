@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 import AisDateRangePicker from '../form/AisDateRangePicker';
+
 
 class DateRangeSection extends React.Component {
 
@@ -11,7 +12,10 @@ class DateRangeSection extends React.Component {
     }
 
     handleRangeChange(startDate, endDate) {
-        console.log(`DateRangeSection Range Change: ${startDate} - ${endDate}`);
+        this.props.onChange({
+            'start_date': startDate,
+            'end_date': endDate
+        });
     }
 
     render() {
@@ -23,5 +27,9 @@ class DateRangeSection extends React.Component {
         );
     }
 }
+
+DateRangeSection.propTypes = {
+    onChange: PropTypes.func
+};
 
 export default DateRangeSection;

@@ -67,7 +67,8 @@ class FilterSection extends React.Component {
 
 FilterSection.propTypes = {
     params: PropTypes.object,
-    filter: PropTypes.func
+    filter: PropTypes.func,
+    onChange: PropTypes.func
 };
 
 const mapStateToProps = (state) => { //optional arg is ownProps
