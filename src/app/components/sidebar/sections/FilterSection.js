@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
 
 import AisComparator from '../form/AisComparator';
 import AisTextInput from '../form/AisTextInput';
@@ -16,30 +15,34 @@ class FilterSection extends React.Component {
 
     handleTextChange(evt) {
         let name = evt.target.name;
-        let value = evt.target.value;
-        this.props.onChange({
-            name: value
-        });
+        let change = {}
+        change[name] = evt.target.value;
+        this.props.onChange(change);
     }
 
     handleComparatorChange(comparator) {
-        let name = comparator.name;
-        let change = {};
+        let basename = comparator.name;
+        let changes = {};
 
-        if (!comparator.enabled) {
-            change[name] = null;
-        }
-        else {
-            if (comparator.comparator === 'less than') {
-                name += '_lt';
-            }
-            else if (comparator.comparator === 'greater than') {
-                name += '_gt';
-            }
-            change[name] = comparator.value;
+        // Always send values for name, name_lt, and name_gt - initialize all to null
+        const names = [basename, `${basename}_lt`, `${basename}_gt`];
+        for (let i = 0; i < names.length; i++) {
+            changes[names[i]] = null;
         }
 
-        this.props.onChange(change);
+        if (comparator.enabled) {
+            switch(comparator.comparator) {
+                case 'less than':
+                    changes[`${basename}_lt`] = comparator.value;
+                    break;
+                case 'greater than':
+                    changes[`${basename}_gt`] = comparator.value;
+                    break;
+                default:
+                    changes[basename] = comparator.value;
+            }
+        }
+        this.props.onChange(changes);
     }
 
     render () {

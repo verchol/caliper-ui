@@ -23,6 +23,15 @@ class CaliperForm extends React.Component {
         let updatedParams = Object.assign({}, this.props.params, changes);
         updatedParams[APP_CONFIG.params.page] = 1;
 
+        // remove any params with values of null
+        for (var key in updatedParams) {
+            if (updatedParams[key] === null ||
+                updatedParams[key] === undefined ||
+                updatedParams[key] === '') {
+                delete updatedParams[key];
+            }
+        }
+
         console.log('New params: ' + JSON.stringify(updatedParams));
 
         this.props.updateParams(updatedParams);
