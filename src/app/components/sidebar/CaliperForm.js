@@ -5,7 +5,7 @@ import DateRangeSection from './sections/DateRangeSection';
 import ErrorCriteriaSection from './sections/ErrorCriteriaSection';
 import FilterSection from './sections/FilterSection';
 
-import * as resultsActions from '../../state/actions/resultsActions';
+import {fetchAllResults} from '../../state/actions/resultsActions';
 import {updateParams} from '../../state/actions/paramsActions';
 
 
@@ -26,6 +26,7 @@ class CaliperForm extends React.Component {
         console.log('New params: ' + JSON.stringify(updatedParams));
 
         this.props.updateParams(updatedParams);
+        this.props.fetchAllResults(updatedParams);
     }
 
     render() {
@@ -84,5 +85,6 @@ const mapStateToProps = (state) => { //optional arg is ownProps
 // };
 
 export default connect(mapStateToProps, {
+    fetchAllResults,
     updateParams
 })(CaliperForm);
