@@ -77,6 +77,10 @@ class LineChart extends React.Component {
     render() {
         const profile = this.props.profile;
 
+        if (typeof profile === 'undefined') {
+            return (<h2>Select a Record</h2>);
+        }
+
         if (typeof profile.signature === 'undefined') {
             return (
                 <div className="chart__spinner">
@@ -93,21 +97,22 @@ class LineChart extends React.Component {
         let context = {};
         context.axisColor = AXIS_COLOR;
         context.margin = MARGIN;
-        context.scales = this.initScales(size, profile.signature);
+        //context.scales = this.initScales(size, profile.signature);
         context.size = size;
 
         return (
-            <svg className="chart chart__line" height={size.height + 10} width={size.width}>
-                <ChartLine data={profile.signature} context={context} />
-                <ChartAxis context={context} showTicks={this.props.showTicks} />
-                <ChartTooltips data={profile.signature} context={context} />
-            </svg>
+            <h1>Chart Goes Here!</h1>
+            // <svg className="chart chart__line" height={size.height + 10} width={size.width}>
+            //     <ChartLine data={profile.signature} context={context} />
+            //     <ChartAxis context={context} showTicks={this.props.showTicks} />
+            //     <ChartTooltips data={profile.signature} context={context} />
+            // </svg>
         );
     }
 
 }
 
-LineChart.propTypes ={
+LineChart.propTypes = {
     profile: PropTypes.object.isRequired,
     showTicks: PropTypes.bool,
     chartHeight: PropTypes.number

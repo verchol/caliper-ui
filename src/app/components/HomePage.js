@@ -1,7 +1,9 @@
 import React from 'react';
+
+import CaliperChart from './chart/CaliperChart';
 import Datagrid from './datagrid/Datagrid';
 import DatagridPager from './datagrid/DatagridPager';
-import LineChart from './chart/LineChart';
+
 
 const HomePage = () => {
     return (
@@ -13,10 +15,8 @@ const HomePage = () => {
                 <DatagridPager/>
             </div>
             <div className="homepage__charts">
-                <div className="line">
-                </div>
-                <div className="histogram">
-                </div>
+                <CaliperChart type="line" />
+                <CaliperChart type="hist" />
             </div>
         </div>
     );
