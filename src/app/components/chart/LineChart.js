@@ -6,8 +6,6 @@ import { scaleLinear } from 'd3-scale';
 
 import ChartAxis from './ChartAxis';
 import ChartLine from './ChartLine';
-import ChartTooltips from './ChartTooltips';
-import Spinner from '../Spinner';
 
 
 const MARGIN = {
