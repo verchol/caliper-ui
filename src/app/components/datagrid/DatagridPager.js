@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
-import DatagridPagerTemplate from './DatagridPagerTemplate';
+import DropdownList from 'react-widgets/lib/DropdownList';
 import * as resultsActions from '../../state/actions/resultsActions';
 import * as paramsActions from '../../state/actions/paramsActions';
 
@@ -10,7 +10,13 @@ class DatagridPager extends React.Component {
     }
 
     render () {
-        return DatagridPagerTemplate(this.props);
+        return (
+            <div className="datagrid__pager">
+                <button className="aisbtn aisbtn__small" onClick={() => this.props.setPage(this.props.params[APP_CONFIG.params.page] - 1)} disabled={this.props.params[APP_CONFIG.params.page] === 1}>Previous</button>
+                <DropdownList className="dropdownList__pages" value={this.props.params[APP_CONFIG.params.page]} data={this.props.pages} onChange={this.props.setPage.bind(this)} />
+                <button className="aisbtn aisbtn__small" onClick={() => this.props.setPage(this.props.params[APP_CONFIG.params.page] + 1)} disabled={this.props.results.headers ? this.props.params[APP_CONFIG.params.page] === this.props.results.headers.pages : true}>Next</button>
+            </div>
+        );
     }
 }
 
