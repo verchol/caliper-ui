@@ -20,7 +20,6 @@ initialParams[APP_CONFIG.params.page] = 1;
 initialParams[APP_CONFIG.params.count] = 20;
 initialParams[APP_CONFIG.params.sort] = 'requirementId';
 initialParams[APP_CONFIG.params.order] = 'ASC';
-store.dispatch(resultsActions.fetchAllResultsPending());
 store.dispatch(updateParams(initialParams));
 store.dispatch(resultsActions.fetchAllResults(initialParams));
 

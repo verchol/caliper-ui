@@ -31,7 +31,6 @@ const mapStateToProps = (state) => { //optional arg is ownProps
 const mapDispatchToProps = (dispatch) => {
     return {
         setPage: (index, params) => {
-            dispatch(resultsActions.fetchAllResultsPending());
             // use config value for key
             let updatedParams = {};
             updatedParams[APP_CONFIG.params.page] = index;

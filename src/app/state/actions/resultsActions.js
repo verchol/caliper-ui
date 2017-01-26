@@ -15,15 +15,10 @@ function resultLoadResultsSuccess(results) {
     };
 }
 
-export function fetchAllResultsPending() {
-    return function(dispatch) {
-        return dispatch(resultLoadResultsPending());
-    };
-}
-
 export function fetchAllResults(params) {
     params = params || {};
-    return function(dispatch) {
+    return (dispatch) => {
+        dispatch(resultLoadResultsPending());
         return api.getAllResults(params).then(results => {
             dispatch(resultLoadResultsSuccess(results));
         }).catch(error => {
