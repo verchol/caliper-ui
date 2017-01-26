@@ -54,7 +54,7 @@ const mapDispatchToProps = (dispatch) => {
         onRowClick: (gridRow, event, report) => {
             if (isEqual(report, gridRow.props.data)) {
                 // deselect report
-                dispatch(reportActions.selectReport({}));
+                dispatch(reportActions.selectReport(null));
             } else {
                 // deselect old report if necessary
                 let oldRow = document.getElementsByClassName('selected');
