@@ -8,6 +8,11 @@ const schema = {
             'items': {
                 'type': 'object',
                 'properties': {
+                    'pk': {
+                        type: 'number',
+                        unique: true,
+                        minimum: 1
+                    },
                     'requirementId': {
                         'type': 'number',
                         'unique': true,
@@ -100,7 +105,7 @@ const schema = {
                         'faker': 'finance.accountName'
                     }
                 },
-                'required': ['requirementId', 'productId', 'taskName', 'date', 'frames', 'biscuits', 'isMonkey', 'isGorilla', 'isLemur', 'isOrangutan', 'isGibbon', 'isHuman', 'isChimpanzee', 'email', 'address', 'city', 'state', 'zipCode', 'latitude', 'longitude', 'company', 'product', 'phone', 'account']
+                'required': ['pk', 'requirementId', 'productId', 'taskName', 'date', 'frames', 'biscuits', 'isMonkey', 'isGorilla', 'isLemur', 'isOrangutan', 'isGibbon', 'isHuman', 'isChimpanzee', 'email', 'address', 'city', 'state', 'zipCode', 'latitude', 'longitude', 'company', 'product', 'phone', 'account']
             }
         }
     },
