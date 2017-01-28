@@ -6,8 +6,6 @@ import { scaleLinear } from 'd3-scale';
 
 import ChartAxis from './ChartAxis';
 import ChartLine from './ChartLine';
-import ChartTooltips from './ChartTooltips';
-import Spinner from '../Spinner';
 
 
 const MARGIN = {
@@ -48,14 +46,14 @@ class LineChart extends React.Component {
         const x = scaleLinear()
             .range([0, xSize])
             .domain(extent(data, d => {
-                return d.time;
+                return d.x;
             }));
 
         const ySize = size.height - MARGIN.top - MARGIN.bottom;
         const y = scaleLinear()
             .range([ySize, 0])
             .domain([0, max(data, d => {
-                return d.high;
+                return d.y;
             })]);
 
         return {
@@ -75,20 +73,6 @@ class LineChart extends React.Component {
     }
 
     render() {
-        const profile = this.props.profile;
-
-        if (typeof profile === 'undefined') {
-            return (<h2>Select a Record</h2>);
-        }
-
-        if (typeof profile.signature === 'undefined') {
-            return (
-                <div className="chart__spinner">
-                    <Spinner />
-                </div>
-            );
-        }
-
         const size = {
             height: this.props.chartHeight,
             width: this.state.componentSize.width
@@ -97,23 +81,21 @@ class LineChart extends React.Component {
         let context = {};
         context.axisColor = AXIS_COLOR;
         context.margin = MARGIN;
-        //context.scales = this.initScales(size, profile.signature);
+        context.scales = this.initScales(size, this.props.data);
         context.size = size;
 
         return (
-            <h1>Chart Goes Here!</h1>
-            // <svg className="chart chart__line" height={size.height + 10} width={size.width}>
-            //     <ChartLine data={profile.signature} context={context} />
-            //     <ChartAxis context={context} showTicks={this.props.showTicks} />
-            //     <ChartTooltips data={profile.signature} context={context} />
-            // </svg>
+            <svg className="chart chart__line" height={size.height + 10} width={size.width}>
+                <ChartLine data={this.props.data} context={context} />
+                <ChartAxis context={context} showTicks={this.props.showTicks} />
+            </svg>
         );
     }
 
 }
 
 LineChart.propTypes = {
-    profile: PropTypes.object.isRequired,
+    data: PropTypes.array.isRequired,
     showTicks: PropTypes.bool,
     chartHeight: PropTypes.number
 };

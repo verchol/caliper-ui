@@ -1,6 +1,8 @@
 APP_CONFIG = {
     urls: {
-        'allResults': 'http://localhost:3000/search'
+        'allResults': 'http://localhost:3000/search',
+        'dataHist': 'http://localhost:3000/hist',
+        'dataLine': 'http://localhost:3000/line'
     },
     params: {
         page: '_page',

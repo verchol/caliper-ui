@@ -1,6 +1,8 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 
+import DataApi from '../../api/dataApi';
+import LineChart from './LineChart';
 import Spinner from '../Spinner';
 
 
@@ -12,12 +14,39 @@ class CaliperChart extends React.Component {
         this.state = {
             data: null
         };
+
+        this.loadData = this.loadData.bind(this);
     }
 
+    loadData(reportId, chartType) {
+        let caliperChart = this;
+        if (chartType === 'hist') {
+            DataApi.getHist(reportId).then(function(data) {
+                caliperChart.setState({
+                    data: data
+                });
+            });
+        }
+        else {
+            DataApi.getLine(reportId).then(function(data) {
+                caliperChart.setState({
+                    data: data
+                });
+            });
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.report && nextProps.report.pk) {
+            this.setState({
+                data: null
+            }, function() {
+                this.loadData(nextProps.report.pk);
+            })
+        }
+    }
 
     render() {
-        console.log('Rendering report: ' + JSON.stringify(this.props.report));
-
         // See if we even have a report
         if (!this.props.report|| !this.props.report.pk) {
             return (
@@ -37,7 +66,7 @@ class CaliperChart extends React.Component {
         // We have data for a report, render the chart
         return (
             <div className="caliper-chart">
-                <p>Chart for report {this.props.report.pk}</p>
+                <LineChart data={this.state.data} />
             </div>
         );
     }

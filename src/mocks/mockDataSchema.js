@@ -1,6 +1,48 @@
 const schema = {
     'type': 'object',
     'properties': {
+        'hist': {
+            'type': 'array',
+            'minItems': 100,
+            'maxItems': 100,
+            'items': {
+                'type': 'object',
+                'properties': {
+                    'x': {
+                        'type': 'number',
+                        'unique': true,
+                        'minimum': 0
+                    },
+                    'y': {
+                        'type': 'number',
+                        'unique': true,
+                        'minimum': 0
+                    }
+                }
+            },
+            'required': ['x', 'y']
+        },
+        'line': {
+            'type': 'array',
+            'minItems': 100,
+            'maxItems': 100,
+            'items': {
+                'type': 'object',
+                'properties': {
+                    'x': {
+                        'type': 'number',
+                        'unique': true,
+                        'minimum': 0
+                    },
+                    'y': {
+                        'type': 'number',
+                        'unique': true,
+                        'minimum': 0
+                    }
+                }
+            },
+            'required': ['x', 'y']
+        },
         'search': {
             'type': 'array',
             'minItems': 100,
@@ -9,9 +51,9 @@ const schema = {
                 'type': 'object',
                 'properties': {
                     'pk': {
-                        type: 'number',
-                        unique: true,
-                        minimum: 1
+                        'type': 'number',
+                        'unique': true,
+                        'minimum': 1
                     },
                     'requirementId': {
                         'type': 'number',
@@ -109,7 +151,7 @@ const schema = {
             }
         }
     },
-    'required': ['search']
+    'required': ['search', 'dataHist', 'dataLine']
 };
 
 module.exports = schema;

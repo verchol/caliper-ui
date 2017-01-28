@@ -30,10 +30,10 @@ class ChartLine extends React.Component {
         // Paint the Signature Line
         const linePainter = line()
             .x(d => {
-                return context.scales.x(d.time);
+                return context.scales.x(d.x);
             })
             .y(d => {
-                return context.scales.y(d.intensity);
+                return context.scales.y(d.y);
             });
 
         let layerLine = select(Faux.createElement('g'));
