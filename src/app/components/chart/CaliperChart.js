@@ -54,6 +54,7 @@ const mapStateToProps = (state) => { //optional arg is ownProps
     };
 };
 
+export { mapStateToProps };
 export default connect(mapStateToProps, {
     // actions here
 })(CaliperChart);

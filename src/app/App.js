@@ -1,13 +1,9 @@
 import React, { PropTypes } from 'react';
 
-import Sidebar from './components/sidebar';
-
-
 const App = (props) => {
     return (
         <div className="application">
-            <Sidebar />
-            <section className="content">
+            <section>
                 {props.children}
             </section>
         </div>

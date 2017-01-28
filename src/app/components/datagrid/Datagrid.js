@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import isEqual from 'lodash/isEqual';
 import Griddle from 'griddle-react';
+import DatagridPager from './DatagridPager';
 import Spinner from '../Spinner';
 import * as resultsActions from '../../state/actions/resultsActions';
 import * as paramsActions from '../../state/actions/paramsActions';
@@ -14,27 +15,32 @@ class Datagrid extends React.Component {
 
     render () {
         return (
-            <Griddle results={this.props.results.reports || []}
-                     columns={APP_CONFIG.columns}
-                     columnMetadata={APP_CONFIG.columnMetadata}
-                     showFilter={false}
-                     showSettings={false}
-                     showPager={false}
-                     onRowClick={this.props.onRowClick}
-                     useGriddleStyles={false}
-                     rowMetadata={this.props.rowMetadata}
-                     key={this.props.report.requirementId}
-                     useExternal={true}
-                     externalIsLoading={this.props.results.pending || false}
-                     externalLoadingComponent={Spinner}
-                     externalSortColumn={this.props.params[APP_CONFIG.params.sort]}
-                     externalSortAscending={this.props.params[APP_CONFIG.params.order] === 'ASC'}
-                     externalMaxPage={this.props.results.headers ? this.props.results.headers.pages : 1}
-                     externalCurrentPage={this.props.results.headers ? this.props.results.headers.page : 1}
-                     externalSetPage={this.props.setPage}
-                     externalChangeSort={this.props.changeSort}
-                     externalSetFilter={this.props.setFilter}
-                     externalSetPageSize={this.props.setPageSize}/>
+            <div className="datagrid__container">
+                <div className="datagrid__table">
+                    <Griddle results={this.props.results.reports || []}
+                             columns={APP_CONFIG.columns}
+                             columnMetadata={APP_CONFIG.columnMetadata}
+                             showFilter={false}
+                             showSettings={false}
+                             showPager={false}
+                             onRowClick={this.props.onRowClick}
+                             useGriddleStyles={false}
+                             rowMetadata={this.props.rowMetadata}
+                             key={this.props.report.requirementId}
+                             useExternal={true}
+                             externalIsLoading={this.props.results.pending || false}
+                             externalLoadingComponent={Spinner}
+                             externalSortColumn={this.props.params[APP_CONFIG.params.sort]}
+                             externalSortAscending={this.props.params[APP_CONFIG.params.order] === 'ASC'}
+                             externalMaxPage={this.props.results.headers ? this.props.results.headers.pages : 1}
+                             externalCurrentPage={this.props.results.headers ? this.props.results.headers.page : 1}
+                             externalSetPage={this.props.setPage}
+                             externalChangeSort={this.props.changeSort}
+                             externalSetFilter={this.props.setFilter}
+                             externalSetPageSize={this.props.setPageSize}/>
+                </div>
+                <DatagridPager/>
+            </div>
         );
     }
 }
@@ -116,4 +122,5 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     });
 };
 
+export { mapStateToProps };
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Datagrid);
