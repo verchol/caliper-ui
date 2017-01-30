@@ -151,7 +151,7 @@ const schema = {
             }
         }
     },
-    'required': ['search', 'dataHist', 'dataLine']
+    'required': ['search', 'hist', 'line']
 };
 
 module.exports = schema;

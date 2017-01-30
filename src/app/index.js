@@ -4,7 +4,7 @@ import ReactDom from 'react-dom';
 import { Router, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
-
+import GlobalStore from './globalStore';
 import routes from './routes';
 import configureStore from './state/store/configureStore';
 import * as resultsActions from './state/actions/resultsActions';
@@ -15,6 +15,7 @@ import { updateParams } from './state/actions/paramsActions';
 //import '../sass/main.scss';
 
 const store = configureStore();
+GlobalStore.setStore(store);
 const initialParams = {};
 initialParams[APP_CONFIG.params.page] = 1;
 initialParams[APP_CONFIG.params.count] = 20;
