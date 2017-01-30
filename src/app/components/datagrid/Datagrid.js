@@ -110,17 +110,16 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         },
         changeSort: (sort, sortAscending) => dispatchProps.changeSort(sort, sortAscending, stateProps.params),
         onRowClick: (gridRow, event) => dispatchProps.onRowClick(gridRow, event, stateProps.report),
-        setPage: (index) => {
+        setPage: () => {
             // just a stub function to suppress a griddle warning
         },
-        setFilter: (filter) => {
+        setFilter: () => {
             // just a stub to suppress griddle warning
         },
-        setPageSize: (size) => {
+        setPageSize: () => {
             // just a stub to suppress griddle warning
         }
     });
 };
 
-export { mapStateToProps };
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Datagrid);

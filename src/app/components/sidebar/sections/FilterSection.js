@@ -15,7 +15,7 @@ class FilterSection extends React.Component {
 
     handleTextChange(evt) {
         let name = evt.target.name;
-        let change = {}
+        let change = {};
         change[name] = evt.target.value;
         this.props.onChange(change);
     }

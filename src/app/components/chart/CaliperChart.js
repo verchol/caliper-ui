@@ -18,6 +18,16 @@ class CaliperChart extends React.Component {
         this.loadData = this.loadData.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.report && nextProps.report.pk) {
+            this.setState({
+                data: null
+            }, function() {
+                this.loadData(nextProps.report.pk);
+            });
+        }
+    }
+
     loadData(reportId, chartType) {
         let caliperChart = this;
         if (chartType === 'hist') {
@@ -33,16 +43,6 @@ class CaliperChart extends React.Component {
                     data: data
                 });
             });
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.report && nextProps.report.pk) {
-            this.setState({
-                data: null
-            }, function() {
-                this.loadData(nextProps.report.pk);
-            })
         }
     }
 
@@ -83,7 +83,6 @@ const mapStateToProps = (state) => { //optional arg is ownProps
     };
 };
 
-export { mapStateToProps };
 export default connect(mapStateToProps, {
     // actions here
 })(CaliperChart);

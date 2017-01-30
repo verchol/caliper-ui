@@ -25,7 +25,7 @@ class Sidebar extends React.Component {
         updatedParams[APP_CONFIG.params.page] = 1;
 
         // remove any params with values of null
-        for (var key in updatedParams) {
+        for (let key in updatedParams) {
             if (updatedParams[key] === null ||
                 updatedParams[key] === undefined ||
                 updatedParams[key] === '') {
@@ -67,7 +67,6 @@ const mapStateToProps = (state) => { //optional arg is ownProps
     };
 };
 
-export { mapStateToProps };
 export default connect(mapStateToProps, {
     fetchAllResults,
     updateParams

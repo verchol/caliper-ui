@@ -1,37 +1,15 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider, connect } from 'react-redux';
 import GoldenLayout from 'golden-layout';
 import GlobalStore from '../globalStore';
-import Sidebar, { mapStateToProps as sbStateToProps } from './sidebar/Sidebar';
-import Datagrid, { mapStateToProps as dgStateToProps } from './datagrid/Datagrid';
-import CaliperChart, { mapStateToProps as ccStateToProps } from './chart/CaliperChart';
-
-const wrapComponent = (Component, store) => {
-    class Wrapped extends React.Component {
-        render () {
-            if (this.props.title) {
-                this.props.glContainer.setTitle(this.props.title);
-            }
-            return (
-                <Provider store={store}>
-                    <Component {...this.props} />
-                </Provider>
-            )
-        }
-    }
-    return Wrapped;
-};
+import Wrap from './helpers/Wrap';
+import Sidebar from './sidebar/Sidebar';
+import Datagrid from './datagrid/Datagrid';
+import CaliperChart from './chart/CaliperChart';
 
 class HomePage extends React.Component {
     constructor (props, context) {
         super(props, context);
-    }
-
-    render () {
-        return (
-            <div className="homepage"></div>
-        );
     }
 
     componentWillMount () {
@@ -112,24 +90,16 @@ class HomePage extends React.Component {
             let layout = new GoldenLayout(layoutConfig);
             let store = GlobalStore.getStore();
 
-            const sidebarView = connect(sbStateToProps)(Sidebar);
-            layout.registerComponent('sidebar', wrapComponent(sidebarView, store));
-
-            const datagridView = connect(dgStateToProps)(Datagrid);
-            layout.registerComponent('datagrid', wrapComponent(datagridView, store));
-
-            const caliperChartView = connect(ccStateToProps)(CaliperChart);
-            layout.registerComponent('caliper-chart', wrapComponent(caliperChartView, store));
+            layout.registerComponent('sidebar', Wrap(Sidebar, store));
+            layout.registerComponent('datagrid', Wrap(Datagrid, store));
+            layout.registerComponent('caliper-chart', Wrap(CaliperChart, store));
 
             layout.on('stateChanged', () => {
                 let state = layout.toConfig();
                 localStorage.setItem(LAYOUT_KEY, JSON.stringify(state));
             });
 
-            layout.container = ReactDOM.findDOMNode(this);
-            layout.init();
-
-            layout.on('stateChanged', function() {
+            layout.on('stateChanged', () => {
                 let state = layout.toConfig();
                 try {
                     localStorage.setItem(LAYOUT_KEY, JSON.stringify(state));
@@ -144,22 +114,25 @@ class HomePage extends React.Component {
         // golden layout config - eventually use stateService for this...
         let layoutConfig = DEFAULT_LAYOUT;
 
-        if (localStorage.getItem(LAYOUT_KEY)) {
-            try {
-                layoutConfig = JSON.parse(localStorage.getItem(LAYOUT_KEY));
-            } catch (e) {
-                console.log('Error parsing layout config: ' + e);
+        if (!this.props.location.query.reset) {
+            if (localStorage.getItem(LAYOUT_KEY)) {
+                try {
+                    layoutConfig = JSON.parse(localStorage.getItem(LAYOUT_KEY));
+                    initializeLayoutWithConfig(layoutConfig);
+                } catch (e) {
+                    console.log('Error parsing layout config: ' + e);
+                    initializeLayoutWithConfig(DEFAULT_LAYOUT);
+                }
             }
-        }
-
-        // Try to use the layout configuration from local storage, but if
-        // for whatever reason that fails, fallback to the default
-        try {
+        } else {
             initializeLayoutWithConfig(layoutConfig);
         }
-        catch (e) {
-            initializeLayoutWithConfig(DEFAULT_LAYOUT);
-        }
+    }
+
+    render () {
+        return (
+            <div className="homepage"/>
+        );
     }
 }
 

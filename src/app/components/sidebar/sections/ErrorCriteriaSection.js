@@ -12,7 +12,6 @@ class ErrorCriteriaSection extends React.Component {
     }
 
     handleChange(evt) {
-        let name = evt.target.name;
         let value = evt.target.checked;
         this.props.onChange({
             name: value
@@ -35,7 +34,7 @@ class ErrorCriteriaSection extends React.Component {
                                 name={criterion.name}
                                 label={criterion.label}
                                 onChange={changeHandler} />
-                        )
+                        );
                     })
                 }
                 </fieldset>
