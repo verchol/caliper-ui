@@ -13,213 +13,173 @@ APP_CONFIG = {
         productId: 'productId_like',
         taskName: 'taskName_like'
     },
-    form: {
-        txtfilters: [{
-            name: 'requirementId',
-            label: 'Requirement ID'
-        }, {
-            name: 'productId',
-            label: 'Product Id'
-        }, {
-            name: 'taskName',
-            label: 'Task Name'
-        }],
-        comparators: [{
-            name: 'eggCount',
-            label: 'Eggs are',
-            defaultValue: 3
-        }, {
-            name: 'baconCount',
-            label: 'Bacon Count is',
-            defaultValue: 26
-        }, {
-            name: 'biscuitCount',
-            label: 'Biscuit Count is',
-            defaultValue: 1
-        }],
-        criteria: [{
-            name: 'isMonkey',
-            label: 'Is a Monkey'
-        }, {
-            name: 'isGorilla',
-            label: 'Is a Gorilla'
-        }, {
-            name: 'isLemur',
-            label: 'Is a Lemur'
-        }, {
-            name: 'isOrangutan',
-            label: 'Is an Orangutan'
-        }, {
-            name: 'isGibbon',
-            label: 'Is a Gibbon'
-        }, {
-            name: 'isHuman',
-            label: 'Is a Human'
-        }, {
-            name: 'isChimpanzee',
-            label: 'Is a Chimpanzee'
-        }]
-    },
-    columns: [
-        'requirementId',
-        'productId',
-        'taskName',
-        'date',
-        'frames',
-        'biscuits',
-        'isMonkey',
-        'isGorilla',
-        'isLemur',
-        'isOrangutan',
-        'isGibbon',
-        'isHuman',
-        'isChimpanzee'
-    ],
     columnMetadata: [
         {
-            'columnName': 'requirementId',
-            'order': 1,
-            'locked': false,
-            'visible': true,
-            'displayName': 'Requirement ID'
+            columnName: 'requirementId',
+            columnType: 'txtfilter',
+            order: 1,
+            locked: false,
+            visible: true,
+            displayName: 'Requirement ID'
         },{
-            'columnName': 'productId',
-            'order': 2,
-            'locked': false,
-            'visible': true,
-            'displayName': 'Product ID'
+            columnName: 'productId',
+            columnType: 'txtfilter',
+            order: 2,
+            locked: false,
+            visible: true,
+            displayName: 'Product ID'
         },{
-            'columnName': 'taskName',
-            'order': 3,
-            'locked': false,
-            'visible': true,
-            'displayName': 'Task Name'
+            columnName: 'taskName',
+            columnType: 'txtfilter',
+            order: 3,
+            locked: false,
+            visible: true,
+            displayName: 'Task Name'
         },{
-            'columnName': 'date',
-            'order': 4,
-            'locked': false,
-            'visible': true,
-            'displayName': 'Date'
+            columnName: 'date',
+            order: 4,
+            locked: false,
+            visible: true,
+            displayName: 'Date'
         },{
-            'columnName': 'frames',
-            'order': 5,
-            'locked': false,
-            'visible': true,
-            'displayName': 'Frames'
+            columnName: 'eggs',
+            columnType: 'comparator',
+            order: 5,
+            locked: false,
+            visible: true,
+            displayName: 'Eggs',
+            defaultValue: 3
         },{
-            'columnName': 'biscuits',
-            'order': 6,
-            'locked': false,
-            'visible': true,
-            'displayName': 'Biscuits'
+            columnName: 'bacon',
+            columnType: 'comparator',
+            order: 6,
+            locked: false,
+            visible: true,
+            displayName: 'Bacon',
+            defaultValue: 26
         },{
-            'columnName': 'isMonkey',
-            'order': 7,
-            'locked': false,
-            'visible': true,
-            'displayName': 'Monkey'
+            columnName: 'biscuits',
+            columnType: 'comparator',
+            order: 7,
+            locked: false,
+            visible: true,
+            displayName: 'Biscuits',
+            defaultValue: 1
         },{
-            'columnName': 'isGorilla',
-            'order': 8,
-            'locked': false,
-            'visible': true,
-            'displayName': 'Gorilla'
+            columnName: 'isMonkey',
+            columnType: 'criteria',
+            order: 8,
+            locked: false,
+            visible: true,
+            displayName: 'Is a Monkey'
         },{
-            'columnName': 'isLemur',
-            'order': 9,
-            'locked': false,
-            'visible': true,
-            'displayName': 'Lemur'
+            columnName: 'isGorilla',
+            columnType: 'criteria',
+            order: 9,
+            locked: false,
+            visible: true,
+            displayName: 'Is a Gorilla'
         },{
-            'columnName': 'isOrangutan',
-            'order': 10,
-            'locked': false,
-            'visible': true,
-            'displayName': 'Orangutan'
+            columnName: 'isLemur',
+            columnType: 'criteria',
+            order: 10,
+            locked: false,
+            visible: true,
+            displayName: 'Is a Lemur'
         },{
-            'columnName': 'isGibbon',
-            'order': 11,
-            'locked': false,
-            'visible': true,
-            'displayName': 'Gibbon'
+            columnName: 'isOrangutan',
+            columnType: 'criteria',
+            order: 11,
+            locked: false,
+            visible: true,
+            displayName: 'Is an Orangutan'
         },{
-            'columnName': 'isHuman',
-            'order': 12,
-            'locked': false,
-            'visible': true,
-            'displayName': 'Human'
+            columnName: 'isGibbon',
+            columnType: 'criteria',
+            order: 12,
+            locked: false,
+            visible: true,
+            displayName: 'Is a Gibbon'
         },{
-            'columnName': 'isChimpanzee',
-            'order': 13,
-            'locked': false,
-            'visible': true,
-            'displayName': 'Chimpanzee'
+            columnName: 'isHuman',
+            columnType: 'criteria',
+            order: 13,
+            locked: false,
+            visible: true,
+            displayName: 'Is a Human'
         },{
-            'columnName': 'email',
-            'order': 14,
-            'locked': false,
-            'visible': false,
-            'displayName': 'Email'
+            columnName: 'isChimpanzee',
+            columnType: 'criteria',
+            order: 14,
+            locked: false,
+            visible: true,
+            displayName: 'Is a Chimpanzee'
         },{
-            'columnName': 'address',
-            'order': 15,
-            'locked': false,
-            'visible': false,
-            'displayName': 'Address'
+            columnName: 'email',
+            order: 15,
+            locked: false,
+            visible: false,
+            displayName: 'Email'
         },{
-            'columnName': 'city',
-            'order': 16,
-            'locked': false,
-            'visible': false,
-            'displayName': 'City'
+            columnName: 'address',
+            order: 16,
+            locked: false,
+            visible: false,
+            displayName: 'Address'
         },{
-            'columnName': 'state',
-            'order': 17,
-            'locked': false,
-            'visible': false,
-            'displayName': 'State'
+            columnName: 'city',
+            order: 17,
+            locked: false,
+            visible: false,
+            displayName: 'City'
         },{
-            'columnName': 'zipCode',
-            'order': 18,
-            'locked': false,
-            'visible': false,
-            'displayName': 'Zip Code'
+            columnName: 'state',
+            order: 18,
+            locked: false,
+            visible: false,
+            displayName: 'State'
         },{
-            'columnName': 'latitude',
-            'order': 19,
-            'locked': false,
-            'visible': false,
-            'displayName': 'Latitude'
+            columnName: 'zipCode',
+            order: 19,
+            locked: false,
+            visible: false,
+            displayName: 'Zip Code'
         },{
-            'columnName': 'longitude',
-            'order': 20,
-            'locked': false,
-            'visible': false,
-            'displayName': 'Longitude'
+            columnName: 'latitude',
+            order: 20,
+            locked: false,
+            visible: false,
+            displayName: 'Latitude'
         },{
-            'columnName': 'company',
-            'order': 21,
-            'locked': false,
-            'visible': false,
-            'displayName': 'Company'
+            columnName: 'longitude',
+            order: 21,
+            locked: false,
+            visible: false,
+            displayName: 'Longitude'
         },{
-            'columnName': 'product',
-            'order': 22,
-            'locked': false,
-            'visible': false,
-            'displayName': 'Product'
+            columnName: 'company',
+            order: 22,
+            locked: false,
+            visible: false,
+            displayName: 'Company'
         },{
-            'columnName': 'phone',
-            'order': 23,
-            'locked': false,
-            'visible': false,
-            'displayName': 'Phone'
+            columnName: 'product',
+            order: 23,
+            locked: false,
+            visible: false,
+            displayName: 'Product'
         },{
-            'columnName': 'account',
-            'order': 24,
-            'locked': false,
-            'visible': false,
-            'displayName': 'Account'
+            columnName: 'phone',
+            order: 24,
+            locked: false,
+            visible: false,
+            displayName: 'Phone'
+        },{
+            columnName: 'account',
+            order: 25,
+            locked: false,
+            visible: false,
+            displayName: 'Account'
         }
     ]
 };

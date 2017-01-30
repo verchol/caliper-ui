@@ -19,10 +19,17 @@ class Sidebar extends React.Component {
     }
 
     handleChange(changes) {
-        console.log('Updating changes: ' + JSON.stringify(changes));
+        // store current params
+        let params = this.props.params;
 
-        let updatedParams = Object.assign({}, this.props.params, changes);
-        updatedParams[APP_CONFIG.params.page] = 1;
+        // revert back to page 1 for changes
+        changes[APP_CONFIG.params.page] = 1;
+
+        // update params on state
+        this.props.updateParams(changes);
+
+        // format params for fetchAllResults call
+        let updatedParams = Object.assign({}, params, changes);
 
         // remove any params with values of null
         for (let key in updatedParams) {
@@ -32,10 +39,7 @@ class Sidebar extends React.Component {
                 delete updatedParams[key];
             }
         }
-
-        console.log('New params: ' + JSON.stringify(updatedParams));
-
-        this.props.updateParams(updatedParams);
+        // update datagrid
         this.props.fetchAllResults(updatedParams);
     }
 

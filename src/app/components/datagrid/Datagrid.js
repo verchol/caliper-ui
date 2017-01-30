@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
-import isEqual from 'lodash/isEqual';
+import _ from 'lodash';
 import Griddle from 'griddle-react';
 import DatagridPager from './DatagridPager';
 import Spinner from '../Spinner';
@@ -14,11 +14,12 @@ class Datagrid extends React.Component {
     }
 
     render () {
+        let columns = _.map(_.filter(APP_CONFIG.columnMetadata, { visible: true }), 'columnName');
         return (
             <div className="datagrid__container">
                 <div className="datagrid__table">
                     <Griddle results={this.props.results.reports || []}
-                             columns={APP_CONFIG.columns}
+                             columns={columns}
                              columnMetadata={APP_CONFIG.columnMetadata}
                              showFilter={false}
                              showSettings={false}
@@ -81,7 +82,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(resultsActions.fetchAllResults(updatedParams));
         },
         onRowClick: (gridRow, event, report) => {
-            if (isEqual(report, gridRow.props.data)) {
+            if (_.isEqual(report, gridRow.props.data)) {
                 // deselect report
                 dispatch(reportActions.selectReport({}));
             } else {

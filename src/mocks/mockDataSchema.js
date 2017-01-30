@@ -73,7 +73,11 @@ const schema = {
                         'type': 'string',
                         'faker': 'date.recent'
                     },
-                    'frames': {
+                    'eggs': {
+                        'type': 'number',
+                        'faker': 'random.number'
+                    },
+                    'bacon': {
                         'type': 'number',
                         'faker': 'random.number'
                     },
@@ -147,7 +151,7 @@ const schema = {
                         'faker': 'finance.accountName'
                     }
                 },
-                'required': ['pk', 'requirementId', 'productId', 'taskName', 'date', 'frames', 'biscuits', 'isMonkey', 'isGorilla', 'isLemur', 'isOrangutan', 'isGibbon', 'isHuman', 'isChimpanzee', 'email', 'address', 'city', 'state', 'zipCode', 'latitude', 'longitude', 'company', 'product', 'phone', 'account']
+                'required': ['pk', 'requirementId', 'productId', 'taskName', 'date', 'eggs', 'bacon', 'biscuits', 'isMonkey', 'isGorilla', 'isLemur', 'isOrangutan', 'isGibbon', 'isHuman', 'isChimpanzee', 'email', 'address', 'city', 'state', 'zipCode', 'latitude', 'longitude', 'company', 'product', 'phone', 'account']
             }
         }
     },

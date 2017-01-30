@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import _ from 'lodash';
 
 import AisCheckbox from '../form/AisCheckbox';
 
@@ -12,15 +13,15 @@ class ErrorCriteriaSection extends React.Component {
     }
 
     handleChange(evt) {
-        let value = evt.target.checked;
-        this.props.onChange({
-            name: value
-        });
+        let changeObj = {};
+        let column = evt.target.id;
+        changeObj[column] = evt.target.checked === true ? evt.target.checked : null;
+        this.props.onChange(changeObj);
     }
 
     render() {
 
-        let criteria = APP_CONFIG.form.criteria;
+        let criteria = _.filter(APP_CONFIG.columnMetadata, { columnType: 'criteria' });
         let changeHandler = this.handleChange;
 
         return (
@@ -30,9 +31,9 @@ class ErrorCriteriaSection extends React.Component {
                 {
                     criteria.map(function(criterion){
                         return (
-                            <AisCheckbox key={criterion.name}
-                                name={criterion.name}
-                                label={criterion.label}
+                            <AisCheckbox key={criterion.columnName}
+                                name={criterion.columnName}
+                                label={criterion.displayName}
                                 onChange={changeHandler} />
                         );
                     })

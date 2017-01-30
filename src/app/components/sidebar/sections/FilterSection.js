@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import _ from 'lodash';
 
 import AisComparator from '../form/AisComparator';
 import AisTextInput from '../form/AisTextInput';
@@ -14,7 +15,7 @@ class FilterSection extends React.Component {
     }
 
     handleTextChange(evt) {
-        let name = evt.target.name;
+        let name = APP_CONFIG.params[evt.target.name];
         let change = {};
         change[name] = evt.target.value;
         this.props.onChange(change);
@@ -25,7 +26,7 @@ class FilterSection extends React.Component {
         let changes = {};
 
         // Always send values for name, name_lt, and name_gt - initialize all to null
-        const names = [basename, `${basename}_lt`, `${basename}_gt`];
+        const names = [basename, `${basename}_lte`, `${basename}_gte`];
         for (let i = 0; i < names.length; i++) {
             changes[names[i]] = null;
         }
@@ -33,10 +34,10 @@ class FilterSection extends React.Component {
         if (comparator.enabled) {
             switch(comparator.comparator) {
                 case 'less than':
-                    changes[`${basename}_lt`] = comparator.value;
+                    changes[`${basename}_lte`] = comparator.value;
                     break;
                 case 'greater than':
-                    changes[`${basename}_gt`] = comparator.value;
+                    changes[`${basename}_gte`] = comparator.value;
                     break;
                 default:
                     changes[basename] = comparator.value;
@@ -46,10 +47,10 @@ class FilterSection extends React.Component {
     }
 
     render () {
-        let txtfilters = APP_CONFIG.form.txtfilters;
+        let txtfilters = _.filter(APP_CONFIG.columnMetadata, { columnType: 'txtfilter' });
         let textHandler = this.handleTextChange;
 
-        let comparators = APP_CONFIG.form.comparators;
+        let comparators = _.filter(APP_CONFIG.columnMetadata, { columnType: 'comparator' });
         let comparatorHandler = this.handleComparatorChange;
 
         return (
@@ -59,10 +60,10 @@ class FilterSection extends React.Component {
                     {
                         txtfilters.map(function(filter) {
                             return (
-                                <AisTextInput key={filter.name}
-                                    id={filter.name}
-                                    name={filter.name}
-                                    label={filter.label}
+                                <AisTextInput key={filter.columnName}
+                                    id={filter.columnName}
+                                    name={filter.columnName}
+                                    label={filter.displayName}
                                     onChange={textHandler} />
                             );
                         })
@@ -72,10 +73,10 @@ class FilterSection extends React.Component {
                     {
                         comparators.map(function(comparator) {
                             return (
-                                <AisComparator key={comparator.name}
-                                    id={comparator.name}
-                                    name={comparator.name}
-                                    label={comparator.label}
+                                <AisComparator key={comparator.columnName}
+                                    id={comparator.columnName}
+                                    name={comparator.columnName}
+                                    label={comparator.displayName}
                                     defaultValue={comparator.defaultValue}
                                     onChange={comparatorHandler} />
                             );
