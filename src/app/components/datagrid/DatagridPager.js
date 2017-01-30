@@ -10,11 +10,28 @@ class DatagridPager extends React.Component {
     }
 
     render () {
+        let stats = '';
+        if (this.props.results.headers) {
+            let page = this.props.results.headers.page + 1;
+            let firstRecord = (this.props.results.headers.count * page) - this.props.results.headers.count;
+            firstRecord = page === 1 ? firstRecord + 1 : firstRecord; // account for zero based paging
+            let lastRecord = firstRecord + (this.props.results.headers.count);
+            lastRecord = page === 1 ? lastRecord - 1 : lastRecord; // account for zero based paging
+            stats = 'Reports ' + firstRecord + '\u2013' + lastRecord + ' of ' + this.props.results.headers.total_count;
+        }
+
         return (
             <div className="datagrid__pager">
-                <button className="aisbtn aisbtn__small" onClick={() => this.props.setPage(this.props.params[APP_CONFIG.params.page] - 1)} disabled={this.props.params[APP_CONFIG.params.page] === 1}>Previous</button>
-                <DropdownList className="dropdownList__pages" dropUp={true} value={this.props.params[APP_CONFIG.params.page]} data={this.props.pages} onChange={this.props.setPage.bind(this)} />
-                <button className="aisbtn aisbtn__small" onClick={() => this.props.setPage(this.props.params[APP_CONFIG.params.page] + 1)} disabled={this.props.results.headers ? this.props.params[APP_CONFIG.params.page] === this.props.results.headers.pages : true}>Next</button>
+                <div className="datagrid__pager-controls">
+                    <div className="controls">
+                        <button className="aisbtn aisbtn__small" onClick={() => this.props.setPage(this.props.params[APP_CONFIG.params.page] - 1)} disabled={this.props.params[APP_CONFIG.params.page] === 1}>Previous</button>
+                        <DropdownList className="dropdownList__pages" dropUp={true} value={this.props.params[APP_CONFIG.params.page]} data={this.props.pages} onChange={this.props.setPage.bind(this)} />
+                        <button className="aisbtn aisbtn__small" onClick={() => this.props.setPage(this.props.params[APP_CONFIG.params.page] + 1)} disabled={this.props.results.headers ? this.props.params[APP_CONFIG.params.page] === this.props.results.headers.pages : true}>Next</button>
+                    </div>
+                </div>
+                <div className="datagrid__pager-stats">
+                    {stats}
+                </div>
             </div>
         );
     }

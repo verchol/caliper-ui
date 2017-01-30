@@ -6,9 +6,8 @@
         position: absolute;
         top: 0;
         left: 0;
-        bottom: 20px;
+        bottom: 48px;
         overflow-y: auto;
-        margin-bottom: 25px;
 
         .griddle {
             text-align: center;
@@ -131,14 +130,30 @@
     }
 
     .datagrid__pager {
-        .grid-justify(flex-start);
+        .grid-justify(space-between);
 
         position: absolute;
-        bottom: 5px;
+        bottom: 0;
         left: 0;
+        width: 100%;
+        background-color: darken(@clr-background-alt, 5%);
 
-        button {
-            margin: 0 5px;
+        .datagrid__pager-controls {
+            margin-left: 2px;
+
+            .controls {
+                .grid-justify(flex-start);
+            }
+            button, .dropdownList__pages {
+                margin: 7px 3px;
+            }
+        }
+
+        .datagrid__pager-stats {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-right: 10px;
         }
     }
 
