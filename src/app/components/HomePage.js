@@ -114,7 +114,9 @@ class HomePage extends React.Component {
         // golden layout config - eventually use stateService for this...
         let layoutConfig = DEFAULT_LAYOUT;
 
-        if (!this.props.location.query.reset) {
+        if (this.props.location.query.reset) {
+            initializeLayoutWithConfig(DEFAULT_LAYOUT);
+        } else {
             if (localStorage.getItem(LAYOUT_KEY)) {
                 try {
                     layoutConfig = JSON.parse(localStorage.getItem(LAYOUT_KEY));
@@ -123,9 +125,9 @@ class HomePage extends React.Component {
                     console.log('Error parsing layout config: ' + e);
                     initializeLayoutWithConfig(DEFAULT_LAYOUT);
                 }
+            } else {
+                initializeLayoutWithConfig(DEFAULT_LAYOUT);
             }
-        } else {
-            initializeLayoutWithConfig(layoutConfig);
         }
     }
 
