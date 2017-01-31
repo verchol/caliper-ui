@@ -26,7 +26,7 @@ class FilterSection extends React.Component {
         let changes = {};
 
         // Always send values for name, name_lt, and name_gt - initialize all to null
-        const names = [basename, `${basename}_lte`, `${basename}_gte`];
+        const names = [basename, `${basename}_lt`, `${basename}_gt`];
         for (let i = 0; i < names.length; i++) {
             changes[names[i]] = null;
         }
@@ -34,10 +34,10 @@ class FilterSection extends React.Component {
         if (comparator.enabled) {
             switch(comparator.comparator) {
                 case 'less than':
-                    changes[`${basename}_lte`] = comparator.value;
+                    changes[`${basename}_lt`] = comparator.value;
                     break;
                 case 'greater than':
-                    changes[`${basename}_gte`] = comparator.value;
+                    changes[`${basename}_gt`] = comparator.value;
                     break;
                 default:
                     changes[basename] = comparator.value;
