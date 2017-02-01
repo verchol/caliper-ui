@@ -1,50 +1,46 @@
 APP_CONFIG = {
     urls: {
-        'allResults': 'http://localhost:3000/search',
+        'allResults': 'http://localhost:8080/api/reports',
         'dataHist': 'http://localhost:3000/hist',
         'dataLine': 'http://localhost:3000/line'
     },
-    params: {
-        page: '_page',
-        count: '_limit',
-        sort: '_sort',
-        order: '_order',
-        requirementId: 'requirementId_like',
-        productId: 'productId_like',
-        taskName: 'taskName_like'
-    },
     columnMetadata: [
         {
-            columnName: 'requirementId',
+            columnName: 'requirements_id',
             columnType: 'txtfilter',
-            order: 1,
             locked: false,
             visible: true,
             displayName: 'Requirement ID'
         },{
-            columnName: 'productId',
+            columnName: 'collection_id',
             columnType: 'txtfilter',
-            order: 2,
             locked: false,
             visible: true,
-            displayName: 'Product ID'
+            displayName: 'Collection ID'
         },{
-            columnName: 'taskName',
+            columnName: 'task_name',
             columnType: 'txtfilter',
-            order: 3,
             locked: false,
             visible: true,
             displayName: 'Task Name'
         },{
-            columnName: 'date',
-            order: 4,
+            columnName: 'collection_date',
             locked: false,
             visible: true,
-            displayName: 'Date'
+            displayName: 'Collected'
+        },{
+            columnName: 'created',
+            locked: false,
+            visible: false,
+            displayName: 'Created'
+        },{
+            columnName: 'last_modified',
+            locked: false,
+            visible: false,
+            displayName: 'Last Modified'
         },{
             columnName: 'eggs',
             columnType: 'comparator',
-            order: 5,
             locked: false,
             visible: true,
             displayName: 'Eggs',
@@ -52,134 +48,64 @@ APP_CONFIG = {
         },{
             columnName: 'bacon',
             columnType: 'comparator',
-            order: 6,
             locked: false,
             visible: true,
             displayName: 'Bacon',
             defaultValue: 26
         },{
-            columnName: 'biscuits',
+            columnName: 'num_biscuits',
             columnType: 'comparator',
-            order: 7,
             locked: false,
             visible: true,
             displayName: 'Biscuits',
             defaultValue: 1
         },{
-            columnName: 'isMonkey',
+            columnName: 'is_monkey',
             columnType: 'criteria',
-            order: 8,
             locked: false,
             visible: true,
             displayName: 'Is a Monkey'
         },{
-            columnName: 'isGorilla',
+            columnName: 'is_gorilla',
             columnType: 'criteria',
-            order: 9,
             locked: false,
             visible: true,
             displayName: 'Is a Gorilla'
         },{
-            columnName: 'isLemur',
+            columnName: 'is_lemur',
             columnType: 'criteria',
-            order: 10,
             locked: false,
             visible: true,
             displayName: 'Is a Lemur'
         },{
-            columnName: 'isOrangutan',
+            columnName: 'is_orangutan',
             columnType: 'criteria',
-            order: 11,
             locked: false,
             visible: true,
             displayName: 'Is an Orangutan'
         },{
-            columnName: 'isGibbon',
+            columnName: 'is_gibbon',
             columnType: 'criteria',
-            order: 12,
             locked: false,
             visible: true,
             displayName: 'Is a Gibbon'
         },{
-            columnName: 'isHuman',
+            columnName: 'is_human',
             columnType: 'criteria',
-            order: 13,
             locked: false,
             visible: true,
             displayName: 'Is a Human'
         },{
-            columnName: 'isChimpanzee',
+            columnName: 'is_chimpanzee',
             columnType: 'criteria',
-            order: 14,
             locked: false,
             visible: true,
             displayName: 'Is a Chimpanzee'
         },{
-            columnName: 'email',
-            order: 15,
+            columnName: 'pk',
             locked: false,
             visible: false,
-            displayName: 'Email'
-        },{
-            columnName: 'address',
-            order: 16,
-            locked: false,
-            visible: false,
-            displayName: 'Address'
-        },{
-            columnName: 'city',
-            order: 17,
-            locked: false,
-            visible: false,
-            displayName: 'City'
-        },{
-            columnName: 'state',
-            order: 18,
-            locked: false,
-            visible: false,
-            displayName: 'State'
-        },{
-            columnName: 'zipCode',
-            order: 19,
-            locked: false,
-            visible: false,
-            displayName: 'Zip Code'
-        },{
-            columnName: 'latitude',
-            order: 20,
-            locked: false,
-            visible: false,
-            displayName: 'Latitude'
-        },{
-            columnName: 'longitude',
-            order: 21,
-            locked: false,
-            visible: false,
-            displayName: 'Longitude'
-        },{
-            columnName: 'company',
-            order: 22,
-            locked: false,
-            visible: false,
-            displayName: 'Company'
-        },{
-            columnName: 'product',
-            order: 23,
-            locked: false,
-            visible: false,
-            displayName: 'Product'
-        },{
-            columnName: 'phone',
-            order: 24,
-            locked: false,
-            visible: false,
-            displayName: 'Phone'
-        },{
-            columnName: 'account',
-            order: 25,
-            locked: false,
-            visible: false,
-            displayName: 'Account'
+            displayName: 'PK'
         }
     ]
 };

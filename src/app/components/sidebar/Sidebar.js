@@ -23,7 +23,7 @@ class Sidebar extends React.Component {
         let params = this.props.params;
 
         // revert back to page 1 for changes
-        changes[APP_CONFIG.params.page] = 1;
+        changes._page = 1;
 
         // update params on state
         this.props.updateParams(changes);

@@ -24,9 +24,9 @@ class DatagridPager extends React.Component {
             <div className="datagrid__pager">
                 <div className="datagrid__pager-controls">
                     <div className="controls">
-                        <button className="aisbtn aisbtn__small" onClick={() => this.props.setPage(this.props.params[APP_CONFIG.params.page] - 1)} disabled={this.props.params[APP_CONFIG.params.page] === 1}>Previous</button>
-                        <DropdownList className="dropdownList__pages" dropUp={true} value={this.props.params[APP_CONFIG.params.page]} data={this.props.pages} onChange={this.props.setPage.bind(this)} />
-                        <button className="aisbtn aisbtn__small" onClick={() => this.props.setPage(this.props.params[APP_CONFIG.params.page] + 1)} disabled={this.props.results.headers ? this.props.params[APP_CONFIG.params.page] === this.props.results.headers.pages : true}>Next</button>
+                        <button className="aisbtn aisbtn__small" onClick={() => this.props.setPage(this.props.params._page - 1)} disabled={this.props.params._page === 1}>Previous</button>
+                        <DropdownList className="dropdownList__pages" dropUp={true} value={this.props.params._page} data={this.props.pages} onChange={this.props.setPage.bind(this)} />
+                        <button className="aisbtn aisbtn__small" onClick={() => this.props.setPage(this.props.params._page + 1)} disabled={this.props.results.headers ? this.props.params._page === this.props.results.headers.pages : true}>Next</button>
                     </div>
                 </div>
                 <div className="datagrid__pager-stats">
@@ -55,8 +55,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setPage: (index, params) => {
             // use config value for key
-            let updatedParams = {};
-            updatedParams[APP_CONFIG.params.page] = index;
+            let updatedParams = {
+                _page: index
+            };
             // update params state
             dispatch(paramsActions.updateParams(updatedParams));
             // update grid

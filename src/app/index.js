@@ -16,11 +16,12 @@ import { updateParams } from './state/actions/paramsActions';
 
 const store = configureStore();
 GlobalStore.setStore(store);
-const initialParams = {};
-initialParams[APP_CONFIG.params.page] = 1;
-initialParams[APP_CONFIG.params.count] = 20;
-initialParams[APP_CONFIG.params.sort] = 'requirementId';
-initialParams[APP_CONFIG.params.order] = 'ASC';
+const initialParams = {
+    _page: 1,
+    _limit: 20,
+    _sort: 'requirements_id',
+    _order: 'ASC'
+};
 store.dispatch(updateParams(initialParams));
 store.dispatch(resultsActions.fetchAllResults(initialParams));
 

@@ -27,12 +27,12 @@ class Datagrid extends React.Component {
                              onRowClick={this.props.onRowClick}
                              useGriddleStyles={false}
                              rowMetadata={this.props.rowMetadata}
-                             key={this.props.report.requirementId}
+                             key={this.props.report.requirements_id}
                              useExternal={true}
                              externalIsLoading={this.props.results.pending || false}
                              externalLoadingComponent={Spinner}
-                             externalSortColumn={this.props.params[APP_CONFIG.params.sort]}
-                             externalSortAscending={this.props.params[APP_CONFIG.params.order] === 'ASC'}
+                             externalSortColumn={this.props.params._sort}
+                             externalSortAscending={this.props.params._order === 'ASC'}
                              externalMaxPage={this.props.results.headers ? this.props.results.headers.pages : 1}
                              externalCurrentPage={this.props.results.headers ? this.props.results.headers.page : 1}
                              externalSetPage={this.props.setPage}
@@ -70,10 +70,11 @@ const mapDispatchToProps = (dispatch) => {
     return {
         changeSort: (sort, sortAscending, params) => {
             // use config value for key
-            let updatedParams = {};
-            updatedParams[APP_CONFIG.params.sort] = sort;
-            updatedParams[APP_CONFIG.params.order] = sortAscending ? 'ASC' : 'DESC';
-            updatedParams[APP_CONFIG.params.page] = 1;
+            let updatedParams = {
+                _sort: sort,
+                _order: sortAscending,
+                _page: 1
+            };
             // update params state
             dispatch(paramsActions.updateParams(updatedParams));
             // update grid
@@ -106,7 +107,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         report: stateProps.report,
         rowMetadata: {
             bodyCssClassName: (rowData) => {
-                return rowData.requirementId === stateProps.report.requirementId ? 'standard-row selected' : 'standard-row';
+                return rowData.requirements_id === stateProps.report.requirements_id ? 'standard-row selected' : 'standard-row';
             }
         },
         changeSort: (sort, sortAscending) => dispatchProps.changeSort(sort, sortAscending, stateProps.params),
