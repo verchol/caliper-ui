@@ -54,27 +54,12 @@ class HomePage extends React.Component {
                         type: 'row',
                         height: 50,
                         content: [{
-                            type: 'column',
-                            width: 50,
-                            content: [{
-                                type: 'react-component',
-                                component: 'caliper-chart',
-                                props: {
-                                    type: 'line',
-                                    title: 'Line'
-                                }
-                            }]
-                        },{
-                            type: 'column',
-                            width: 50,
-                            content: [{
-                                type: 'react-component',
-                                component: 'caliper-chart',
-                                props: {
-                                    type: 'hist',
-                                    title: 'Histogram'
-                                }
-                            }]
+                            type: 'react-component',
+                            component: 'caliper-chart',
+                            props: {
+                                type: 'line',
+                                title: 'Line'
+                            }
                         }]
                     }]
                 }]
