@@ -88,7 +88,7 @@
             }
 
             th {
-                background-color: darken(desaturate(@clr-highlight, 20%), 15%);
+                background-color: lighten(@clr-background, 12%);
                 border-bottom: 1px solid @clr-background;
                 color: @clr-gray-light;
                 font-weight: bold;
@@ -99,7 +99,7 @@
                 transition: @transition;
 
                 &:hover {
-                    background-color: desaturate(@clr-highlight, 20%);
+                    background-color: lighten(@clr-background, 20%);
                     color: @clr-txt;
                 }
             }
