@@ -16,7 +16,7 @@ class HomePage extends React.Component {
         const LAYOUT_KEY = 'caliperLayoutConfig';
         const DEFAULT_LAYOUT = {
             settings: {
-                hasHeaders: true,
+                hasHeaders: false,
                 showPopoutIcon: false,
                 showMaximiseIcon: true,
                 showCloseIcon: false
@@ -29,7 +29,7 @@ class HomePage extends React.Component {
                 type: 'row',
                 content: [{
                     type: 'row',
-                    width: 20,
+                    width: 25,
                     content: [{
                         type: 'react-component',
                         component: 'sidebar',
@@ -39,7 +39,7 @@ class HomePage extends React.Component {
                     }]
                 },{
                     type: 'column',
-                    width: 80,
+                    width: 75,
                     content: [{
                         type: 'row',
                         height: 50,
