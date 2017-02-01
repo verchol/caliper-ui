@@ -12,12 +12,12 @@ class DatagridPager extends React.Component {
     render () {
         let stats = '';
         if (this.props.results.headers) {
-            let page = this.props.results.headers.page + 1;
-            let firstRecord = (this.props.results.headers.limit * page) - this.props.results.headers.limit;
-            firstRecord = page === 1 ? firstRecord + 1 : firstRecord; // account for zero based paging
-            let lastRecord = firstRecord + (this.props.results.headers.limit);
-            lastRecord = page === 1 ? lastRecord - 1 : lastRecord; // account for zero based paging
-            stats = 'Reports ' + firstRecord + '\u2013' + lastRecord + ' of ' + this.props.results.headers.total_count;
+            let page = this.props.results.headers.page;
+            let firstRecord = (this.props.results.headers.pageSize * page) - this.props.results.headers.pageSize;
+            firstRecord = firstRecord + 1; // account for zero based paging
+            let lastRecord = firstRecord + (this.props.results.headers.pageSize);
+            lastRecord = lastRecord - 1; // account for zero based paging
+            stats = 'Reports ' + firstRecord + '\u2013' + lastRecord + ' of ' + this.props.results.headers.rowCount;
         }
 
         return (
@@ -26,7 +26,7 @@ class DatagridPager extends React.Component {
                     <div className="controls">
                         <button className="aisbtn aisbtn__small" onClick={() => this.props.setPage(this.props.params._page - 1)} disabled={this.props.params._page === 1}>Previous</button>
                         <DropdownList className="dropdownList__pages" dropUp={true} value={this.props.params._page} data={this.props.pages} onChange={this.props.setPage.bind(this)} />
-                        <button className="aisbtn aisbtn__small" onClick={() => this.props.setPage(this.props.params._page + 1)} disabled={this.props.results.headers ? this.props.params._page === this.props.results.headers.pages : true}>Next</button>
+                        <button className="aisbtn aisbtn__small" onClick={() => this.props.setPage(this.props.params._page + 1)} disabled={this.props.results.headers ? this.props.params._page === this.props.results.headers.pageCount : true}>Next</button>
                     </div>
                 </div>
                 <div className="datagrid__pager-stats">
@@ -73,7 +73,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         results: stateProps.results,
         params: stateProps.params,
         setPage: (index) => dispatchProps.setPage(index, stateProps.params),
-        pages: stateProps.results.headers ? Array.from({length: stateProps.results.headers.pages}, (v, i) => i + 1) : [1]
+        pages: stateProps.results.headers ? Array.from({length: stateProps.results.headers.pageCount}, (v, i) => i + 1) : [1]
     });
 };
 

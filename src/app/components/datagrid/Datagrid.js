@@ -33,7 +33,7 @@ class Datagrid extends React.Component {
                              externalLoadingComponent={Spinner}
                              externalSortColumn={this.props.params._sort}
                              externalSortAscending={this.props.params._order === 'ASC'}
-                             externalMaxPage={this.props.results.headers ? this.props.results.headers.pages : 1}
+                             externalMaxPage={this.props.results.headers ? this.props.results.headers.pageCount : 1}
                              externalCurrentPage={this.props.results.headers ? this.props.results.headers.page : 1}
                              externalSetPage={this.props.setPage}
                              externalChangeSort={this.props.changeSort}
