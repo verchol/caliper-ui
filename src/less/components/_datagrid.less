@@ -64,42 +64,50 @@
             }
 
             thead {
-                border-left: 2px solid @clr-background-alt;
-                border-right: 2px solid @clr-background-alt;
+                border-left: 2px solid @clr-background;
+                border-right: 2px solid @clr-background;
             }
 
             tr {
                 &.standard-row {
-                    background-color: lighten(@clr-background-alt, 5%);
+                    background-color: lighten(@clr-background, 5%);
                     transition: all 0.35s ease;
 
                     &:hover {
                         cursor: pointer;
-                        background-color: lighten(@clr-background-alt, 15%);
+                        background-color: lighten(@clr-background, 12%);
                     }
                 }
 
                 &.selected {
-                    background-color: lighten(@clr-background-alt, 35%);
+                    background-color: lighten(@clr-background, 35%);
                     &:hover {
-                        background-color: lighten(@clr-background-alt, 35%);
+                        background-color: lighten(@clr-background, 35%);
                     }
                 }
             }
 
             th {
-                background-color:#EDEDEF;
-                border-left: 2px solid @clr-background-alt;
-                border-right: 2px solid @clr-background-alt;
-                color:#222;
-                padding:5px;
+                background-color: darken(desaturate(@clr-highlight, 20%), 15%);
+                border-bottom: 1px solid @clr-background;
+                color: @clr-gray-light;
+                font-weight: bold;
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+                padding: 0.5em 1.0em;
                 cursor: pointer;
+                transition: @transition;
+
+                &:hover {
+                    background-color: desaturate(@clr-highlight, 20%);
+                    color: @clr-txt;
+                }
             }
 
             td {
                 padding:5px;
-                border: 2px solid @clr-background-alt;
-                color:#ddd;
+                border-bottom: 1px solid @clr-background;
+                color: @clr-txt;
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
@@ -107,8 +115,8 @@
             .footer-container {
                 padding:5px;
                 background-color:#EDEDED;
-                border-left: 2px solid @clr-background-alt;
-                border-right: 2px solid @clr-background-alt;
+                border-left: 2px solid @clr-background;
+                border-right: 2px solid @clr-background;
                 color:#222;
             }
 
@@ -136,7 +144,7 @@
         bottom: 0;
         left: 0;
         width: 100%;
-        background-color: darken(@clr-background-alt, 5%);
+        background-color: darken(@clr-background, 5%);
 
         .datagrid__pager-controls {
             margin-left: 2px;

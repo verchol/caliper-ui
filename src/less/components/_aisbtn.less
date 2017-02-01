@@ -1,24 +1,26 @@
 .btn() {
-    background: @clr-blue-dark;
+    background: darken(@clr-highlight, 5%);
     border: none;
-    border-radius: 0.25em;
+    //border-radius: 0.25em;
+    border-radius: 4px;
     color: @clr-gray-light;
     cursor: pointer;
     font-size: 0.95rem;
     padding: 0.5em;
-    transition: all 0.35s ease;
+    transition: @transition;
 
     &:focus {
         outline: 0;
     }
 
     &:hover {
-        background: @clr-blue;
+        background: @clr-highlight;
         color: @clr-white;
     }
 
     &:disabled {
-        background: lighten(@clr-gray-dark, 25%);
+        background: @clr-gray-medium;
+        color: darken(@clr-gray-light, 5%);
         cursor: not-allowed;
     }
 }
