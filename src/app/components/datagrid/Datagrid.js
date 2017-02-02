@@ -27,7 +27,7 @@ class Datagrid extends React.Component {
                              onRowClick={this.props.onRowClick}
                              useGriddleStyles={false}
                              rowMetadata={this.props.rowMetadata}
-                             key={this.props.report.requirements_id}
+                             key={this.props.report.id}
                              useExternal={true}
                              externalIsLoading={this.props.results.pending || false}
                              externalLoadingComponent={Spinner}
@@ -107,7 +107,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         report: stateProps.report,
         rowMetadata: {
             bodyCssClassName: (rowData) => {
-                return rowData.requirements_id === stateProps.report.requirements_id ? 'standard-row selected' : 'standard-row';
+                return rowData.id === stateProps.report.id ? 'standard-row selected' : 'standard-row';
             }
         },
         changeSort: (sort, sortAscending) => dispatchProps.changeSort(sort, sortAscending, stateProps.params),

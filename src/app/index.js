@@ -19,8 +19,8 @@ GlobalStore.setStore(store);
 const initialParams = {
     _page: 1,
     _limit: 20,
-    _sort: 'requirements_id',
-    _order: 'ASC'
+    _sort: APP_CONFIG.sort.column,
+    _order: APP_CONFIG.sort.order
 };
 store.dispatch(updateParams(initialParams));
 store.dispatch(resultsActions.fetchAllResults(initialParams));

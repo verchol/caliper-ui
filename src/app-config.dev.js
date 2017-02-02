@@ -4,13 +4,22 @@ APP_CONFIG = {
         'dataHist': 'http://localhost:3000/hist',
         'dataLine': 'http://localhost:3000/line'
     },
+    sort: {
+        column: 'collection_start',
+        direction: 'DESC'
+    },
     columnMetadata: [
         {
-            columnName: 'requirements_id',
+            columnName: 'id',
+            locked: false,
+            visible: false,
+            displayName: 'ID'
+        },{
+            columnName: 'sensor_id',
             columnType: 'txtfilter',
             locked: false,
             visible: true,
-            displayName: 'Requirement ID'
+            displayName: 'Sensor ID'
         },{
             columnName: 'collection_id',
             columnType: 'txtfilter',
@@ -24,7 +33,7 @@ APP_CONFIG = {
             visible: true,
             displayName: 'Task Name'
         },{
-            columnName: 'collection_date',
+            columnName: 'collection_start',
             locked: false,
             visible: true,
             displayName: 'Collected'
