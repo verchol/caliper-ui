@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import moment from 'moment';
 // D3 Components
 import { extent, max } from 'd3-array';
-import { scaleLinear, scaleTime } from 'd3-scale';
-import { timeFormat } from 'd3-time-format';
+import { scaleLinear, scaleUtc } from 'd3-scale';
 
 import ChartAxis from './ChartAxis';
 import ChartLine from './ChartLine';
@@ -45,7 +44,7 @@ class LineChart extends React.Component {
 
     initScales(size, data) {
         const xSize =  size.width - (MARGIN.right + MARGIN.left);
-        const x = scaleTime()
+        const x = scaleUtc()
             .range([0, xSize])
             .domain(extent(data, d => {
                 return moment.utc(d.x);

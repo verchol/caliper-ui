@@ -3,6 +3,7 @@ import Faux from 'react-faux-dom';
 // D3 Components
 import { axisBottom, axisLeft } from 'd3-axis';
 import { select } from 'd3-selection';
+import { utcFormat } from 'd3-time-format';
 
 
 class ChartAxis extends React.Component {
@@ -31,6 +32,7 @@ class ChartAxis extends React.Component {
 
         // X Axis
         const axisX = axisBottom(context.scales.x);
+        axisX.tickFormat(utcFormat('%Y-%m-%d %H00'));
         if (!this.props.showTicks) {
             axisX.tickValues(context.scales.x.domain());
         }

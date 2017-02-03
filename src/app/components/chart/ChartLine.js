@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import Faux from 'react-faux-dom';
+import moment from 'moment';
 // D3 Components
 import { select } from 'd3-selection';
 import { line } from 'd3-shape';
@@ -30,7 +31,7 @@ class ChartLine extends React.Component {
         // Paint the Signature Line
         const linePainter = line()
             .x(d => {
-                return context.scales.x(d.x);
+                return context.scales.x(moment.utc(d.x));
             })
             .y(d => {
                 return context.scales.y(d.y);
