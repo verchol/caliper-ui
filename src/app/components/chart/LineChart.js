@@ -74,23 +74,28 @@ class LineChart extends React.Component {
     }
 
     render() {
-        const size = {
-            height: this.props.chartHeight,
-            width: this.state.componentSize.width
-        };
+        if (this.props.data.length > 0) {
+            const size = {
+                height: this.props.chartHeight,
+                width: this.state.componentSize.width
+            };
 
-        let context = {};
-        context.axisColor = AXIS_COLOR;
-        context.margin = MARGIN;
-        context.scales = this.initScales(size, this.props.data);
-        context.size = size;
+            let context = {};
+            context.axisColor = AXIS_COLOR;
+            context.margin = MARGIN;
+            context.scales = this.initScales(size, this.props.data);
+            context.size = size;
 
+            return (
+                <svg className="chart chart__line" height={size.height + 10} width={size.width}>
+                    <ChartLine data={this.props.data} context={context} />
+                    <ChartAxis context={context} showTicks={this.props.showTicks} />
+                </svg>
+            );
+        }
         return (
-            <svg className="chart chart__line" height={size.height + 10} width={size.width}>
-                <ChartLine data={this.props.data} context={context} />
-                <ChartAxis context={context} showTicks={this.props.showTicks} />
-            </svg>
-        );
+            <div className="absolute-center">There is no data to display.</div>
+        )
     }
 
 }
