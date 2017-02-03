@@ -15,7 +15,7 @@ class CaliperChart extends React.Component {
         if (this.props.resultsByDay.pending) {
             return (
                 <Spinner/>
-            )
+            );
         }
         return (
             <div className="caliper-chart">
