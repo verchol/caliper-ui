@@ -1,13 +1,15 @@
 APP_CONFIG = {
     urls: {
-        'allResults': 'http://localhost:8080/api/reports',
-        'dataHist': 'http://localhost:3000/hist',
-        'dataLine': 'http://localhost:3000/line'
+        allResults: 'http://localhost:8080/api/reports',
+        resultsByHour: 'http://localhost:8080/api/reports/hour',
+        resultsByDay: 'http://localhost:8080/api/reports/day'
     },
     sort: {
         column: 'collection_start',
         direction: 'DESC'
     },
+    dateFormat: 'MM-DD-YYYY',
+    timeFormat: 'HH:mm[Z]',
     columnMetadata: [
         {
             columnName: 'id',

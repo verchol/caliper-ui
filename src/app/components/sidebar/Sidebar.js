@@ -7,6 +7,8 @@ import ErrorCriteriaSection from './sections/ErrorCriteriaSection';
 import FilterSection from './sections/FilterSection';
 
 import {fetchAllResults} from '../../state/actions/resultsActions';
+import {fetchResultsByHour} from '../../state/actions/resultsByHourActions';
+import {fetchResultsByDay} from '../../state/actions/resultsByDayActions';
 import {updateParams} from '../../state/actions/paramsActions';
 
 
@@ -41,6 +43,10 @@ class Sidebar extends React.Component {
         }
         // update datagrid
         this.props.fetchAllResults(updatedParams);
+        // update radial chart
+        this.props.fetchResultsByHour(updatedParams);
+        // update line chart
+        this.props.fetchResultsByDay(updatedParams);
     }
 
     render() {
@@ -73,5 +79,7 @@ const mapStateToProps = (state) => { //optional arg is ownProps
 
 export default connect(mapStateToProps, {
     fetchAllResults,
+    fetchResultsByHour,
+    fetchResultsByDay,
     updateParams
 })(Sidebar);

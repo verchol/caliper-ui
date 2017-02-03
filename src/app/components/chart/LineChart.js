@@ -1,8 +1,10 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import moment from 'moment';
 // D3 Components
 import { extent, max } from 'd3-array';
-import { scaleLinear } from 'd3-scale';
+import { scaleLinear, scaleTime } from 'd3-scale';
+import { timeFormat } from 'd3-time-format';
 
 import ChartAxis from './ChartAxis';
 import ChartLine from './ChartLine';
@@ -43,10 +45,10 @@ class LineChart extends React.Component {
 
     initScales(size, data) {
         const xSize =  size.width - (MARGIN.right + MARGIN.left);
-        const x = scaleLinear()
+        const x = scaleTime()
             .range([0, xSize])
             .domain(extent(data, d => {
-                return d.x;
+                return moment.utc(d.x);
             }));
 
         const ySize = size.height - MARGIN.top - MARGIN.bottom;

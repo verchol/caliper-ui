@@ -7,8 +7,8 @@ import momentLocalizer from 'react-widgets/lib/localizers/moment';
 // Required by react-widgets: https://jquense.github.io/react-widgets/docs/#/datetime-picker
 momentLocalizer(moment);
 
-export const DATE_FORMAT = 'MM-DD-YYYY';
-export const TIME_FORMAT = 'HH:mm[Z]';
+export const DATE_FORMAT = APP_CONFIG.dateFormat;
+export const TIME_FORMAT = APP_CONFIG.timeFormat;
 
 class AisDateTimePicker extends React.Component {
 

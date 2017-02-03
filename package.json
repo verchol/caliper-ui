@@ -52,6 +52,7 @@
     "d3-selection": "^1.0.2",
     "d3-selection-multi": "^1.0.0",
     "d3-shape": "^1.0.3",
+    "d3-time-format": "^2.0.3",
     "fixed-data-table": "^0.6.3",
     "font-awesome": "^4.7.0",
     "golden-layout": "^1.5.7",

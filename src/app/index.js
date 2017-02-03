@@ -4,10 +4,13 @@ import ReactDom from 'react-dom';
 import { Router, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
+import moment from 'moment';
 import GlobalStore from './globalStore';
 import routes from './routes';
 import configureStore from './state/store/configureStore';
 import * as resultsActions from './state/actions/resultsActions';
+import * as resultsByHourActions from './state/actions/resultsByHourActions';
+import * as resultsByDayActions from './state/actions/resultsByDayActions';
 import { updateParams } from './state/actions/paramsActions';
 
 // Import application assets so webpack can process them
@@ -20,10 +23,14 @@ const initialParams = {
     _page: 1,
     _limit: 20,
     _sort: APP_CONFIG.sort.column,
-    _order: APP_CONFIG.sort.order
+    _order: APP_CONFIG.sort.direction,
+    start_date: moment.utc().startOf('d').toISOString(),
+    end_date: moment.utc().endOf('d').toISOString()
 };
 store.dispatch(updateParams(initialParams));
 store.dispatch(resultsActions.fetchAllResults(initialParams));
+store.dispatch(resultsByHourActions.fetchResultsByHour(initialParams));
+store.dispatch(resultsByDayActions.fetchResultsByDay(initialParams));
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
