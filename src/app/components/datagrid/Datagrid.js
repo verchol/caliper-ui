@@ -2,11 +2,15 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import _ from 'lodash';
 import Griddle from 'griddle-react';
+
 import DatagridPager from './DatagridPager';
+import ExternalLink from './ExternalLink';
 import Spinner from '../Spinner';
+
 import * as resultsActions from '../../state/actions/resultsActions';
 import * as paramsActions from '../../state/actions/paramsActions';
 import * as reportActions from '../../state/actions/reportActions';
+
 
 class Datagrid extends React.Component {
     constructor (props, context) {
@@ -15,6 +19,14 @@ class Datagrid extends React.Component {
 
     render () {
         let columns = _.map(_.filter(APP_CONFIG.columnMetadata, { visible: true }), 'columnName');
+
+        // Set the customComponent field on any columns that should be links
+        APP_CONFIG.columnMetadata.filter(col => {
+            if (col.link) return col;
+        }).map(col => {
+            col.customComponent = ExternalLink;
+        });
+
         return (
             <div className="datagrid__container">
                 <div className="datagrid__table">
@@ -38,7 +50,7 @@ class Datagrid extends React.Component {
                              externalSetPage={this.props.setPage}
                              externalChangeSort={this.props.changeSort}
                              externalSetFilter={this.props.setFilter}
-                             externalSetPageSize={this.props.setPageSize}/>
+                             externalSetPageSize={this.props.setPageSize} />
                 </div>
                 <DatagridPager/>
             </div>
