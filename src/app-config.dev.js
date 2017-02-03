@@ -8,24 +8,27 @@ APP_CONFIG = {
         column: 'collection_start',
         direction: 'DESC'
     },
-    columnMetadata: [
-        {
+    columnMetadata: [{
             columnName: 'id',
             locked: false,
             visible: false,
             displayName: 'ID'
+        },{
+            columnName: 'collect_id',
+            columnType: 'txtfilter',
+            locked: false,
+            visible: true,
+            displayName: 'Collection ID',
+            link: {
+                icon: 'images/scale-icon.png',
+                template: 'http://scale.com/collect/<%= data %>'
+            }
         },{
             columnName: 'sensor_id',
             columnType: 'txtfilter',
             locked: false,
             visible: true,
             displayName: 'Sensor ID'
-        },{
-            columnName: 'collection_id',
-            columnType: 'txtfilter',
-            locked: false,
-            visible: true,
-            displayName: 'Collection ID'
         },{
             columnName: 'task_name',
             columnType: 'txtfilter',
