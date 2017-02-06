@@ -110,7 +110,7 @@ APP_CONFIG = {
             visible: true,
             displayName: 'Is a Human'
         },{
-            columnName: 'is_chimpanzee',
+            columnName: 'is_chimp',
             columnType: 'criteria',
             locked: false,
             visible: true,

@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 
-import LineChart from './LineChart';
+import BarChart from './BarChart';
 import Spinner from '../Spinner';
 
 
@@ -19,7 +19,7 @@ class CaliperChart extends React.Component {
         }
         return (
             <div className="caliper-chart">
-                <LineChart data={this.props.resultsByDay.results} />
+                <BarChart data={this.props.resultsByDay.results} />
             </div>
         );
     }
