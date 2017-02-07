@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
+import _ from 'lodash';
 // D3 Components
 import { extent, max } from 'd3-array';
 import { scaleLinear, scaleUtc, scaleOrdinal } from 'd3-scale';
@@ -9,10 +10,10 @@ import ChartAxis from './ChartAxis';
 import ChartBar from './ChartBar';
 
 const MARGIN = {
-    top: 0,
-    right: 30,
+    top: 10,
+    right: 70,
     bottom: 20,
-    left: 30
+    left: 50
 };
 const AXIS_COLOR = '#9b9b9b';
 
@@ -41,11 +42,11 @@ class BarChart extends React.Component {
     }
 
     initScales(size, data) {
-        const xSize =  size.width - (MARGIN.right + MARGIN.left);
+        const xSize =  size.width - ((size.width / data.length) / 2) - (MARGIN.right + MARGIN.left);
         const x = scaleUtc()
-            .range([0, xSize])
+            .range([((size.width / data.length) / 2), xSize])
             .domain(extent(data, d => {
-                return moment.utc(d.date);
+                return moment.utc(d.date).toDate();
             }));
 
         let keys = _.remove(_.keys(data[0]), (key) => {
@@ -63,8 +64,15 @@ class BarChart extends React.Component {
                 return total;
             })]);
 
+        const colors = ['#03484e', '#045a62', '#05717b', '#067e89', '#07909d', '#07a2b0', '#08b4c4', '#09c6d7', '#0ad8eb', '#14e2f5', '#28e5f6', '#3be7f7', '#4feaf8', '#62ecf8', '#76eef9', '#89f1fa', '#9df3fb', '#b1f5fc', '#c4f8fd', '#d8fafd', '#ebfdfe', '#ffffff'];
+        const comparatorColumns = _.map(_.filter(APP_CONFIG.columnMetadata, { columnType: 'comparator' }), 'columnName');
+        const criteriaColumns = _.map(_.filter(APP_CONFIG.columnMetadata, { columnType: 'criteria' }), 'columnName');
+        let columnArr = [];
+        columnArr = columnArr.concat(comparatorColumns, criteriaColumns);
+
         const z = scaleOrdinal()
-            .range(['#98abc5', '#8a89a6', '#7b6888', '#6b486b', '#a05d56', '#d0743c', '#ff8c00']);
+            .domain(columnArr)
+            .range(colors);
 
         return {
             x: x,
@@ -118,7 +126,7 @@ BarChart.propTypes = {
 
 BarChart.defaultProps = {
     showTicks: true,
-    chartHeight: 250
+    chartHeight: 350
 };
 
 export default BarChart;

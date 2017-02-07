@@ -42,10 +42,11 @@ class ChartBar extends React.Component {
             .selectAll('rect')
             .data((d) => { return d; })
             .enter().append('rect')
-                .attr('x', (d) => { return context.scales.x(moment.utc(d.data.date)); })
+                .attr('x', (d) => { return context.scales.x(moment.utc(d.data.date).toDate()) - (context.size.width / data.length) / 2; })
                 .attr('y', (d) => { return context.scales.y(d[1]); })
                 .attr('height', (d) => { return context.scales.y(d[0]) - context.scales.y(d[1]); })
-                .attr('width', 25);
+                .attr('width', () => { return context.size.width > 0 ? (context.size.width / data.length) - 3 : context.size.width / data.length; })
+                .attr('transform', 'translate(' + context.margin.left + ', ' + context.margin.top + ')');
 
         return layerStack.node().toReact();
     }
