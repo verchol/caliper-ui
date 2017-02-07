@@ -38,7 +38,7 @@ class ChartBar extends React.Component {
             .selectAll('g')
             .data(stack().keys(keys)(data))
             .enter().append('g')
-                .attr('fill', (d) => { return context.scales.z(d.key); })
+                .attr('fill', (d) => { return context.scales.z(d.index); })
             .selectAll('rect')
             .data((d) => { return d; })
             .enter().append('rect')
