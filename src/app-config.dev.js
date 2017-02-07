@@ -10,7 +10,7 @@ APP_CONFIG = {
     },
     dateFormat: 'MM-DD-YYYY',
     timeFormat: 'HH:mm[Z]',
-    chartColors: ['#03484e', '#045a62', '#05717b', '#067e89', '#07909d', '#07a2b0', '#08b4c4', '#09c6d7', '#0ad8eb', '#14e2f5', '#28e5f6', '#3be7f7', '#4feaf8', '#62ecf8', '#76eef9', '#89f1fa', '#9df3fb', '#b1f5fc', '#c4f8fd', '#d8fafd', '#ebfdfe', '#ffffff'],
+    chartColors: ['#05717b', '#1F8B95', '#38A4AE', '#52BEC8', '#6BD7E1', '#84F0FA', '#9EFFFF', '#B8FFFF', '#D1FFFF', '#EAFFFF'],
     columnMetadata: [{
             columnName: 'id',
             locked: false,
