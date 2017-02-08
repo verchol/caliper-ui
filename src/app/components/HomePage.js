@@ -57,8 +57,8 @@ class HomePage extends React.Component {
                             type: 'react-component',
                             component: 'caliper-chart',
                             props: {
-                                type: 'line',
-                                title: 'Line'
+                                type: 'bar',
+                                title: 'Errors Over Time'
                             }
                         }]
                     }]
@@ -78,11 +78,6 @@ class HomePage extends React.Component {
             layout.registerComponent('sidebar', Wrap(Sidebar, store));
             layout.registerComponent('datagrid', Wrap(Datagrid, store));
             layout.registerComponent('caliper-chart', Wrap(CaliperChart, store));
-
-            layout.on('stateChanged', () => {
-                let state = layout.toConfig();
-                localStorage.setItem(LAYOUT_KEY, JSON.stringify(state));
-            });
 
             layout.on('stateChanged', () => {
                 let state = layout.toConfig();

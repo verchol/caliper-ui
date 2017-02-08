@@ -8,7 +8,6 @@ import Spinner from '../Spinner';
 class CaliperChart extends React.Component {
     constructor(props, context) {
         super(props, context);
-        this.type = '';
     }
 
     render() {
@@ -19,7 +18,7 @@ class CaliperChart extends React.Component {
         }
         return (
             <div className="caliper-chart">
-                <BarChart data={this.props.resultsByDay.results} />
+                <BarChart data={this.props.resultsByDay.results} {...this.props} />
             </div>
         );
     }

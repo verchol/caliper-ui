@@ -12,7 +12,7 @@ import ChartBar from './ChartBar';
 const MARGIN = {
     top: 10,
     right: 70,
-    bottom: 20,
+    bottom: 40,
     left: 50
 };
 const AXIS_COLOR = '#9b9b9b';
@@ -33,6 +33,11 @@ class BarChart extends React.Component {
     }
 
     componentDidMount() {
+        // listen for golden layout resize and fire resize event
+        this.props.glContainer.on('resize', () => {
+            window.dispatchEvent(new Event('resize'));
+        });
+        
         window.addEventListener('resize', this.updateDimensions);
         this.updateDimensions();
     }
@@ -91,10 +96,10 @@ class BarChart extends React.Component {
     }
 
     render() {
-        if (this.props.data.length > 0) {
+        if (this.props.data && this.props.data.length > 0) {
             const size = {
-                height: this.props.chartHeight,
-                width: this.state.componentSize.width
+                height: this.props.glContainer.height,
+                width: this.props.glContainer.width
             };
 
             let context = {};
