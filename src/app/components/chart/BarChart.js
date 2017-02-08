@@ -88,11 +88,10 @@ class BarChart extends React.Component {
     }
 
     updateDimensions() {
-        let el = ReactDOM.findDOMNode(this).parentNode;
         this.setState({
             componentSize: Object.assign({}, {
-                height: el.offsetHeight,
-                width: el.offsetWidth
+                height: this.props.glContainer.height - 20,
+                width: this.props.glContainer.width
             })
         });
     }
@@ -100,7 +99,7 @@ class BarChart extends React.Component {
     render() {
         if (this.props.data && this.props.data.length > 0) {
             const size = {
-                height: this.props.glContainer.height,
+                height: this.props.glContainer.height - 20,
                 width: this.props.glContainer.width
             };
 
