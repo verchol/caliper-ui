@@ -1,7 +1,7 @@
 'use strict';
 const nodeStatic = require('node-static');
 
-const PORT = 3000;
+const PORT = 9000;
 const DIST = './dist';
 
 
