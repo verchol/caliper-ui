@@ -1,4 +1,4 @@
-FROM node
+FROM docker.platform.cloud.coe.ic.gov/node
 
 MAINTAINER Caliper Developers <https://github.com/appliedis/caliper-api>
 
