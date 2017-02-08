@@ -4,16 +4,18 @@ import moment from 'moment';
 import _ from 'lodash';
 // D3 Components
 import { extent, max } from 'd3-array';
-import { scaleLinear, scaleUtc, scaleOrdinal } from 'd3-scale';
+import { scaleLinear, scaleUtc } from 'd3-scale';
+import { rgb } from 'd3-color';
+import { interpolateRgb } from 'd3-interpolate';
 
 import ChartAxis from './ChartAxis';
 import ChartBar from './ChartBar';
 
 const MARGIN = {
     top: 10,
-    right: 110,
+    right: 150,
     bottom: 40,
-    left: 50
+    left: 30
 };
 const AXIS_COLOR = '#9b9b9b';
 
@@ -74,9 +76,9 @@ class BarChart extends React.Component {
         let columnArr = [];
         columnArr = columnArr.concat(comparatorColumns, criteriaColumns);
 
-        const z = scaleOrdinal()
-            .domain(columnArr)
-            .range(APP_CONFIG.chartColors);
+        const z = scaleLinear().domain([1, columnArr.length])
+            .interpolate(interpolateRgb)
+            .range([rgb('#044b51'), rgb('#fff')]);
 
         return {
             x: x,

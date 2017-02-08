@@ -38,7 +38,7 @@ class ChartBar extends React.Component {
             .selectAll('g')
             .data(stack().keys(keys)(data))
             .enter().append('g')
-                .attr('fill', (d) => { return context.scales.z(d.key); })
+                .attr('fill', (d) => { return context.scales.z(d.index); })
             .selectAll('rect')
             .data((d) => { return d; })
             .enter().append('rect')
@@ -58,13 +58,13 @@ class ChartBar extends React.Component {
             .attr('transform', (d, i) => { return 'translate(0,' + i * 20 + ')'; });
 
         legend.append('rect')
-            .attr('x', context.size.width - 40)
+            .attr('x', context.size.width - 60)
             .attr('width', 19)
             .attr('height', 19)
-            .attr('fill', context.scales.z);
+            .attr('fill', (d) => { return context.scales.z(_.indexOf(keys, d)); });
 
         legend.append('text')
-            .attr('x', context.size.width - 45)
+            .attr('x', context.size.width - 65)
             .attr('y', 9.5)
             .attr('dy', '0.32em')
             .attr('fill', '#fff')

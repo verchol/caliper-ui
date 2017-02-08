@@ -10,7 +10,6 @@ APP_CONFIG = {
     },
     dateFormat: 'MM-DD-YYYY',
     timeFormat: 'HH:mm[Z]',
-    chartColors: ['#05717b', '#1F8B95', '#38A4AE', '#52BEC8', '#6BD7E1', '#84F0FA', '#9EFFFF', '#B8FFFF', '#D1FFFF', '#EAFFFF'],
     columnMetadata: [{
             columnName: 'id',
             locked: false,
