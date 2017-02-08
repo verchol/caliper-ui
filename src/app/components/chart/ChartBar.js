@@ -45,8 +45,30 @@ class ChartBar extends React.Component {
                 .attr('x', (d) => { return context.scales.x(moment.utc(d.data.date).toDate()) - (context.size.width / data.length) / 2; })
                 .attr('y', (d) => { return context.scales.y(d[1]); })
                 .attr('height', (d) => { return context.scales.y(d[0]) - context.scales.y(d[1]); })
-                .attr('width', () => { return context.size.width > 0 ? (context.size.width / data.length) - 3 : context.size.width / data.length; })
-                .attr('transform', 'translate(' + context.margin.left + ', ' + context.margin.top + ')');
+                .attr('width', () => { return context.size.width / data.length - ((context.size.width / data.length) / 4); })
+            .attr('transform', 'translate(' + (context.margin.left + ((context.size.width / data.length) / 8)) + ', ' + context.margin.top + ')');
+
+        let legend = layerStack.append('g')
+            .attr('font-family', 'sans-serif')
+            .attr('font-size', 12)
+            .attr('text-anchor', 'end')
+            .selectAll('g')
+            .data(keys.slice().reverse())
+            .enter().append('g')
+            .attr('transform', (d, i) => { return 'translate(0,' + i * 20 + ')'; });
+
+        legend.append('rect')
+            .attr('x', context.size.width - 40)
+            .attr('width', 19)
+            .attr('height', 19)
+            .attr('fill', context.scales.z);
+
+        legend.append('text')
+            .attr('x', context.size.width - 45)
+            .attr('y', 9.5)
+            .attr('dy', '0.32em')
+            .attr('fill', '#fff')
+            .text((d) => { return d; });
 
         return layerStack.node().toReact();
     }

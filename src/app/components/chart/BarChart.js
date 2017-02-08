@@ -11,7 +11,7 @@ import ChartBar from './ChartBar';
 
 const MARGIN = {
     top: 10,
-    right: 70,
+    right: 110,
     bottom: 40,
     left: 50
 };
@@ -37,7 +37,7 @@ class BarChart extends React.Component {
         this.props.glContainer.on('resize', () => {
             window.dispatchEvent(new Event('resize'));
         });
-        
+
         window.addEventListener('resize', this.updateDimensions);
         this.updateDimensions();
     }
