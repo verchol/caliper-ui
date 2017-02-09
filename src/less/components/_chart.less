@@ -43,14 +43,14 @@
 }
 
 .chart__tooltip {
-
-    rect {
-        fill: #0f0;
-        stroke: #f00;
-        stroke-width: 1px;
-    }
-
-    text {
-        fill: @clr-white;
-    }
+    position: absolute;
+    display: none;
+    min-width: 80px;
+    height: auto;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid @clr-highlight;
+    padding: 14px;
+    text-align: center;
+    color: #000;
+    border-radius: 5px;
 }

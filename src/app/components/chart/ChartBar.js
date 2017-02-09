@@ -3,8 +3,8 @@ import Faux from 'react-faux-dom';
 import moment from 'moment';
 import _ from 'lodash';
 // D3 Components
-import { select } from 'd3-selection';
-import { stack } from 'd3-shape';
+import { select, event } from 'd3-selection';
+import { stack, stackOrderNone, stackOffsetNone } from 'd3-shape';
 import 'd3-selection-multi'; // attrs() function to d3 selections
 
 
@@ -33,20 +33,48 @@ class ChartBar extends React.Component {
             return key !== 'date';
         });
 
-        let layerStack = select(Faux.createElement('g'));
-        layerStack
-            .selectAll('g')
-            .data(stack().keys(keys)(data))
-            .enter().append('g')
-                .attr('fill', (d) => { return context.scales.z(d.index); })
-            .selectAll('rect')
-            .data((d) => { return d; })
-            .enter().append('rect')
-                .attr('x', (d) => { return context.scales.x(moment.utc(d.data.date).toDate()) - (context.size.width / data.length) / 2; })
-                .attr('y', (d) => { return context.scales.y(d[1]); })
-                .attr('height', (d) => { return context.scales.y(d[0]) - context.scales.y(d[1]); })
-                .attr('width', () => { return context.size.width / data.length - ((context.size.width / data.length) / 4); })
+        let layerStack = select(Faux.createElement('g'))
             .attr('transform', 'translate(' + (context.margin.left + ((context.size.width / data.length) / 8)) + ', ' + context.margin.top + ')');
+
+        let dataStack = stack()
+            .keys(keys)
+            .order(stackOrderNone)
+            .offset(stackOffsetNone);
+
+        let series = dataStack(data);
+
+        let groups = layerStack.selectAll('g')
+            .data(series)
+            .enter().append('g')
+            .attr('fill', (d) => { return context.scales.z(d.index); });
+
+        let rect = groups.selectAll('rect')
+            .data((d) => {
+                _.forEach(d, (arr) => {
+                    arr.key = d.key;
+                });
+                return d;
+            })
+            .enter().append('rect')
+            .attr('x', (d) => { return context.scales.x(moment.utc(d.data.date).toDate()) - (context.size.width / data.length) / 2; })
+            .attr('y', (d) => { return context.scales.y(d[1]); })
+            .attr('height', (d) => { return context.scales.y(d[0]) - context.scales.y(d[1]); })
+            .attr('width', () => { return context.size.width / data.length - ((context.size.width / data.length) / 4); })
+            .on('mousemove', (d) => {
+                let xPosition = event.layerX - 40;
+                let yPosition = event.layerY - 70;
+                tooltip
+                    .style('left', xPosition + 'px')
+                    .style('top', yPosition + 'px')
+                    .style('display', 'inline-block')
+                    .html(() => {
+                        let total = d[1] - d[0];
+                        let type = _.split(d.key, '_');
+                        type = type.length > 1 ? _.startCase(type[1]) : _.startCase(d.key);
+                        return '<b>' + moment.utc(d.data.date).format(APP_CONFIG.dateFormat) + ' ' + moment.utc(d.data.date).format(APP_CONFIG.timeFormat) + '</b><br />' + type + ': ' + total;
+                    });
+            })
+            .on('mouseout', () => { tooltip.style('display', 'none'); });
 
         let legend = layerStack.append('g')
             .attr('font-family', 'sans-serif')
@@ -58,17 +86,19 @@ class ChartBar extends React.Component {
             .attr('transform', (d, i) => { return 'translate(0,' + i * 20 + ')'; });
 
         legend.append('rect')
-            .attr('x', context.size.width - 60)
+            .attr('x', context.size.width - 90)
             .attr('width', 19)
             .attr('height', 19)
             .attr('fill', (d) => { return context.scales.z(_.indexOf(keys, d)); });
 
         legend.append('text')
-            .attr('x', context.size.width - 65)
+            .attr('x', context.size.width - 95)
             .attr('y', 9.5)
             .attr('dy', '0.32em')
             .attr('fill', '#fff')
             .text((d) => { return d; });
+
+        let tooltip = select('.caliper-chart').append('div').attr('class', 'chart__tooltip');
 
         return layerStack.node().toReact();
     }
