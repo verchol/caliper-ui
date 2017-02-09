@@ -14,7 +14,7 @@ class ExternalLink extends React.Component {
             data: this.props.data
         });
         return (
-            <a href={href}><img src={link.icon} alt={this.props.data} /></a>
+            <a href={href} target="_blank"><img src={link.icon} alt={this.props.data} /></a>
         );
     }
 }
