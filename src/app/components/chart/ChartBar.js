@@ -56,7 +56,7 @@ class ChartBar extends React.Component {
                 return d;
             })
             .enter().append('rect')
-            .attr('x', (d) => { return context.scales.x(moment.utc(d.data.date).toDate()) - (context.size.width / data.length) / 2; })
+            .attr('x', (d) => { return context.scales.x(moment.utc(d.data.date, APP_CONFIG.resultsFormat).toDate()) - (context.size.width / data.length) / 2; })
             .attr('y', (d) => { return context.scales.y(d[1]); })
             .attr('height', (d) => { return context.scales.y(d[0]) - context.scales.y(d[1]); })
             .attr('width', () => { return context.size.width / data.length - ((context.size.width / data.length) / 4); })
@@ -71,7 +71,8 @@ class ChartBar extends React.Component {
                         let total = d[1] - d[0];
                         let type = _.split(d.key, '_');
                         type = type.length > 1 ? _.startCase(type[1]) : _.startCase(d.key);
-                        return '<b>' + moment.utc(d.data.date).format(APP_CONFIG.dateFormat) + ' ' + moment.utc(d.data.date).format(APP_CONFIG.timeFormat) + '</b><br />' + type + ': ' + total;
+                        return '<b>' + moment.utc(d.data.date, APP_CONFIG.resultsFormat).format(APP_CONFIG.dateFormat) +
+                               ' ' + moment.utc(d.data.date, APP_CONFIG.resultsFormat).format(APP_CONFIG.timeFormat) + '</b><br />' + type + ': ' + total;
                     });
             })
             .on('mouseout', () => { tooltip.style('display', 'none'); });
