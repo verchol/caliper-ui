@@ -51,7 +51,7 @@ class BarChart extends React.Component {
         const x = scaleUtc()
             .range([((size.width / data.length) / 2), xSize])
             .domain(extent(data, d => {
-                return moment.utc(d.date).toDate();
+                return moment.utc(d.date, APP_CONFIG.resultsFormat).toDate();
             }));
 
         let keys = _.remove(_.keys(data[0]), (key) => {

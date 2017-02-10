@@ -10,6 +10,7 @@ APP_CONFIG = {
     },
     dateFormat: 'MM-DD-YYYY',
     timeFormat: 'HH:mm[Z]',
+    resultsFormat: 'YYYY-MM-DD[T]HH:mm.sss[Z]',
     columnMetadata: [{
             columnName: 'id',
             locked: false,
