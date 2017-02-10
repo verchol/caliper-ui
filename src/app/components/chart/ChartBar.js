@@ -28,12 +28,16 @@ class ChartBar extends React.Component {
             return null;
         }
 
+        let svg = select('svg.chart');
+
         // Draw the stack
         let keys = _.remove(_.keys(data[0]), (key) => {
             return key !== 'date';
         });
 
+        // Draw stacked bars
         let layerStack = select(Faux.createElement('g'))
+            .attr('clip-path', 'url(#chart__mask)')
             .attr('transform', 'translate(' + (context.margin.left + ((context.size.width / data.length) / 8)) + ', ' + context.margin.top + ')');
 
         let dataStack = stack()
@@ -48,7 +52,7 @@ class ChartBar extends React.Component {
             .enter().append('g')
             .attr('fill', (d) => { return context.scales.z(d.index); });
 
-        let rect = groups.selectAll('rect')
+        groups.selectAll('rect')
             .data((d) => {
                 _.forEach(d, (arr) => {
                     arr.key = d.key;
@@ -56,6 +60,7 @@ class ChartBar extends React.Component {
                 return d;
             })
             .enter().append('rect')
+            .attr('class', 'bar')
             .attr('x', (d) => { return context.scales.x(moment.utc(d.data.date).toDate()) - (context.size.width / data.length) / 2; })
             .attr('y', (d) => { return context.scales.y(d[1]); })
             .attr('height', (d) => { return context.scales.y(d[0]) - context.scales.y(d[1]); })
@@ -76,7 +81,7 @@ class ChartBar extends React.Component {
             })
             .on('mouseout', () => { tooltip.style('display', 'none'); });
 
-        let legend = layerStack.append('g')
+        let legend = svg.append('g')
             .attr('font-family', 'sans-serif')
             .attr('font-size', 12)
             .attr('text-anchor', 'end')
@@ -86,14 +91,15 @@ class ChartBar extends React.Component {
             .attr('transform', (d, i) => { return 'translate(0,' + i * 20 + ')'; });
 
         legend.append('rect')
-            .attr('x', context.size.width - 90)
+            .attr('x', context.size.width - 50)
+            .attr('y', 15)
             .attr('width', 19)
             .attr('height', 19)
             .attr('fill', (d) => { return context.scales.z(_.indexOf(keys, d)); });
 
         legend.append('text')
-            .attr('x', context.size.width - 95)
-            .attr('y', 9.5)
+            .attr('x', context.size.width - 55)
+            .attr('y', 25)
             .attr('dy', '0.32em')
             .attr('fill', '#fff')
             .text((d) => { return d; });

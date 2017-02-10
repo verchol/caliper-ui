@@ -2,8 +2,9 @@ import React, { PropTypes } from 'react';
 import Faux from 'react-faux-dom';
 // D3 Components
 import { axisBottom, axisLeft } from 'd3-axis';
-import { select } from 'd3-selection';
+import { select, event } from 'd3-selection';
 import { utcFormat } from 'd3-time-format';
+import { zoom } from 'd3-zoom';
 
 
 class ChartAxis extends React.Component {
@@ -25,10 +26,30 @@ class ChartAxis extends React.Component {
             return null;
         }
 
+        let zoomChart = zoom()
+            .scaleExtent([1, 40])
+            .translateExtent([[0, 0], [context.size.width, context.size.height]])
+            .on('zoom', zoomed);
+
+        // Create clip mask to constrain chart when zoomed
+        let svg = select('svg.chart');
+
+        svg.append('defs')
+            .append('clipPath')
+            .attr('id', 'chart__mask')
+            .style('pointer-events', 'none')
+            .append('rect')
+            .attrs({
+                x: 0,
+                y: 0,
+                width: context.size.width - (context.margin.left + context.margin.right),
+                height: context.size.height - (context.margin.top + context.margin.bottom)
+            });
+
         let layerAxis = select(Faux.createElement('g'));
         layerAxis.attr('class', 'chart__axis');
-        let layerAxisX = layerAxis.append('g');
-        let layerAxisY = layerAxis.append('g');
+        let layerAxisX = layerAxis.append('g').attr('class', 'chart__xAxis');
+        let layerAxisY = layerAxis.append('g').attr('class', 'chart__yAxis');
 
         // X Axis
         const axisX = axisBottom(context.scales.x);
@@ -49,18 +70,16 @@ class ChartAxis extends React.Component {
         layerAxisY.call(axisY);
         layerAxisY.attr('transform', 'translate(' + context.margin.left + ', ' + context.margin.top + ')');
 
+        svg.call(zoomChart);
 
-        // Styling for the axis - sucks we have to do this, but d3 v4 is
-        // hard coded for a light theme
-        layerAxis.selectAll('.domain').attrs({
-            stroke: context.axisColor
-        });
-        layerAxis.selectAll('.tick').attrs({
-            stroke: context.axisColor
-        });
-        layerAxis.selectAll('line').attrs({
-            stroke: context.axisColor
-        });
+        function zoomed() {
+            console.log('zoom');
+            svg.selectAll('rect.bar').attr('transform', event.transform);
+            svg.select('g.chart__xAxis')
+                .call(axisX.scale(event.transform.rescaleX(context.scales.x)));
+            svg.select('g.chart__yAxis')
+                .call(axisY.scale(event.transform.rescaleY(context.scales.y)));
+        }
 
         return layerAxis.node().toReact();
     }

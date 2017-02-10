@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 import moment from 'moment';
 import _ from 'lodash';
 // D3 Components
@@ -17,7 +16,6 @@ const MARGIN = {
     bottom: 40,
     left: 30
 };
-const AXIS_COLOR = '#9b9b9b';
 
 class BarChart extends React.Component {
     constructor(props, context) {
@@ -104,7 +102,6 @@ class BarChart extends React.Component {
             };
 
             let context = {};
-            context.axisColor = AXIS_COLOR;
             context.margin = MARGIN;
             context.scales = this.initScales(size, this.props.data);
             context.size = size;
