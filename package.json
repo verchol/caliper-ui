@@ -8,7 +8,7 @@
   "scripts": {
     "start-message": "babel-node tools/startMessage.js",
     "prestart": "npm-run-all --parallel start-message remove-dist appconfig:dev",
-    "start": "npm-run-all --parallel test:watch open:src lint:watch less:watch watch:appconfig:dev start-mockapi",
+    "start": "npm-run-all --parallel test:watch open:src lint:watch less:watch watch:appconfig:dev",
     "generate-mock-data": "node src/mocks/generateMockData",
     "prestart-mockapi": "npm run generate-mock-data",
     "start-mockapi": "node src/mocks/server.js",
