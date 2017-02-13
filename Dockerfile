@@ -7,6 +7,8 @@ RUN mkdir -p /caliper
 WORKDIR /caliper
 COPY . /caliper
 
+RUN npm set registry http://npm.appdev.proj.coe.ic.gov
+
 RUN npm install
 
 # Our app will run on port 9000
