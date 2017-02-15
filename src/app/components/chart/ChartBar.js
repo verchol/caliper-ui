@@ -74,8 +74,9 @@ class ChartBar extends React.Component {
                     .style('display', 'inline-block')
                     .html(() => {
                         let total = d[1] - d[0];
-                        let type = _.split(d.key, '_');
-                        type = type.length > 1 ? _.startCase(type[1]) : _.startCase(d.key);
+                        let type = d.key;
+                        //let type = _.split(d.key, '_');
+                        //type = type.length > 1 ? _.startCase(type[1]) : _.startCase(d.key);
                         return '<b>' + moment.utc(d.data.date, APP_CONFIG.resultsFormat).format(APP_CONFIG.dateFormat) +
                                ' ' + moment.utc(d.data.date, APP_CONFIG.resultsFormat).format(APP_CONFIG.timeFormat) + '</b><br />' + type + ': ' + total;
                     });
