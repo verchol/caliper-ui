@@ -76,7 +76,7 @@ class BarChart extends React.Component {
 
         const z = scaleLinear().domain([1, columnArr.length])
             .interpolate(interpolateRgb)
-            .range([rgb('#044b51'), rgb('#fff')]);
+            .range([rgb('#068894'), rgb('#F1EB1A')]);
 
         return {
             x: x,
