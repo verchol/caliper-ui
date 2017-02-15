@@ -9,8 +9,7 @@ import GlobalStore from './globalStore';
 import routes from './routes';
 import configureStore from './state/store/configureStore';
 import * as resultsActions from './state/actions/resultsActions';
-import * as resultsByHourActions from './state/actions/resultsByHourActions';
-import * as resultsByDayActions from './state/actions/resultsByDayActions';
+import * as resultsAggregateActions from './state/actions/resultsAggregateActions';
 import { updateParams } from './state/actions/paramsActions';
 
 // Import application assets so webpack can process them
@@ -29,8 +28,7 @@ const initialParams = {
 };
 store.dispatch(updateParams(initialParams));
 store.dispatch(resultsActions.fetchAllResults(initialParams));
-store.dispatch(resultsByHourActions.fetchResultsByHour(initialParams));
-store.dispatch(resultsByDayActions.fetchResultsByDay(initialParams));
+store.dispatch(resultsAggregateActions.fetchResultsAggregate(initialParams));
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);

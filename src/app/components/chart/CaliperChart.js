@@ -11,26 +11,26 @@ class CaliperChart extends React.Component {
     }
 
     render() {
-        if (this.props.resultsByDay.pending) {
+        if (this.props.resultsAggregate.pending) {
             return (
                 <Spinner/>
             );
         }
         return (
             <div className="caliper-chart">
-                <BarChart data={this.props.resultsByDay.results} {...this.props} />
+                <BarChart data={this.props.resultsAggregate.results} {...this.props} />
             </div>
         );
     }
 }
 
 CaliperChart.propTypes = {
-    resultsByDay: PropTypes.object
+    resultsAggregate: PropTypes.object
 };
 
 const mapStateToProps = (state) => { //optional arg is ownProps
     return {
-        resultsByDay: state.resultsByDay
+        resultsAggregate: state.resultsAggregate
     };
 };
 

@@ -21,13 +21,8 @@ class ResultsApi {
         return this.makeCall(params, url);
     }
 
-    static getResultsByHour(params) {
-        let url = new URL(APP_CONFIG.urls.resultsByHour);
-        return this.makeCall(params, url);
-    }
-
-    static getResultsByDay(params) {
-        let url = new URL(APP_CONFIG.urls.resultsByDay);
+    static getResultsAggregate(params) {
+        let url = new URL(APP_CONFIG.urls.resultsAggregate);
         return this.makeCall(params, url);
     }
 

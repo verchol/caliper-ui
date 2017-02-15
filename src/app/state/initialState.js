@@ -1,8 +1,7 @@
 
 export default {
     results: {},
-    resultsByHour: {},
-    resultsByDay: {},
+    resultsAggregate: {},
     params: {},
     report: {}
 };
