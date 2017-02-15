@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import { Link } from 'react-router';
 import {connect} from 'react-redux';
+import {debounce} from 'throttle-debounce';
 
 import DateRangeSection from './sections/DateRangeSection';
 import ErrorCriteriaSection from './sections/ErrorCriteriaSection';
@@ -16,7 +17,18 @@ class Sidebar extends React.Component {
     constructor(props, context) {
         super(props, context);
 
+        const DBTIME = 1.25 * 1000; // in ms
+
         this.handleChange = this.handleChange.bind(this);
+        this.fetchResults = debounce(DBTIME, this.fetchResults);
+    }
+
+    fetchResults(params) {
+        console.log('Fetching results...');
+        // update datagrid
+        this.props.fetchAllResults(params);
+        // update line chart
+        this.props.fetchResultsAggregate(params);
     }
 
     handleChange(changes) {
@@ -40,10 +52,8 @@ class Sidebar extends React.Component {
                 delete updatedParams[key];
             }
         }
-        // update datagrid
-        this.props.fetchAllResults(updatedParams);
-        // update line chart
-        this.props.fetchResultsAggregate(updatedParams);
+
+        this.fetchResults(updatedParams);
     }
 
     render() {
