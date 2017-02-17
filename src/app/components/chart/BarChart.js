@@ -47,6 +47,7 @@ class BarChart extends React.Component {
     }
 
     initScales(size, data) {
+        const criteriaFields = _.map(_.filter(APP_CONFIG.columnMetadata, { columnType: 'criteria' }), 'columnName');
         const xSize =  size.width - ((size.width / data.length) / 2) - (MARGIN.right + MARGIN.left);
         const x = scaleUtc()
             .range([((size.width / data.length) / 2), xSize])
@@ -55,8 +56,12 @@ class BarChart extends React.Component {
             }));
 
         let keys = _.remove(_.keys(data[0]), (key) => {
-            return key !== 'date';
+            return _.indexOf(criteriaFields, key) > -1;
         });
+        // if no keys are found, then show total
+        if (keys.length === 0) {
+            keys.push('total');
+        }
 
         const ySize = size.height - MARGIN.top - MARGIN.bottom;
         const y = scaleLinear()

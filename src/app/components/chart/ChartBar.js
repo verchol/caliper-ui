@@ -22,6 +22,7 @@ class ChartBar extends React.Component {
     render() {
         const context = this.props.context;
         const data = this.props.data;
+        const criteriaFields = _.map(_.filter(APP_CONFIG.columnMetadata, { columnType: 'criteria' }), 'columnName');
 
         // need both data and context
         if (typeof data === 'undefined' || typeof context === 'undefined') {
@@ -32,8 +33,12 @@ class ChartBar extends React.Component {
 
         // Draw the stack
         let keys = _.remove(_.keys(data[0]), (key) => {
-            return key !== 'date';
+            return _.indexOf(criteriaFields, key) > -1;
         });
+        // if no keys are found, then show total
+        if (keys.length === 0) {
+            keys.push('total');
+        }
 
         // Draw stacked bars
         let layerStack = select(Faux.createElement('g'))

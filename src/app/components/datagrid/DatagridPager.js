@@ -12,15 +12,7 @@ class DatagridPager extends React.Component {
     render () {
         let stats = '';
         if (this.props.results.headers && this.props.results.headers.rowCount > 0) {
-            let page = this.props.results.headers.page;
-            let firstRecord = (this.props.results.headers.pageSize * page) - this.props.results.headers.pageSize;
-            firstRecord = firstRecord + 1; // account for zero based paging
-            let lastRecord = firstRecord + (this.props.results.headers.pageSize);
-            if (lastRecord > this.props.results.headers.rowCount) {
-                lastRecord = this.props.results.headers.rowCount;
-            }
-            lastRecord = lastRecord - 1; // account for zero based paging
-            stats = 'Reports ' + firstRecord + ' \u2013 ' + lastRecord + ' of ' + this.props.results.headers.rowCount.toLocaleString();
+            stats = 'Total Reports: ' + this.props.results.headers.rowCount.toLocaleString();
         }
 
         return (
