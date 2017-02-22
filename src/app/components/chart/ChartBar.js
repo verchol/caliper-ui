@@ -71,8 +71,8 @@ class ChartBar extends React.Component {
             .attr('height', (d) => { return context.scales.y(d[0]) - context.scales.y(d[1]); })
             .attr('width', () => { return context.size.width / data.length - ((context.size.width / data.length) / 4); })
             .on('mousemove', (d) => {
-                let xPosition = event.layerX - 40;
-                let yPosition = event.layerY - 70;
+                let xPosition = event.pageX - 40;
+                let yPosition = event.pageY - 70;
                 tooltip
                     .style('left', xPosition + 'px')
                     .style('top', yPosition + 'px')
@@ -111,7 +111,7 @@ class ChartBar extends React.Component {
             .attr('fill', '#fff')
             .text((d) => { return d; });
 
-        let tooltip = select('.caliper-chart').append('div').attr('class', 'chart__tooltip');
+        let tooltip = select('body').append('div').attr('class', 'chart__tooltip');
 
         return layerStack.node().toReact();
     }
