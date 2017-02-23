@@ -11,6 +11,9 @@ RUN npm set registry http://npm.appdev.proj.coe.ic.gov
 
 RUN npm install
 
+# Build the application
+RUN npm run dist
+
 # Our app will run on port 9000
 EXPOSE 9000
 
