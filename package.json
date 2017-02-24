@@ -37,9 +37,10 @@
     "copyfontawesome": "copyfiles -f node_modules/font-awesome/fonts/* src/fonts",
     "copyreactwidgets": "copyfiles -f node_modules/react-widgets/dist/fonts/* src/fonts",
     "copysrc": "node tools/copySrc2Dist.js",
+    "copyfonts": "copyfiles -f src/fonts/* dist/fonts",
     "copystyles": "copyfiles -f src/styles/* dist/styles",
     "predist": "npm-run-all clean-dist appconfig:prod",
-    "dist": "npm-run-all copysrc build copystyles",
+    "dist": "npm-run-all copysrc build copystyles copyfonts",
     "server": "npm-run-all open:dist",
     "deploy": "gh-pages-deploy"
   },
