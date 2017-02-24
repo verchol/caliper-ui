@@ -7,6 +7,7 @@ APP_CONFIG = {
         column: 'collection_start',
         direction: 'DESC'
     },
+    chartcolors: ['#068894', '#c7e9b4', '#edf8b1', '#ffffd9', '#7fcdbb', '#41b6c4', '#1d91c0', '#225ea8'],
     dateFormat: 'MM-DD-YYYY',
     timeFormat: 'HH:mm[Z]',
     resultsFormat: 'YYYY-MM-DD[T]HH:mm.sss[Z]',

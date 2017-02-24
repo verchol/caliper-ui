@@ -3,7 +3,7 @@ import moment from 'moment';
 import _ from 'lodash';
 // D3 Components
 import { extent, max } from 'd3-array';
-import { scaleLinear, scaleUtc } from 'd3-scale';
+import { scaleLinear, scaleOrdinal, scaleUtc } from 'd3-scale';
 import { rgb } from 'd3-color';
 import { interpolateRgb } from 'd3-interpolate';
 
@@ -79,9 +79,8 @@ class BarChart extends React.Component {
         let columnArr = [];
         columnArr = columnArr.concat(comparatorColumns, criteriaColumns);
 
-        const z = scaleLinear().domain([1, columnArr.length])
-            .interpolate(interpolateRgb)
-            .range([rgb('#068894'), rgb('#F1EB1A')]);
+        const z = scaleOrdinal()
+                    .range(APP_CONFIG.chartcolors);
 
         return {
             x: x,
