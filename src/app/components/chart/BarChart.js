@@ -4,8 +4,6 @@ import _ from 'lodash';
 // D3 Components
 import { extent, max } from 'd3-array';
 import { scaleLinear, scaleOrdinal, scaleUtc } from 'd3-scale';
-import { rgb } from 'd3-color';
-import { interpolateRgb } from 'd3-interpolate';
 
 import ChartAxis from './ChartAxis';
 import ChartBar from './ChartBar';
@@ -73,11 +71,6 @@ class BarChart extends React.Component {
                 });
                 return total;
             })]);
-
-        const comparatorColumns = _.map(_.filter(APP_CONFIG.columnMetadata, { columnType: 'comparator' }), 'columnName');
-        const criteriaColumns = _.map(_.filter(APP_CONFIG.columnMetadata, { columnType: 'criteria' }), 'columnName');
-        let columnArr = [];
-        columnArr = columnArr.concat(comparatorColumns, criteriaColumns);
 
         const z = scaleOrdinal()
                     .range(APP_CONFIG.chartcolors);
