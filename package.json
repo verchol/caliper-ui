@@ -46,6 +46,7 @@
   },
   "author": "Applied Information Sciences",
   "dependencies": {
+    "c3": "^0.4.11",
     "colorbrewer": "^1.0.0",
     "copy-dir": "^0.3.0",
     "cssnano": "^3.8.0",
