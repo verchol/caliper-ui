@@ -7,7 +7,8 @@ APP_CONFIG = {
         column: 'collection_start',
         direction: 'DESC'
     },
-    chartcolors: ['#068894', '#c7e9b4', '#edf8b1', '#ffffd9', '#7fcdbb', '#41b6c4', '#1d91c0', '#225ea8'],
+    //chartcolors: ['#068894', '#E24522', '#F7F4A0', '#62C19F', '#FF821F', '#5CC4EE'],
+    chartcolors: ['#068894', '#62c19f', '#97e5ff', '#f7f4a0', '#ffffdd'],
     dateFormat: 'MM-DD-YYYY',
     timeFormat: 'HH:mm[Z]',
     resultsFormat: 'YYYY-MM-DD[T]HH:mm.sss[Z]',
@@ -104,18 +105,6 @@ APP_CONFIG = {
             locked: false,
             visible: true,
             displayName: 'Is a Gibbon'
-        },{
-            columnName: 'is_human',
-            columnType: 'criteria',
-            locked: false,
-            visible: true,
-            displayName: 'Is a Human'
-        },{
-            columnName: 'is_chimp',
-            columnType: 'criteria',
-            locked: false,
-            visible: true,
-            displayName: 'Is a Chimpanzee'
         },{
             columnName: 'pk',
             locked: false,
