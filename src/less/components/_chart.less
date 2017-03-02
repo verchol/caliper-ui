@@ -7,63 +7,26 @@
         margin: 20px 10px;
     }
 
+    /*-- Chart --*/
     #chart {
-        text {
-            stroke: none;
-            fill: #fff;
+        svg {
+            font: 10px sans-serif;
         }
-        .c3-axis {
+
+        path, #chart line {
             fill: none;
             stroke: #fff;
         }
-    }
-}
-
-.chart {
-    padding: 0.5em 1em;
-    width: 100%;
-}
-
-.chart__axis {
-    line, path, text {
-        stroke: #9b9b9b;
-    }
-}
-
-.chart__band {
-    fill: @clr-dark;
-    fill-opacity: 0.25;
-    stroke: none;
-}
-
-.chart__overlay {
-
-    rect {
-        // make it transparent so that it gets mouse events but you can
-        // still see through it.
-        fill: @clr-black;
-        fill-opacity: 0;
+        text {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+            fill: #fff;
+        }
     }
 }
 
 .chart__spinner {
     text-align: center;
     width: 100%;
-}
-
-#chart__mask {
-    pointer-events: none;
-}
-
-.chart__tooltip {
-    position: absolute;
-    display: none;
-    min-width: 80px;
-    height: auto;
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid @clr-highlight;
-    padding: 14px;
-    text-align: center;
-    color: #000;
-    border-radius: 5px;
 }
