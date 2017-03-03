@@ -3,48 +3,68 @@ import {connect} from 'react-redux';
 import c3 from 'c3';
 import _ from 'lodash';
 
-import Spinner from './Spinner';
-
-
 class CaliperChart extends React.Component {
     constructor(props, context) {
         super(props, context);
+        this.chart = null;
+        this.keys = [];
         this.initChart = this.initChart.bind(this);
     }
 
     componentDidUpdate() {
-        let chart = this.initChart();
+        if (this.props.resultsAggregate.results) {
+            this.initChart();
 
-        this.props.glContainer.on('resize', () => {
-            if (chart) {
-                chart.resize({
-                    height: this.props.glContainer.height - 10,
-                    width: this.props.glContainer.width
-                });
-            }
-        });
+            this.props.glContainer.on('resize', () => {
+                if (this.chart) {
+                    this.chart.resize({
+                        height: this.props.glContainer.height - 10,
+                        width: this.props.glContainer.width
+                    });
+                }
+            });
+        }
     }
 
     initChart() {
-        if (this.props.resultsAggregate.results) {
-            const criteriaFields = _.map(_.filter(APP_CONFIG.columnMetadata, {columnType: 'criteria'}), 'columnName');
-            let keys = _.filter(_.keys(this.props.resultsAggregate.results[0]), (key) => {
-                return _.indexOf(criteriaFields, key) > -1;
-            });
+        const criteriaFields = _.map(_.filter(APP_CONFIG.columnMetadata, {columnType: 'criteria'}), 'columnName');
+        let keys = _.filter(_.keys(this.props.resultsAggregate.results[0]), (key) => {
+            return _.indexOf(criteriaFields, key) > -1;
+        });
 
-            let names = {};
+        let names = {};
+        let removeIds = [];
 
-            _.forEach(keys, (key) => {
-                names[key] = _.find(APP_CONFIG.columnMetadata, { columnName: key }).displayName;
-            });
+        _.forEach(keys, (key) => {
+            names[key] = _.find(APP_CONFIG.columnMetadata, { columnName: key }).displayName;
+        });
 
-            // if no keys are found, then show total
-            if (keys.length === 0) {
-                keys.push('total');
-                names.total = 'Total';
+        // if no keys are found, then show total
+        if (keys.length === 0) {
+            keys.push('total');
+            names.total = 'Total';
+        }
+        let diff = _.xor(keys, this.keys);
+        _.forEach(diff, (d) => {
+            if (_.indexOf(keys, d) < 0) {
+                removeIds.push(d);
             }
+        });
+        this.keys = keys;
 
-            return c3.generate({
+        if (this.chart) {
+            this.chart.groups([this.keys]);
+            this.chart.data.names(names);
+            this.chart.load({
+                json: this.props.resultsAggregate.results,
+                keys: {
+                    x: 'date',
+                    value: this.keys
+                },
+                unload: removeIds
+            });
+        } else {
+            this.chart = c3.generate({
                 data: {
                     json: this.props.resultsAggregate.results,
                     keys: {
@@ -53,7 +73,7 @@ class CaliperChart extends React.Component {
                     },
                     xFormat: '%Y-%m-%dT%H:%M:%LZ',
                     type: 'bar',
-                    groups: [keys],
+                    groups: [this.keys],
                     names: names,
                     empty: {
                         label: {
@@ -72,8 +92,7 @@ class CaliperChart extends React.Component {
                     },
                     y: {
                         label: {
-                            text: 'Errors',
-                            position: 'outer-middle'
+                            text: 'Errors'
                         }
                     }
                 },
@@ -94,15 +113,9 @@ class CaliperChart extends React.Component {
     }
 
     render() {
-        if (this.props.resultsAggregate.pending) {
-            return (
-                <Spinner/>
-            );
-        }
-
         return (
             <div className="caliper-chart">
-                <div id="chart"></div>
+                <div id="chart"/>
             </div>
         );
     }
