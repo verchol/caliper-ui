@@ -5,7 +5,7 @@ import GlobalStore from '../globalStore';
 import Wrap from './helpers/Wrap';
 import Sidebar from './sidebar/Sidebar';
 import Datagrid from './datagrid/Datagrid';
-import CaliperChart from './chart/CaliperChart';
+import CaliperChart from './CaliperChart';
 
 class HomePage extends React.Component {
     constructor (props, context) {
