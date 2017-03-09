@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
 import AisCheckbox from './AisCheckbox';
 import AisNumberInput from './AisNumberInput';
 import DropdownList from 'react-widgets/lib/DropdownList';
@@ -13,9 +14,9 @@ class AisComparator extends React.Component {
 
         this.state = {
             name: props.name,
-            enabled: false,
+            enabled: typeof props.params[props.name] !== 'undefined' || false,
             comparator: defaultComparator,
-            value: props.defaultValue
+            value: props.params[props.name] || props.defaultValue
         };
 
         this.updateEnabled = this.updateEnabled.bind(this);
@@ -23,10 +24,9 @@ class AisComparator extends React.Component {
         this.updateValue = this.updateValue.bind(this);
     }
 
-    updateEnabled(evt) {
-        let value = evt.target.checked;
+    updateEnabled(name, checked) {
         this.setState({
-            enabled: value
+            enabled: checked
         }, function() {
             this.props.onChange(this.state);
         });
@@ -64,7 +64,7 @@ class AisComparator extends React.Component {
 
         return (
             <div className="aisform__comparator">
-                <AisCheckbox name={this.props.name} label={comparatorLabel} onChange={this.updateEnabled} />
+                <AisCheckbox name={this.props.name} label={comparatorLabel} onChange={this.updateEnabled} checked={this.state.enabled} />
                 {
                     <div className={this.state.enabled ? 'aisform__comparator-operators' : 'aisform__comparator-operators aisform__comparator-operators-closed'}>
                         <div className="aisform__comparator-dropdown">
@@ -82,7 +82,16 @@ AisComparator.propTypes = {
     name: PropTypes.string,
     label: PropTypes.string,
     defaultValue: PropTypes.number,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    params: PropTypes.object
 };
 
-export default AisComparator;
+const mapStateToProps = (state) => { //optional arg is ownProps
+    return {
+        params: state.params
+    };
+};
+
+export default connect(mapStateToProps, {
+    // actions here
+})(AisComparator);
