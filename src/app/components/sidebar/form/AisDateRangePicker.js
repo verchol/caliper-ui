@@ -14,8 +14,8 @@ class AisDateRangePicker extends React.Component {
 
         this.state = {
             error: null,
-            startDateTime: moment.utc().startOf('day').format(DATE_TIME_FORMAT),
-            endDateTime: moment.utc().add(1, 'd').startOf('day').format(DATE_TIME_FORMAT)
+            startDateTime: props.start,
+            endDateTime: props.end
         };
 
         this.handleStartChange = this.handleStartChange.bind(this);

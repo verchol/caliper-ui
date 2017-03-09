@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
 import _ from 'lodash';
 
 import AisComparator from '../form/AisComparator';
@@ -42,6 +43,7 @@ class FilterSection extends React.Component {
                 default:
                     changes[basename] = comparator.value;
             }
+            changes[`${basename}_comparator`] = comparator.comparator;
         }
         this.props.onChange(changes);
     }
@@ -53,18 +55,23 @@ class FilterSection extends React.Component {
         let comparators = _.filter(APP_CONFIG.columnMetadata, { columnType: 'comparator' });
         let comparatorHandler = this.handleComparatorChange;
 
+        let params = this.props.params;
+
         return (
             <section>
                 <h2>Filters</h2>
                 <fieldset>
                     {
                         txtfilters.map(function(filter) {
+                            let value = params[filter.columnName] || '';
+
                             return (
                                 <AisTextInput key={filter.columnName}
                                     id={filter.columnName}
                                     name={filter.columnName}
                                     label={filter.displayName}
-                                    onChange={textHandler} />
+                                    onChange={textHandler}
+                                    value={value} />
                             );
                         })
                     }
@@ -72,12 +79,19 @@ class FilterSection extends React.Component {
                 <fieldset>
                     {
                         comparators.map(function(comparator) {
+                            let comparatorType = params[`${comparator.columnName}_comparator`] || 'equal to';
+                            let comparatorSuffix = comparatorType === 'greater than' ? '_gt' : comparatorType === 'less than' ? '_lt' : '';
+                            let value = params[comparator.columnName + comparatorSuffix] || 0;
+                            let enabled = typeof params[comparator.columnName + comparatorSuffix] !== 'undefined';
+
                             return (
                                 <AisComparator key={comparator.columnName}
                                     id={comparator.columnName}
                                     name={comparator.columnName}
                                     label={comparator.displayName}
-                                    defaultValue={comparator.defaultValue}
+                                    comparator={comparatorType}
+                                    defaultValue={value}
+                                    enabled={enabled}
                                     onChange={comparatorHandler} />
                             );
                         })
@@ -89,7 +103,16 @@ class FilterSection extends React.Component {
 }
 
 FilterSection.propTypes = {
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    params: PropTypes.object
 };
 
-export default FilterSection;
+const mapStateToProps = (state) => { //optional arg is ownProps
+    return {
+        params: state.params
+    };
+};
+
+export default connect(mapStateToProps, {
+    // actions here
+})(FilterSection);

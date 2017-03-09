@@ -9,12 +9,10 @@ class AisComparator extends React.Component {
     constructor(props) {
         super(props);
 
-        const defaultComparator = 'equal to';
-
         this.state = {
             name: props.name,
-            enabled: false,
-            comparator: defaultComparator,
+            enabled: props.enabled,
+            comparator: props.comparator,
             value: props.defaultValue
         };
 
@@ -23,10 +21,9 @@ class AisComparator extends React.Component {
         this.updateValue = this.updateValue.bind(this);
     }
 
-    updateEnabled(evt) {
-        let value = evt.target.checked;
+    updateEnabled(name, checked) {
         this.setState({
-            enabled: value
+            enabled: checked
         }, function() {
             this.props.onChange(this.state);
         });
@@ -64,7 +61,7 @@ class AisComparator extends React.Component {
 
         return (
             <div className="aisform__comparator">
-                <AisCheckbox name={this.props.name} label={comparatorLabel} onChange={this.updateEnabled} />
+                <AisCheckbox name={this.props.name} label={comparatorLabel} onChange={this.updateEnabled} checked={this.props.enabled} />
                 {
                     <div className={this.state.enabled ? 'aisform__comparator-operators' : 'aisform__comparator-operators aisform__comparator-operators-closed'}>
                         <div className="aisform__comparator-dropdown">
@@ -80,7 +77,9 @@ class AisComparator extends React.Component {
 
 AisComparator.propTypes = {
     name: PropTypes.string,
+    enabled: PropTypes.bool,
     label: PropTypes.string,
+    comparator: PropTypes.string,
     defaultValue: PropTypes.number,
     onChange: PropTypes.func
 };

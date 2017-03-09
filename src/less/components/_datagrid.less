@@ -146,21 +146,34 @@
         width: 100%;
         background-color: darken(@clr-background, 5%);
 
-        .datagrid__pager-controls {
-            margin-left: 2px;
+        .datagrid__pager-controls-container {
+            .grid-justify(flex-start);
 
-            .controls {
-                .grid-justify(flex-start);
+            .datagrid__pager-controls {
+                margin-left: 2px;
+
+                .controls {
+                    .grid-justify(flex-start);
+                }
+                button, .dropdownList__pages {
+                    margin: 7px 3px;
+                }
             }
-            button, .dropdownList__pages {
-                margin: 7px 3px;
+
+            .datagrid__pager-stats {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin-left: 10px;
+                margin-right: 10px;
             }
         }
 
-        .datagrid__pager-stats {
+        .datagrid__pager-share {
             display: flex;
             flex-direction: column;
             justify-content: center;
+            margin-left: 10px;
             margin-right: 10px;
         }
     }
