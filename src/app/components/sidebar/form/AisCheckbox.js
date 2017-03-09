@@ -5,22 +5,18 @@ class AisCheckbox extends React.Component {
         super(props, context);
 
         this.state = {
-            checked: this.props.checked
+            checked: props.checked
         };
 
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange() {
-        const { onChange, name, checked } = this.props;
-
-        this.setState(({ checked }) => (
-            {
-                checked: !checked,
-            }
-        ));
-
-        onChange(name, !checked);
+        this.setState({
+            checked: !this.props.checked
+        }, function() {
+            this.props.onChange(this.props.name, !this.props.checked);
+        });
     }
 
     render() {

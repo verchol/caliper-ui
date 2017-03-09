@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
 import AisCheckbox from './AisCheckbox';
 import AisNumberInput from './AisNumberInput';
 import DropdownList from 'react-widgets/lib/DropdownList';
@@ -10,13 +9,11 @@ class AisComparator extends React.Component {
     constructor(props) {
         super(props);
 
-        const defaultComparator = 'equal to';
-
         this.state = {
             name: props.name,
-            enabled: typeof props.params[props.name] !== 'undefined' || false,
-            comparator: defaultComparator,
-            value: props.params[props.name] || props.defaultValue
+            enabled: props.enabled,
+            comparator: props.comparator,
+            value: props.defaultValue
         };
 
         this.updateEnabled = this.updateEnabled.bind(this);
@@ -64,7 +61,7 @@ class AisComparator extends React.Component {
 
         return (
             <div className="aisform__comparator">
-                <AisCheckbox name={this.props.name} label={comparatorLabel} onChange={this.updateEnabled} checked={this.state.enabled} />
+                <AisCheckbox name={this.props.name} label={comparatorLabel} onChange={this.updateEnabled} checked={this.props.enabled} />
                 {
                     <div className={this.state.enabled ? 'aisform__comparator-operators' : 'aisform__comparator-operators aisform__comparator-operators-closed'}>
                         <div className="aisform__comparator-dropdown">
@@ -80,18 +77,11 @@ class AisComparator extends React.Component {
 
 AisComparator.propTypes = {
     name: PropTypes.string,
+    enabled: PropTypes.bool,
     label: PropTypes.string,
+    comparator: PropTypes.string,
     defaultValue: PropTypes.number,
-    onChange: PropTypes.func,
-    params: PropTypes.object
+    onChange: PropTypes.func
 };
 
-const mapStateToProps = (state) => { //optional arg is ownProps
-    return {
-        params: state.params
-    };
-};
-
-export default connect(mapStateToProps, {
-    // actions here
-})(AisComparator);
+export default AisComparator;
