@@ -12,6 +12,7 @@ import configureStore from './state/store/configureStore';
 import * as resultsActions from './state/actions/resultsActions';
 import * as resultsAggregateActions from './state/actions/resultsAggregateActions';
 import { updateParams } from './state/actions/paramsActions';
+import { DATE_FORMAT, TIME_FORMAT } from './components/sidebar/form/AisDateTimePicker';
 
 // Import application assets so webpack can process them
 //require('../favicon.ico');
@@ -31,13 +32,14 @@ const getStateId = () => {
 const init = () => {
     store = configureStore();
     GlobalStore.setStore(store);
+    const DATE_TIME_FORMAT = `${DATE_FORMAT} ${TIME_FORMAT}`;
     const initialParams = {
         _page: 1,
         _limit: 20,
         _sort: APP_CONFIG.sort.column,
         _order: APP_CONFIG.sort.direction,
-        start_date: moment.utc().startOf('d').toISOString(),
-        end_date: moment.utc().endOf('d').toISOString()
+        start_date: moment.utc().startOf('d').format(DATE_TIME_FORMAT),
+        end_date: moment.utc().add(1, 'd').startOf('d').format(DATE_TIME_FORMAT)
     };
     store.dispatch(updateParams(initialParams));
     store.dispatch(resultsActions.fetchAllResults(initialParams));

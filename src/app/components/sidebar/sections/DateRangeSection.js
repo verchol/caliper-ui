@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
+import moment from 'moment';
 
 import { DATE_FORMAT, TIME_FORMAT } from '../form/AisDateTimePicker';
 import AisDateRangePicker from '../form/AisDateRangePicker';
@@ -25,6 +26,7 @@ class DateRangeSection extends React.Component {
 
         let start = this.props.params.start_date || moment.utc().startOf('day').format(DATE_TIME_FORMAT);
         let end = this.props.params.end_date || moment.utc().add(1, 'd').startOf('day').format(DATE_TIME_FORMAT);
+
         return (
             <section>
                 <h2>Date Range</h2>
