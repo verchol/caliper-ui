@@ -6,6 +6,7 @@ import {debounce} from 'throttle-debounce';
 import DateRangeSection from './sections/DateRangeSection';
 import ErrorCriteriaSection from './sections/ErrorCriteriaSection';
 import FilterSection from './sections/FilterSection';
+import ShareSection from './sections/ShareSection';
 
 import {fetchAllResults} from '../../state/actions/resultsActions';
 import {fetchResultsAggregate} from '../../state/actions/resultsAggregateActions';
@@ -67,6 +68,10 @@ class Sidebar extends React.Component {
                     <DateRangeSection onChange={this.handleChange} />
                     <FilterSection onChange={this.handleChange} />
                     <ErrorCriteriaSection onChange={this.handleChange} />
+                </div>
+
+                <div className="sidebar__share">
+                    <ShareSection/>
                 </div>
             </div>
         );
