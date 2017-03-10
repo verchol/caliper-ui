@@ -1,6 +1,9 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import DropdownList from 'react-widgets/lib/DropdownList';
+import ReactTooltip from 'react-tooltip';
+import { toast } from 'react-toastify';
+
 import * as resultsActions from '../../state/actions/resultsActions';
 import * as paramsActions from '../../state/actions/paramsActions';
 import api from '../../api/stateApi';
@@ -30,8 +33,9 @@ class DatagridPager extends React.Component {
                         {stats}
                     </div>
                 </div>
-                <div className="datagrid__pager-share">
-                    <button className="aisbtn aisbtn__small share" onClick={() => this.props.share()}><i className="fa fa-share-alt"></i></button>
+                <div className="datagrid__pager-save">
+                    <button className="aisbtn aisbtn__small" onClick={this.props.saveState} data-tip="Save Application State"><i className="fa fa-clone"></i></button>
+                    <ReactTooltip effect="solid"/>
                 </div>
             </div>
         );
@@ -43,23 +47,37 @@ DatagridPager.propTypes = {
     params: PropTypes.object,
     setPage: PropTypes.func,
     pages: PropTypes.array,
-    share: PropTypes.func
+    saveState: PropTypes.func
 };
+
+const SaveToast = (props) => <div className="toast-content"><h3>Application state saved</h3><a href={props.href}>{props.href}</a></div>;
+const ErrorToast = (props) => <div className="toast-content"><h3>{props.title}</h3>{props.error}</div>;
 
 const mapStateToProps = (state) => { //optional arg is ownProps
     return {
         results: state.results,
         params: state.params,
-        share: () => {
-            let data = {
-                app_name: 'caliper',
-                user_state: JSON.stringify(state)
-            };
-            api.setState(data).then((result) => {
-                console.log(result.id);
-            }).catch((err) => {
-                alert('Unable to contact state server - ' + err);
-            });
+        saveState: () => {
+            try {
+                let data = {
+                    app_name: 'caliper',
+                    user_state: JSON.stringify(state)
+                };
+                api.setState(data).then((result) => {
+                    toast(<SaveToast href={`${location.origin}/?id=${result.id}`}/>, {
+                        autoClose: false,
+                        type: toast.TYPE.SUCCESS
+                    });
+                }).catch((err) => {
+                    toast(<ErrorToast title="Unable to contact state server" error={err.message}/>, {
+                        type: toast.TYPE.ERROR
+                    });
+                });
+            } catch (err) {
+                toast(<ErrorToast title="Unable to serialize state" error={err.message}/>, {
+                    type: toast.TYPE.ERROR
+                });
+            }
         }
     };
 };
@@ -87,7 +105,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         params: stateProps.params,
         setPage: (index) => dispatchProps.setPage(index, stateProps.params),
         pages: stateProps.results.headers ? Array.from({length: stateProps.results.headers.pageCount}, (v, i) => i + 1) : [1],
-        share: () => stateProps.share()
+        saveState: () => stateProps.saveState()
     });
 };
 

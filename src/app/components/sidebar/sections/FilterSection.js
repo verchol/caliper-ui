@@ -81,7 +81,7 @@ class FilterSection extends React.Component {
                         comparators.map(function(comparator) {
                             let comparatorType = params[`${comparator.columnName}_comparator`] || 'equal to';
                             let comparatorSuffix = comparatorType === 'greater than' ? '_gt' : comparatorType === 'less than' ? '_lt' : '';
-                            let value = params[comparator.columnName + comparatorSuffix] || 0;
+                            let value = params[comparator.columnName + comparatorSuffix] || comparator.defaultValue;
                             let enabled = typeof params[comparator.columnName + comparatorSuffix] !== 'undefined';
 
                             return (

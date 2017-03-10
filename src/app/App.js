@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 const App = (props) => {
     return (
@@ -6,6 +7,7 @@ const App = (props) => {
             <section>
                 {props.children}
             </section>
+            <ToastContainer autoClose={5000} position="top-right"/>
         </div>
     );
 };
