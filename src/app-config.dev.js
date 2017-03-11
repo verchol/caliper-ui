@@ -2,8 +2,7 @@ APP_CONFIG = {
     urls: {
         allResults: 'http://localhost:8080/api/reports',
         resultsAggregate: 'http://localhost:8080/api/reports/aggregate',
-        getState: 'http://localhost:8081/states/state',
-        setState: 'http://localhost:8081/states'
+        stateful: 'http://localhost:8081'
     },
     sort: {
         column: 'collection_start',

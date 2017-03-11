@@ -1,7 +1,8 @@
 APP_CONFIG = {
     urls: {
         allResults: 'http://localhost:8080/api/reports',
-        resultsAggregate: 'http://localhost:8080/api/reports/aggregate'
+        resultsAggregate: 'http://localhost:8080/api/reports/aggregate',
+        stateful: 'http://localhost:8081'
     },
     sort: {
         column: 'collection_start',

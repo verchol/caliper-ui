@@ -14,7 +14,6 @@ import {updateParams} from '../../state/actions/paramsActions';
 
 
 class Sidebar extends React.Component {
-
     constructor(props, context) {
         super(props, context);
 
@@ -76,7 +75,6 @@ class Sidebar extends React.Component {
             </div>
         );
     }
-
 }
 
 Sidebar.propTypes = {

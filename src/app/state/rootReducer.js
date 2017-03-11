@@ -4,6 +4,7 @@ import results from './reducers/resultsReducer';
 import resultsAggregate from './reducers/resultsAggregateReducer';
 import params from './reducers/paramsReducer';
 import report from './reducers/reportReducer';
+import statefulStatus from './reducers/statefulReducer';
 
 
 const rootReducer = combineReducers({
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
   results,
   resultsAggregate,
   params,
-  report
+  report,
+  statefulStatus
 });
 
 export default rootReducer;

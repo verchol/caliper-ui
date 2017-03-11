@@ -1,4 +1,3 @@
-
 import * as types from './paramsActionTypes';
 
 export function updateParams(params) {
