@@ -109,7 +109,7 @@ if (stateId) {
         } catch (err) {
             statefulStatus = {
                 value: true,
-                error: null
+                error: err.message
             };
             init(false);
         }

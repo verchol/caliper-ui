@@ -20,6 +20,10 @@ class ShareSection extends React.Component {
             toast(<ErrorToast title="Unable to contact state server" error={this.props.statefulStatus.error}/>, {
                 type: toast.TYPE.ERROR
             });
+        } else if (this.props.statefulStatus.error) {
+            toast(<ErrorToast title="State server error" error={this.props.statefulStatus.error}/>, {
+                type: toast.TYPE.ERROR
+            });
         }
     }
 
@@ -28,11 +32,18 @@ class ShareSection extends React.Component {
             return (
                 <ToastContainer autoClose={5000} position="top-right"/>
             );
+        } else if (this.props.statefulStatus.error) {
+            return (
+                <section>
+                    <ToastContainer autoClose={5000} position="top-right"/>
+                    <button className="aisbtn aisbtn__block" onClick={() => this.props.share()}><i className="fa fa-share"></i> Share Application State</button>
+                </section>
+            );
         }
 
         return (
             <section>
-                <button className="aisbtn aisbtn__block" onClick={this.props.share}><i className="fa fa-share"></i> Share Application State</button>
+                <button className="aisbtn aisbtn__block" onClick={() => this.props.share()}><i className="fa fa-share"></i> Share Application State</button>
             </section>
         );
     }
