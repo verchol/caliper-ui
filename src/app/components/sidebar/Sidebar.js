@@ -10,6 +10,7 @@ import ShareSection from './sections/ShareSection';
 
 import {fetchAllResults} from '../../state/actions/resultsActions';
 import {fetchResultsAggregate} from '../../state/actions/resultsAggregateActions';
+import {fetchResultsAggregateByHour} from '../../state/actions/resultsAggregateByHourActions';
 import {updateParams} from '../../state/actions/paramsActions';
 
 
@@ -29,6 +30,8 @@ class Sidebar extends React.Component {
         this.props.fetchAllResults(params);
         // update line chart
         this.props.fetchResultsAggregate(params);
+        // update radial chart
+        this.props.fetchResultsAggregateByHour(params);
     }
 
     handleChange(changes) {
@@ -90,5 +93,6 @@ const mapStateToProps = (state) => { //optional arg is ownProps
 export default connect(mapStateToProps, {
     fetchAllResults,
     fetchResultsAggregate,
+    fetchResultsAggregateByHour,
     updateParams
 })(Sidebar);

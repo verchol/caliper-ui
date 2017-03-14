@@ -2,6 +2,7 @@ APP_CONFIG = {
     urls: {
         allResults: 'http://localhost:8080/api/reports',
         resultsAggregate: 'http://localhost:8080/api/reports/aggregate',
+        resultsAggregateByHour: 'http://localhost:8080/api/reports/aggregate/hour',
         stateful: 'http://localhost:8081'
     },
     sort: {

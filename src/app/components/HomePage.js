@@ -6,6 +6,7 @@ import Wrap from './helpers/Wrap';
 import Sidebar from './sidebar/Sidebar';
 import Datagrid from './datagrid/Datagrid';
 import CaliperChart from './CaliperChart';
+import CaliperRadialChart from './CaliperRadialChart';
 
 class HomePage extends React.Component {
     constructor (props, context) {
@@ -52,14 +53,27 @@ class HomePage extends React.Component {
                         }]
                     },{
                         type: 'row',
-                        height: 50,
+                        width: 50,
                         content: [{
-                            type: 'react-component',
-                            component: 'caliper-chart',
-                            props: {
-                                type: 'bar',
-                                title: 'Errors Over Time'
-                            }
+                            type: 'row',
+                            width: 25,
+                            content: [{
+                                type: 'react-component',
+                                component: 'caliper-radial-chart',
+                                props: {
+                                    title: 'Errors By Hour'
+                                }
+                            }]
+                        },{
+                            type: 'row',
+                            width: 75,
+                            content: [{
+                                type: 'react-component',
+                                component: 'caliper-chart',
+                                props: {
+                                    title: 'Errors Over Time'
+                                }
+                            }]
                         }]
                     }]
                 }]
@@ -78,6 +92,7 @@ class HomePage extends React.Component {
             layout.registerComponent('sidebar', Wrap(Sidebar, store));
             layout.registerComponent('datagrid', Wrap(Datagrid, store));
             layout.registerComponent('caliper-chart', Wrap(CaliperChart, store));
+            layout.registerComponent('caliper-radial-chart', Wrap(CaliperRadialChart, store));
 
             layout.on('stateChanged', () => {
                 let state = layout.toConfig();

@@ -26,5 +26,10 @@ class ResultsApi {
         return this.makeCall(params, url);
     }
 
+    static getResultsAggregateByHour(params) {
+        let url = new URL(APP_CONFIG.urls.resultsAggregateByHour);
+        return this.makeCall(params, url);
+    }
+
 }
 export default ResultsApi;
