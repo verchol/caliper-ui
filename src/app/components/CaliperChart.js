@@ -74,7 +74,7 @@ class CaliperChart extends React.Component {
                 x: {
                     type: 'timeseries',
                     format: '%Y-%m-%dT%H:%M:%LZ',
-                    localtime: false,
+                    // localtime: false,
                     tick: {
                         format: '%Y-%m-%d %H:%MZ'
                     }
