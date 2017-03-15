@@ -50,6 +50,7 @@
     "colorbrewer": "^1.0.0",
     "copy-dir": "^0.3.0",
     "cssnano": "^3.8.0",
+    "d3": "^3.5.17",
     "fixed-data-table": "^0.6.3",
     "font-awesome": "^4.7.0",
     "golden-layout": "^1.5.7",

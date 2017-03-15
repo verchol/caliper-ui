@@ -26,6 +26,56 @@
     }
 }
 
+.caliper-radial-chart {
+    .radial {
+        font: 10px sans-serif;
+
+        path {
+            fill: none;
+        }
+        /* layers */
+        .layer-0 path {
+            fill: steelblue;
+        }
+        .layer-1 path {
+            fill: white !important;
+            opacity: 0.3;
+            stroke-width: 2px;
+            stroke: #fff;
+        }
+        /* Outer circle, tick-circles and spokes */
+        circle.outer {
+            stroke: #fff;
+            stroke-dasharray: 4, 4;
+        }
+        .spokes line {
+            stroke: #fff;
+            stroke-width: 0.5;
+        }
+        /* Axis */
+        .axis {
+            text {
+                font-size: 11px;
+                fill: #fff;
+            }
+            path {
+                stroke: #fff;
+                shape-rendering: crispEdges;
+            }
+            line {
+                stroke: #fff;
+                shape-rendering: crispEdges;
+            }
+        }
+        /* Labels */
+        .labels text {
+            fill: #fff;
+            font-size: 10px;
+            font-weight: 500;
+        }
+    }
+}
+
 .chart__spinner {
     text-align: center;
     width: 100%;

@@ -77,7 +77,7 @@ const init = (checkStateful) => {
                 error: err.message
             };
             render();
-        })
+        });
     } else {
         render();
     }
