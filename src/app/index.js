@@ -12,6 +12,7 @@ import routes from './routes';
 import configureStore from './state/store/configureStore';
 import * as resultsActions from './state/actions/resultsActions';
 import * as resultsAggregateActions from './state/actions/resultsAggregateActions';
+import * as resultsAggregateByHourActions from './state/actions/resultsAggregateByHourActions';
 import { updateParams } from './state/actions/paramsActions';
 import { updateStatefulStatus } from './state/actions/statefulActions';
 import { DATE_FORMAT, TIME_FORMAT } from './components/sidebar/form/AisDateTimePicker';
@@ -50,6 +51,7 @@ const init = (checkStateful) => {
         store.dispatch(updateParams(initialParams));
         store.dispatch(resultsActions.fetchAllResults(initialParams));
         store.dispatch(resultsAggregateActions.fetchResultsAggregate(initialParams));
+        store.dispatch(resultsAggregateByHourActions.fetchResultsAggregateByHour(initialParams));
         store.dispatch(updateStatefulStatus(statefulStatus));
 
         // Create an enhanced history that syncs navigation events with the store
@@ -75,7 +77,7 @@ const init = (checkStateful) => {
                 error: err.message
             };
             render();
-        })
+        });
     } else {
         render();
     }

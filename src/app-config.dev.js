@@ -2,14 +2,14 @@ APP_CONFIG = {
     urls: {
         allResults: 'http://localhost:8080/api/reports',
         resultsAggregate: 'http://localhost:8080/api/reports/aggregate',
+        resultsAggregateByHour: 'http://localhost:8080/api/reports/aggregate/hour',
         stateful: 'http://10.3.2.106:28672'
     },
     sort: {
         column: 'collection_start',
         direction: 'DESC'
     },
-    //chartcolors: ['#068894', '#E24522', '#F7F4A0', '#62C19F', '#FF821F', '#5CC4EE'],
-    chartcolors: ['#068894', '#62c19f', '#97e5ff', '#f7f4a0', '#ffffdd'],
+    defaultColor: '#068894',
     dateFormat: 'MM-DD-YYYY',
     timeFormat: 'HH:mm[Z]',
     resultsFormat: 'YYYY-MM-DD[T]HH:mm.sss[Z]',
@@ -81,31 +81,36 @@ APP_CONFIG = {
             columnType: 'criteria',
             locked: false,
             visible: true,
-            displayName: 'Is a Monkey'
+            displayName: 'Is a Monkey',
+            color: '#068894'
         },{
             columnName: 'is_gorilla',
             columnType: 'criteria',
             locked: false,
             visible: true,
-            displayName: 'Is a Gorilla'
+            displayName: 'Is a Gorilla',
+            color: '#27A0FF'
         },{
             columnName: 'is_lemur',
             columnType: 'criteria',
             locked: false,
             visible: true,
-            displayName: 'Is a Lemur'
+            displayName: 'Is a Lemur',
+            color: '#C289CC'
         },{
             columnName: 'is_orangutan',
             columnType: 'criteria',
             locked: false,
             visible: true,
-            displayName: 'Is an Orangutan'
+            displayName: 'Is an Orangutan',
+            color: '#E3DD6D'
         },{
             columnName: 'is_gibbon',
             columnType: 'criteria',
             locked: false,
             visible: true,
-            displayName: 'Is a Gibbon'
+            displayName: 'Is a Gibbon',
+            color: '#FF8C00'
         },{
             columnName: 'pk',
             locked: false,
