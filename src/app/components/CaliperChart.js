@@ -39,14 +39,18 @@ class CaliperChart extends React.Component {
         });
 
         let names = {};
+        let colors = {};
         _.forEach(keys, (key) => {
-            names[key] = _.find(APP_CONFIG.columnMetadata, { columnName: key }).displayName;
+            let column = _.find(APP_CONFIG.columnMetadata, { columnName: key });
+            names[key] = column.displayName;
+            colors[key] = column.color;
         });
 
         // if no keys are found, then show total
         if (keys.length === 0) {
             keys = ['total'];
             names.total = 'Total';
+            colors.total = APP_CONFIG.defaultColor
         }
 
         if (this.chart) {
@@ -64,6 +68,7 @@ class CaliperChart extends React.Component {
                 type: 'bar',
                 groups: [keys],
                 names: names,
+                colors: colors,
                 empty: {
                     label: {
                         text: 'There is no data to display.'
@@ -92,9 +97,6 @@ class CaliperChart extends React.Component {
                 top: 10,
                 left: 40,
                 right: 20
-            },
-            color: {
-                pattern: APP_CONFIG.chartcolors
             }
         });
     }

@@ -11,18 +11,25 @@ class CaliperRadialChart extends React.Component {
 
         this.initRadialChart = this.initRadialChart.bind(this);
         this.renderRadialChart = this.renderRadialChart.bind(this);
-        this.chart = null;
     }
 
     componentDidMount() {
         if (this.props.resultsAggregateByHour.results && this.props.resultsAggregateByHour.results.length > 0) {
             this.renderRadialChart();
+
+            this.props.glContainer.on('resize', () => {
+                this.renderRadialChart();
+            });
         }
     }
 
     componentDidUpdate() {
         if (this.props.resultsAggregateByHour.results && this.props.resultsAggregateByHour.results.length > 0) {
             this.renderRadialChart();
+
+            this.props.glContainer.on('resize', () => {
+                this.renderRadialChart();
+            });
         }
     }
 
@@ -31,7 +38,6 @@ class CaliperRadialChart extends React.Component {
         let margin = {top: 30, right: 20, bottom: 20, left: 20};
         let barHeight = 100;
         let reverseLayerOrder = false;
-        let barColors;
         let capitalizeLabels = false;
         let domain = [0, 100];
         let tickValues;
@@ -46,13 +52,12 @@ class CaliperRadialChart extends React.Component {
         let labelRadius = 0;
         let axis = d3.svg.axis();
 
-
         function init(d) {
             barScale = d3.scale.linear().domain(domain).range([0, barHeight]);
 
             if (Array.isArray(d[0].data)) {
                 for (let i = 0; i < d[0].data.length; ++i) {
-                    keys.push(d[0].data[i][0]);
+                    keys.push(d[0].data[i].hour);
                 }
             } else {
                 keys = d3.map(d[0].data).keys();
@@ -87,7 +92,7 @@ class CaliperRadialChart extends React.Component {
                 .data(tickCircleValues)
                 .enter()
                 .append('circle')
-                .attr('r', function(d) {return barScale(d);})
+                .attr('r', function (d) {return barScale(d);})
                 .style('fill', 'none');
         }
 
@@ -102,12 +107,12 @@ class CaliperRadialChart extends React.Component {
                 .enter()
                 .append('line')
                 .attr('y2', -barHeight)
-                .attr('transform', function(d, i) {return svgRotate(i * 360 / numBars);});
+                .attr('transform', function (d, i) {return svgRotate(i * 360 / numBars);});
 
             // Axis
             let axisScale = d3.scale.linear().domain(domain).range([0, -barHeight]);
             axis.scale(axisScale).orient('right');
-            if(tickValues){
+            if (tickValues) {
                 axis.tickValues(tickValues);
             }
             g.append('g')
@@ -134,29 +139,29 @@ class CaliperRadialChart extends React.Component {
                 .enter()
                 .append('text')
                 .style('text-anchor', 'middle')
-                .style('fill', function(d, i) {return colorLabels ? barColors[i % barColors.length] : null;})
+                .style('fill', function (d) {return d.color;})
                 .append('textPath')
                 .attr('xlink:href', '#label-path')
-                .attr('startOffset', function(d, i) {return i * 100 / numBars + 50 / numBars + '%';})
-                .text(function(d) {return capitalizeLabels ? d.toUpperCase() : d;});
+                .attr('startOffset', function (d, i) {return i * 100 / numBars + 50 / numBars + '%';})
+                .text(function (d) {return capitalizeLabels ? d.toUpperCase() : d;});
         }
 
         /* Arc functions */
-        let or = function(d) {
-            return barScale(d);
+        let or = function (d) {
+            return barScale(d.value);
         };
-        let sa = function(d, i) {
+        let sa = function (d, i) {
             return (i * 2 * Math.PI) / numBars;
         };
-        let ea = function(d, i) {
+        let ea = function (d, i) {
             return ((i + 1) * 2 * Math.PI) / numBars;
         };
 
         function chart(selection) {
-            selection.each(function(d) {
+            selection.each(function (d) {
                 init(d);
 
-                if(reverseLayerOrder){
+                if (reverseLayerOrder) {
                     d.reverse();
                 }
 
@@ -165,7 +170,7 @@ class CaliperRadialChart extends React.Component {
                 // check whether chart has already been created
                 let update = g[0][0] !== null; // true if data is being updated
 
-                if(!update){
+                if (!update) {
                     initChart(this);
                 }
 
@@ -178,7 +183,7 @@ class CaliperRadialChart extends React.Component {
                 layers
                     .enter()
                     .append('g')
-                    .attr('class', function(d, i) {
+                    .attr('class', function (d, i) {
                         return 'layer-' + i;
                     })
                     .classed('layer', true);
@@ -188,26 +193,15 @@ class CaliperRadialChart extends React.Component {
                 // Segment enter/exit/update
                 let segments = layers
                     .selectAll('path')
-                    .data(function(d) {
-                        let m = d3.map(d.data),
-                            mValues = m.values(),
-                            mArr = [];
-                        if (Array.isArray(mValues)) {
-                            for (let i = 0; i < mValues.length; ++i) {
-                                mArr.push(mValues[i][1]);
-                            }
-                        } else {
-                            mArr = mValues;
-                        }
-                        return mArr;
+                    .data(function (d) {
+                        return d.data;
                     });
 
                 segments
                     .enter()
                     .append('path')
-                    .style('fill', function(d, i) {
-                        if(!barColors){ return; }
-                        return barColors[i % barColors.length];
+                    .style('fill', function (d) {
+                        return d.color;
                     });
 
                 segments.exit().remove();
@@ -215,84 +209,119 @@ class CaliperRadialChart extends React.Component {
                 segments
                     .transition()
                     .duration(transitionDuration)
-                    .attr('d', d3.svg.arc().innerRadius(0).outerRadius(or).startAngle(sa).endAngle(ea));
+                    .attr('d', d3.svg.arc().innerRadius(0).outerRadius(or).startAngle(sa).endAngle(ea))
+                    .style('fill', function (d) {
+                        return d.color;
+                    });
 
-                if(!update) {
+                if (!update) {
                     renderOverlays(this);
                 } else {
                     let axisScale = d3.scale.linear().domain(domain).range([0, -barHeight]);
                     axis.scale(axisScale)
                         .orient('right');
-                    if (tickValues){
+                    if (tickValues) {
                         axis.tickValues(tickValues);
                     }
 
+                    // let g = d3.select(this).select('svg g.radial-barchart');
+
+                    // Radius of the key labels
+                    labelRadius = barHeight * 1.025;
+
+                    d3.select(this).select('svg')
+                        .transition()
+                        .duration(transitionDuration)
+                        .style('width', 2 * barHeight + margin.left + margin.right + 'px')
+                        .style('height', 2 * barHeight + margin.top + margin.bottom + 'px');
+
+                    d3.select('.radial')
+                        .transition()
+                        .duration(transitionDuration)
+                        .style('width', 2 * barHeight + margin.left + margin.right + 'px')
+                        .style('height', 2 * barHeight + margin.top + margin.bottom + 'px');
+
+                    d3.select('.radial-barchart')
+                        .transition()
+                        .duration(transitionDuration)
+                        .attr('transform', svgTranslate(margin.left + barHeight, margin.top + barHeight));
+
                     d3.select('.radial .axis')
                         .transition()
-                        .duration(2000)
+                        .duration(transitionDuration)
                         .call(axis);
+
+                    d3.select('.outer')
+                        .transition()
+                        .duration(transitionDuration)
+                        .attr('r', barHeight);
+
+                    d3.select('.radial .spokes')
+                        .transition()
+                        .duration(transitionDuration)
+                        .selectAll('line')
+                        .attr('y2', -barHeight);
+
+                    d3.select('#label-path')
+                        .transition()
+                        .duration(transitionDuration)
+                        .attr('d', 'm0 ' + -labelRadius + ' a' + labelRadius + ' ' + labelRadius + ' 0 1,1 -0.01 0');
                 }
             });
 
         }
 
         /* Configuration getters/setters */
-        chart.margin = function(_) {
-            if (!arguments.length){ return margin; }
+        chart.margin = function (_) {
+            if (!arguments.length) { return margin; }
             margin = _;
             return chart;
         };
 
-        chart.barHeight = function(_) {
-            if (!arguments.length){ return barHeight; }
+        chart.barHeight = function (_) {
+            if (!arguments.length) { return barHeight; }
             barHeight = _;
             return chart;
         };
 
-        chart.reverseLayerOrder = function(_) {
-            if (!arguments.length){ return reverseLayerOrder; }
+        chart.reverseLayerOrder = function (_) {
+            if (!arguments.length) { return reverseLayerOrder; }
             reverseLayerOrder = _;
             return chart;
         };
 
-        chart.barColors = function(_) {
-            if (!arguments.length){ return barColors; }
-            barColors = _;
-            return chart;
-        };
-
-        chart.capitalizeLabels = function(_) {
-            if (!arguments.length){ return capitalizeLabels; }
+        chart.capitalizeLabels = function (_) {
+            if (!arguments.length) { return capitalizeLabels; }
             capitalizeLabels = _;
             return chart;
         };
 
-        chart.domain = function(_) {
-            if (!arguments.length){ return domain; }
+        chart.domain = function (_) {
+            if (!arguments.length) { return domain; }
             domain = _;
             return chart;
         };
 
-        chart.tickValues = function(_) {
-            if (!arguments.length){ return tickValues; }
+        chart.tickValues = function (_) {
+            if (!arguments.length) { return tickValues; }
             tickValues = _;
             return chart;
         };
 
-        chart.colorLabels = function(_) {
-            if (!arguments.length){ return colorLabels; }
+        chart.colorLabels = function (_) {
+            if (!arguments.length) { return colorLabels; }
             colorLabels = _;
             return chart;
         };
 
-        chart.tickCircleValues = function(_) {
-            if (!arguments.length){ return tickCircleValues; }
+        chart.tickCircleValues = function (_) {
+            if (!arguments.length) { return tickCircleValues; }
             tickCircleValues = _;
             return chart;
         };
 
-        chart.transitionDuration = function(_) {
-            if (!arguments.length){ return transitionDuration; }
+        chart.transitionDuration = function (_) {
+            if (!arguments.length) { return transitionDuration; }
             transitionDuration = _;
             return chart;
         };
@@ -307,14 +336,34 @@ class CaliperRadialChart extends React.Component {
                 data: []
             }];
 
+        let criteriaFields = _.map(_.filter(APP_CONFIG.columnMetadata, {columnType: 'criteria'}), 'columnName');
+
+        let keys = _.filter(_.keys(this.props.resultsAggregateByHour.results[0]), (key) => {
+            return _.indexOf(criteriaFields, key) > -1;
+        });
+
+        if (keys.length === 0) {
+            keys = ['total'];
+        }
+
         let findResult = (hour) => {
             return _.find(this.props.resultsAggregateByHour.results, { hour: hour });
         };
 
         for (let hour = 0; hour < 24; hour++) {
             let result = findResult(hour);
-            chartDataValues.push(result ? result.total : 0);
-            chartData[0].data.push([moment.utc(hour, 'h').format('HH:mm'), result ? result.total : 0]);
+            _.forEach(_.keys(result), function (key) {
+                if (_.indexOf(keys, key) > -1) {
+                    let column = _.find(APP_CONFIG.columnMetadata, { columnName: key });
+                    chartDataValues.push(result ? result[key] : 0);
+                    chartData[0].data.push({
+                        hour: moment.utc(hour, 'h').format('HH:mm'),
+                        value: result ? result[key] : 0,
+                        key: key,
+                        color: column ? column.color : APP_CONFIG.defaultColor
+                    });
+                }
+            });
         }
 
         // array of values for determining domain and average number of collects
@@ -322,21 +371,20 @@ class CaliperRadialChart extends React.Component {
         let chartTicks = Math.floor(d3.max(chartDataValues) / 3);
 
         // instantiate radialBarChart
-        this.chart.barHeight((this.props.glContainer.width / 2) - 20)
+        let chart = this.initRadialChart(keys);
+        chart.barHeight((this.props.glContainer.width / 2) - 20)
             .reverseLayerOrder(true)
             .capitalizeLabels(true)
-            .barColors(['#C6A800', '#FFD800', '#FFE864']) // these repeat if array length is shorter than the number of bars
             .domain([0, d3.max(chartDataValues)])
             .tickValues([chartTicks, chartTicks * 2, chartTicks * 3])
             .tickCircleValues(chartDataValues);
 
         d3.select('.radial')
             .datum(chartData)
-            .call(this.chart);
+            .call(chart);
     }
 
     render() {
-        this.chart = this.initRadialChart();
         return (
             <div className="caliper-radial-chart">
                 <div className="radial"/>
