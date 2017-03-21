@@ -56,22 +56,22 @@ class HomePage extends React.Component {
                         width: 50,
                         content: [{
                             type: 'row',
-                            width: 25,
-                            content: [{
-                                type: 'react-component',
-                                component: 'caliper-radial-chart',
-                                props: {
-                                    title: 'Errors By Hour'
-                                }
-                            }]
-                        },{
-                            type: 'row',
                             width: 75,
                             content: [{
                                 type: 'react-component',
                                 component: 'caliper-chart',
                                 props: {
                                     title: 'Errors Over Time'
+                                }
+                            }]
+                        },{
+                            type: 'row',
+                            width: 25,
+                            content: [{
+                                type: 'react-component',
+                                component: 'caliper-radial-chart',
+                                props: {
+                                    title: 'Errors By Hour'
                                 }
                             }]
                         }]
