@@ -1,15 +1,12 @@
 const cheerio = require('cheerio');
 const fs = require('fs');
+const env = process.env;
 
-
-const ANALYTICS_PATH = './analytics.html';
 // Only operate on files in dist so you're not modifying your source files
 const HTML_FILES = ['./dist/index.html'];
 
-
-let appendAnalytics = function(htmlPath) {
+let appendAnalytics = function(htmlPath, analytics) {
     let html = fs.readFileSync(htmlPath);
-    let analytics = fs.readFileSync(ANALYTICS_PATH, 'utf8');
     let $ = cheerio.load(html);
     $('body').append(analytics);
     // write back to ./dist/index.html
@@ -17,10 +14,12 @@ let appendAnalytics = function(htmlPath) {
     console.log('Appended analytics code to ' + htmlPath);
 };
 
-if (fs.existsSync(ANALYTICS_PATH)) {
+if (env['ANALYTICS_CODE']) {
+    console.log('Injecting ANALYTICS_CODE environment variable into HTML...');
     HTML_FILES.map(filePath => {
-        appendAnalytics(filePath);
+        appendAnalytics(filePath, env['ANALYTICS_CODE']);
     });
-} else {
-    console.log('Need analytics? Create an analytics.html file');
+}
+else {
+    console.log('Set ANALYTICS_CODE environment variable to enable analytics.');
 }

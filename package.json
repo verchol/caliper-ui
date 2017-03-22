@@ -40,9 +40,9 @@
     "copyfonts": "copyfiles -f src/fonts/* dist/fonts",
     "copystyles": "copyfiles -f src/styles/* dist/styles",
     "predist": "npm-run-all clean-dist appconfig:prod",
-    "dist": "npm-run-all copysrc build copystyles copyfonts analytics",
+    "dist": "npm-run-all copysrc build copystyles copyfonts",
     "analytics": "node tools/injectAnalytics.js",
-    "server": "npm-run-all open:dist",
+    "server": "npm-run-all dist analytics open:dist",
     "deploy": "gh-pages-deploy"
   },
   "author": "Applied Information Sciences",
